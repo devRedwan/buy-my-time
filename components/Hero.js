@@ -20,7 +20,7 @@ const Hero = () => {
               Your go-to for companionship and convenience.
             </h1>
             <p className="text-black-500 mt-4 mb-6">
-              <span class="text-blue-500 font-bold">BuyMyTime:</span> The
+              <span className="text-blue-500 font-bold">BuyMyTime:</span> The
               ultimate solution for all your companionship and convenience needs
               - waiting in line, events, and more
             </p>

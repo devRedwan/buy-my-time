@@ -10,6 +10,7 @@ const Layout = ({ children }) => {
       <Footer />
     </>
   );
+  ß;
 };
 
 export default Layout;

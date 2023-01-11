@@ -62,6 +62,27 @@ li.check:before {
   @apply bg-blue-500 rounded-l-full rounded-r-full w-12;
 }
 
+/* ------------------ Generic Styles ------------------ */
+.navMenu__link {
+  @apply px-4 py-2 mx-2 cursor-pointer animation-hover inline-block hover:text-blue-500 relative;
+}
+.navMenu__link--active {
+  @apply text-blue-500 font-semibold;
+}
+.navMenu__link--active:after {
+  @apply left-0 w-full;
+}
+.mobileNav__menuLink {
+  @apply mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 border-transparent transition-all relative;
+}
+.mobileNav__menuLink--active {
+  @apply text-blue-500 border-blue-500;
+}
+
+.cart__itemQty {
+  @apply flex bg-blue-500 text-white-500 w-4 h-4 font-extralight text-xs items-center justify-center rounded-full absolute;
+}
+
 /* purgecss end ignore */
 @tailwind utilities;
 /* purgecss start ignore */

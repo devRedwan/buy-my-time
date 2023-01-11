@@ -1,13 +1,13 @@
 import Layout from "../components/Layout/Layout";
 import SeoHead from "../components/SeoHead";
 
-export default function Explore() {
+export default function () {
   return (
     <>
-      <SeoHead title="Buy My Time | Explore" />
+      <SeoHead title="Buy My Time | Cart" />
       <Layout>
         <h1 className="text-red relative h-35 border-black-600">
-          This is the Explore Page
+          This is the Cart Page
         </h1>
       </Layout>
     </>
