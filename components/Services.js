@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import getScrollAnimation from "../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
 
-const features = [
-  "Powerfull online protection.",
-  "Internet without borders.",
-  "Supercharged VPN",
-  "No specific time limits.",
+const services = [
+  "Companionship for any situation.",
+  "Stand-in for events or social gatherings.",
+  "Convenient waiting services - never wait on another line, our professionals are here to do it for you.",
+  "Secure payments on all services.",
 ];
 
-const Feature = () => {
+const Services = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
 
   return (
@@ -35,27 +35,27 @@ const Feature = () => {
           <motion.div
             className="flex flex-col items-end justify-center ml-auto w-full lg:w-9/12"
             variants={scrollAnimation}>
-            <h3 className="text-3xl lg:text-4xl font-medium leading-relaxed text-black-600">
-              We Provide Many Features You Can Use
+            <h3 className=" text-2xl  md:text-3xl lg:text-4xl font-medium leading-relaxed text-black-600">
+              Find the Most Convenient Services on BuyMyTime
             </h3>
             <p className="my-2 text-black-500">
-              You can explore the features that we provide with fun and have
-              their own functions each feature.
+              Explore a variety of services offered by our world-class
+              professionals on BuyMyTime.
             </p>
             <ul className="text-black-500 self-start list-inside ml-8">
-              {features.map((feature, index) => (
+              {services.map((service, index) => (
                 <motion.li
                   className="relative circle-check custom-list"
                   custom={{ duration: 2 + index }}
                   variants={scrollAnimation}
-                  key={feature}
+                  key={service}
                   whileHover={{
                     scale: 1.1,
                     transition: {
                       duration: 0.2,
                     },
                   }}>
-                  {feature}
+                  {service}
                 </motion.li>
               ))}
             </ul>
@@ -66,4 +66,4 @@ const Feature = () => {
   );
 };
 
-export default Feature;
+export default Services;
