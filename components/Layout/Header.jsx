@@ -1,10 +1,9 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Logo from "../../public/assets/Logo.svg";
-import ButtonOutline from "../misc/ButtonOutline";
-import MobileNavMenu from "../misc/nav/MobileNavMenu";
-import NavMenu from "../misc/nav/NavMenu";
-import { navLinks } from "../misc/nav/NavMenuLinks";
+import ButtonOutline from "../misc/buttons/ButtonOutline";
+import { MobileNavMenu, NavMenu } from "../misc/nav/NavMenu";
+import NavLinks from "../misc/nav/NavMenuLinks";
 
 const Header = () => {
   const [scrollActive, setScrollActive] = useState(false);
@@ -29,7 +28,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <NavMenu navLinks={navLinks} />
+          <NavMenu navLinks={NavLinks} />
 
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
             <Link href="/">
@@ -47,7 +46,7 @@ const Header = () => {
       {/* Mobile Navigation */}
       <nav className="mobileNavBar fixed md:hidden bottom-0 left-0 right-0 z-20 px-4 sm:px-8 shadow-t ">
         <div className="mobileNav bg-white-500 sm:px-3">
-          <MobileNavMenu navLinks={navLinks} />
+          <MobileNavMenu navLinks={NavLinks} />
         </div>
       </nav>
       {/* End Mobile Navigation */}

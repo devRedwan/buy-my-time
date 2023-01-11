@@ -4,7 +4,7 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/solid";
 
-export const navLinks = [
+const navLinks = [
   {
     label: "Home",
     href: "/",
@@ -22,3 +22,5 @@ export const navLinks = [
     cartItemQty: 2,
   },
 ];
+
+export default navLinks;
