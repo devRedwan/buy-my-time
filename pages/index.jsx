@@ -1,5 +1,5 @@
 import Services from "../components/Services";
-import Pricing from "../components/Pricing";
+import TopServices from "../components/TopServices";
 import Hero from "../components/Hero";
 import Layout from "../components/Layout/Layout";
 import SeoHead from "../components/SeoHead";
@@ -11,7 +11,7 @@ export default function Home() {
       <Layout>
         <Hero />
         <Services />
-        <Pricing />
+        <TopServices />
       </Layout>
     </>
   );
