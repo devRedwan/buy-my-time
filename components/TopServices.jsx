@@ -1,8 +1,7 @@
-import React, { useMemo } from "react";
-import ButtonPrimary from "./misc/buttons/ButtonPrimary";
-import Carousel from "./Carousel";
 import { motion } from "framer-motion";
+import React, { useMemo } from "react";
 import getScrollAnimation from "../utils/getScrollAnimation";
+import Carousel from "./Carousel";
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
 
 const TopServices = () => {
