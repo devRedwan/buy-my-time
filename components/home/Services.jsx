@@ -69,11 +69,11 @@ const Services = () => {
         </div>
       </div>
 
-      <div className="serviceMap__section bg-gradient-to-b from-white-300 to-white-500 w-full flex flex-col md:my-16 pt-10">
+      <div className="serviceMap__section text-center bg-gradient-to-b from-white-300 to-white-500 w-full flex flex-col  md:my-16 pt-10">
         <ScrollAnimationWrapper>
           <motion.h3
             variants={scrollAnimation}
-            className="serviceMap__sectionTitle text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed w-10/12 sm:w-6/12 lg:w-4/12 mx-auto">
+            className="serviceMap__sectionTitle text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed w-10/12 sm:w-6/12  mx-auto">
             Our professionals travel all over for their clients
           </motion.h3>
           <motion.p
