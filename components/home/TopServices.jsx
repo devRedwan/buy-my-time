@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React, { useMemo } from "react";
-import getScrollAnimation from "../utils/getScrollAnimation";
-import Carousel from "./Carousel";
-import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
+import getScrollAnimation from "../../utils/getScrollAnimation";
+import Carousel from "../misc/carousel/Carousel";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 
 const TopServices = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
@@ -24,7 +24,7 @@ const TopServices = () => {
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper className="topServices__carousel w-full flex flex-col py-12">
             <motion.div variants={scrollAnimation}>
-              <Carousel />
+              <Carousel className="carousel" />
             </motion.div>
           </ScrollAnimationWrapper>
         </div>

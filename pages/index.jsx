@@ -1,6 +1,6 @@
-import Services from "../components/Services";
-import TopServices from "../components/TopServices";
-import Hero from "../components/Hero";
+import Services from "../components/home/Services";
+import TopServices from "../components/home/TopServices";
+import Hero from "../components/home/Hero";
 import Layout from "../components/Layout/Layout";
 import SeoHead from "../components/SeoHead";
 

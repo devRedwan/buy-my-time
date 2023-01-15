@@ -1,9 +1,9 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useMemo } from "react";
-import { motion } from "framer-motion";
-import getScrollAnimation from "../utils/getScrollAnimation";
-import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
-import Maps from "../public/assets/HugeGlobal.svg";
+import Maps from "../../public/assets/HugeGlobal.svg";
+import getScrollAnimation from "../../utils/getScrollAnimation";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 
 const services = [
   "Companionship for any situation.",

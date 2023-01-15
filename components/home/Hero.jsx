@@ -1,10 +1,10 @@
-import React, { useMemo } from "react";
-import Image from "next/image";
-import ButtonPrimary from "./misc/buttons/ButtonPrimary";
 import { motion } from "framer-motion";
-import getScrollAnimation from "../utils/getScrollAnimation";
-import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
+import Image from "next/image";
 import Link from "next/link";
+import React, { useMemo } from "react";
+import getScrollAnimation from "../../utils/getScrollAnimation";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
+import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const Hero = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);

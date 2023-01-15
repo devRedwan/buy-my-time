@@ -1,25 +1,29 @@
-import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import ArrowBack from "../public/assets/Icon/eva_arrow-back-fill.svg";
-import ArrowNext from "../public/assets/Icon/eva_arrow-next-fill.svg";
-import Stars from "../public/assets/Icon/stars.svg";
+import ArrowBack from "../../../public/assets/Icon/eva_arrow-back-fill.svg";
+import ArrowNext from "../../../public/assets/Icon/eva_arrow-next-fill.svg";
+import ServiceCard from "../ServiceCard";
 
-const Carousel = ({
-  services = [
+const Carousel = (props) => {
+  const services = [
     {
       id: 491,
       imageURL:
         "https://cdn.discordapp.com/attachments/997260939135025223/1063550099176816661/nura_two_men_sitting_in_silence_realistic_art_8k_fe5d0a7b-917e-4b2f-9e37-933fa486417f.png",
       price: 50,
+      title: "Buddy for sitting in silence",
       description:
         "Spend time with me in quiet companionship. No talking necessary. Just sit and be present with each other.",
       seller: {
         id: 73317331,
         name: "Redwan Ahmed",
+        rating: 5.0,
+        imageURL:
+          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
       },
-      vists: 3000,
+      visits: 3000,
       likes: 1657,
+      rating: 5.0,
     },
     {
       id: 712,
@@ -32,9 +36,13 @@ const Carousel = ({
       seller: {
         id: 85869845,
         name: "Bob Marley",
+        rating: 4.5,
+        imageURL:
+          "https://images.unsplash.com/photo-1522556189639-b150ed9c4330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       },
       visits: 1000,
       likes: 879,
+      rating: 4.8,
     },
     {
       id: 316,
@@ -47,9 +55,13 @@ const Carousel = ({
       seller: {
         id: 85869845,
         name: "Bob Marley",
-        visits: 3500,
-        likes: 3200,
+        rating: 4.5,
+        imageURL:
+          "https://images.unsplash.com/photo-1522556189639-b150ed9c4330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       },
+      visits: 3500,
+      likes: 3200,
+      rating: 4.7,
     },
     {
       id: 128,
@@ -62,9 +74,13 @@ const Carousel = ({
       seller: {
         id: 85869845,
         name: "Bob Marley",
+        rating: 4.5,
+        imageURL:
+          "https://images.unsplash.com/photo-1522556189639-b150ed9c4330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       },
       visits: 2200,
       likes: 1851,
+      rating: 5.0,
     },
     {
       id: 902,
@@ -77,9 +93,13 @@ const Carousel = ({
       seller: {
         id: 85869845,
         name: "Bob Marley",
+        rating: 4.5,
+        imageURL:
+          "https://images.unsplash.com/photo-1522556189639-b150ed9c4330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       },
       visits: 1500,
       likes: 140,
+      rating: 4.7,
     },
     {
       id: 647,
@@ -92,9 +112,13 @@ const Carousel = ({
       seller: {
         id: 73317331,
         name: "Redwan Ahmed",
+        rating: 5.0,
+        imageURL:
+          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
       },
       visits: 4000,
       likes: 600,
+      rating: 5.0,
     },
     {
       id: 390,
@@ -107,9 +131,13 @@ const Carousel = ({
       seller: {
         id: 85869845,
         name: "Bob Marley",
+        rating: 4.5,
+        imageURL:
+          "https://images.unsplash.com/photo-1522556189639-b150ed9c4330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       },
       visits: 2800,
       likes: 295,
+      rating: 5.0,
     },
     {
       id: 568,
@@ -122,9 +150,13 @@ const Carousel = ({
       seller: {
         id: 73317331,
         name: "Redwan Ahmed",
+        rating: 5.0,
+        imageURL:
+          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
       },
       visits: 1800,
       likes: 146,
+      rating: 4.7,
     },
     {
       id: 832,
@@ -137,30 +169,18 @@ const Carousel = ({
       seller: {
         id: 73317331,
         name: "Redwan Ahmed",
+        rating: 5.0,
+        imageURL:
+          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
       },
       visits: 5500,
       likes: 4500,
+      rating: 5.0,
     },
-    {
-      id: 123,
-      imageURL:
-        "https://cdn.discordapp.com/attachments/981697648119648266/1063588193854836816/NMadness444_a_smiling_young_person_extending_his_hand_on_anothe_28b2aea6-b9f8-423b-94f2-6b78bb99be03.png",
-      title: "Companion for someone feeling lonely",
-      price: 60,
-      description:
-        "Provide companionship for someone feeling lonely. I'll be there to listen and offer a supportive presence.",
-      seller: {
-        id: 25462897,
-        name: "Carl Mourinho",
-      },
-      visits: 2600,
-      likes: 204,
-    },
-  ],
-}) => {
-  const settings = {
+  ];
+  const sliderSettings = {
     dots: true,
-    dotsClass: "slick-dots w-max absolute mt-20  ",
+    dotsClass: "slick-dots w-max absolute md:mt-20",
     infinite: true,
     speed: 500,
     slidesToShow: 2,
@@ -181,31 +201,21 @@ const Carousel = ({
       );
     },
   };
-  const [sliderRef, setSliderRef] = useState(null);
+  const [sliderRef, setSliderRef] = useState({});
 
   return (
     <>
       <Slider
-        {...settings}
+        {...sliderSettings}
         arrows={false}
         ref={setSliderRef}
         className="flex items-stretch justify-items-stretch">
         {services.map((service) => (
-          <div className="serviceWrapper px-3" key={service.id}>
-            <div className="serviceBox__container border">
-              <div className="serviceImageWrapper w-full h-1/2">
-                <img
-                  className="h-60 object-cover w-full "
-                  src={service.imageURL}
-                  alt="BuyMyTime Services"
-                />
-              </div>
-            </div>
-          </div>
+          <ServiceCard service={service} key={service.id} />
         ))}
       </Slider>
 
-      <div className="flex w-full items-center justify-end">
+      <div className="carousel__navigation flex w-full items-center justify-center md:justify-end">
         <div className="flex flex-none justify-between w-auto mt-14">
           <div
             className="mx-4 flex items-center justify-center h-14 w-14 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
@@ -222,6 +232,15 @@ const Carousel = ({
       </div>
     </>
   );
+};
+
+Carousel.getInitialProps = async (context) => {
+  const largestSlide = Array.from(
+    context.querySelectorAll(".slick-slide")
+  ).reduce((largest, current) => {
+    return current.clientHeight > largest.clientHeight ? current : largest;
+  });
+  return { largestSlideHeight: largestSlide.clientHeight };
 };
 
 export default Carousel;
