@@ -18,11 +18,11 @@ const TopServices = () => {
           <ScrollAnimationWrapper className="topServices__textWrapper">
             <motion.h3
               variants={scrollAnimation}
-              className="topServices__title text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-normal w-9/12 sm: lg:w-4/12 mx-auto">
+              className="topServices__title text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-normal w-9/12 sm: lg:w-6/12 mx-auto">
               Top Selling Services
             </motion.h3>
           </ScrollAnimationWrapper>
-          <ScrollAnimationWrapper className="topServices__carousel w-full flex flex-col py-12">
+          <ScrollAnimationWrapper className="topServices__carousel w-full flex flex-col pt-5 pb-12 relative">
             <motion.div variants={scrollAnimation}>
               <Carousel className="carousel" />
             </motion.div>

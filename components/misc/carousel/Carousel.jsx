@@ -18,8 +18,7 @@ const Carousel = (props) => {
         id: 73317331,
         name: "Redwan Ahmed",
         rating: 5.0,
-        imageURL:
-          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
+        imageURL: "https://i.postimg.cc/x12tFnd7/IMG-1874.jpg",
       },
       visits: 3000,
       likes: 1657,
@@ -113,8 +112,7 @@ const Carousel = (props) => {
         id: 73317331,
         name: "Redwan Ahmed",
         rating: 5.0,
-        imageURL:
-          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
+        imageURL: "https://i.postimg.cc/x12tFnd7/IMG-1874.jpg",
       },
       visits: 4000,
       likes: 600,
@@ -151,8 +149,7 @@ const Carousel = (props) => {
         id: 73317331,
         name: "Redwan Ahmed",
         rating: 5.0,
-        imageURL:
-          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
+        imageURL: "https://i.postimg.cc/x12tFnd7/IMG-1874.jpg",
       },
       visits: 1800,
       likes: 146,
@@ -170,8 +167,7 @@ const Carousel = (props) => {
         id: 73317331,
         name: "Redwan Ahmed",
         rating: 5.0,
-        imageURL:
-          "https://d1ro8r1rbfn3jf.cloudfront.net/ms_550551/V6iQE9KPLuGySz2oHgE4Rbvl7OnDY1/IMG_1874.JPG?Expires=1673667000&Signature=ZWK-76ab5eMIl-YdX5Ir0nytemM2qPkVbzh~TVac7mfawT-EkgmH~eWAhKkuLtfHJ61aXSLCZfYjvk2ni8gFxStQGpRy3cvGmzF17-EEsJHtCzAmaCmveBqlMT5bxZ7eb5aGoJZIi6WS0jacksC8x8390jsmxo0887-g9ZHMF~XdmWtIMkRFzsNHad7YjucoADiXo0NLYl9u~knzAF2HuYSnHVyQyeucQpKg9wKp8QtTDcvd1IbRkGPLjoRBjXywFEf-CLEMhEBgA9I0Zw20dZFqJ7hj7JvfpdV~vWWy-WfhHcb1Rhv42L~QKmiOFVijOM8VqeEcOt1s0nvgNwRXjg__&Key-Pair-Id=APKAJBCGYQYURKHBGCOA",
+        imageURL: "https://i.postimg.cc/x12tFnd7/IMG-1874.jpg",
       },
       visits: 5500,
       likes: 4500,
@@ -180,28 +176,32 @@ const Carousel = (props) => {
   ];
   const sliderSettings = {
     dots: true,
-    dotsClass: "slick-dots w-max absolute md:mt-20",
+    dotsClass: "slick-dots w-max absolute left-1/2 -translate-x-1/2 sm:mt-2 ",
     infinite: true,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
     adaptiveHeight: false,
+
     responsive: [
       {
         breakpoint: 950,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          fade: true,
         },
       },
     ],
     customPaging: function () {
       return (
-        <span className="customPagingSetting mx-2 rounded-l-full rounded-r-full h-4 w-4 block cursor-pointer transition-all"></span>
+        <span className="customPagingSetting mx-1 sm:mx-2 rounded-l-full rounded-r-full h-2 w-2 sm:h-4 sm:w-4 block cursor-pointer transition-all"></span>
       );
     },
   };
   const [sliderRef, setSliderRef] = useState({});
+
+
 
   return (
     <>
@@ -209,22 +209,25 @@ const Carousel = (props) => {
         {...sliderSettings}
         arrows={false}
         ref={setSliderRef}
-        className="flex items-stretch justify-items-stretch">
+        className="sliderItem flex items-stretch justify-items-stretch">
         {services.map((service) => (
-          <ServiceCard service={service} key={service.id} />
+          <ServiceCard
+            service={service}
+            key={service.id}
+          />
         ))}
       </Slider>
 
-      <div className="carousel__navigation flex w-full items-center justify-center md:justify-end">
-        <div className="flex flex-none justify-between w-auto mt-14">
+      <div className="carouselNavigation__wrapper max-w-screen-xl w-screen  absolute -left-6 sm:-left-8 lg:-left-16 bottom-1/2 ">
+        <div className="carousel__Navigation flex flex-none justify-between w-auto">
           <div
-            className="mx-4 flex items-center justify-center h-14 w-14 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
+            className="carouselNavigation__leftArrow ml-3 sm:ml-5 lg:ml-7 flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
             onClick={sliderRef?.slickPrev}>
-            <ArrowBack className="h-6 w-6 " />
+            <ArrowBack className="h-6 w-6" />
           </div>
 
           <div
-            className="flex items-center justify-center h-14 w-14 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
+            className="carouselNavigation__leftArrow mr-3 sm:mr-5 lg:mr-7 flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
             onClick={sliderRef?.slickNext}>
             <ArrowNext className="h-6 w-6" />
           </div>
