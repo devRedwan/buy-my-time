@@ -1,19 +1,18 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useMemo } from "react";
-import Maps from "../../public/assets/HugeGlobal.svg";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 
-const services = [
-  "Companionship for any situation.",
-  "Stand-in for events or social gatherings.",
-  "Convenient waiting services - never wait on another line, our professionals are here to do it for you.",
-  "Secure payments on all services.",
-];
-
 const Services = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
+
+  const services = [
+    "Companionship for any situation.",
+    "Stand-in for events or social gatherings.",
+    "Convenient waiting services - never wait on another line, our professionals are here to do it for you.",
+    "Secure payments on all services.",
+  ];
 
   return (
     <>
@@ -67,31 +66,6 @@ const Services = () => {
             </motion.div>
           </ScrollAnimationWrapper>
         </div>
-      </div>
-
-      <div className="serviceMap__section text-center bg-gradient-to-b from-white-300 to-white-500 w-full flex flex-col  md:my-16 pt-10">
-        <ScrollAnimationWrapper>
-          <motion.h3
-            variants={scrollAnimation}
-            className="serviceMap__sectionTitle text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-relaxed w-10/12 sm:w-6/12  mx-auto">
-            Our professionals travel all over for their clients
-          </motion.h3>
-          <motion.p
-            className="serviceMap__sectionPara leading-normal  mx-auto my-2 w-10/12 sm:w-7/12 lg:w-6/12"
-            variants={scrollAnimation}>
-            Our services are adaptable to international requirements, subject to
-            the execution of a legally binding agreement between the
-            professional and the client.
-          </motion.p>
-        </ScrollAnimationWrapper>
-
-        <ScrollAnimationWrapper>
-          <motion.div
-            className="serviceMap__map py-12 w-full px-8 mt-16"
-            variants={scrollAnimation}>
-            <Maps className="w-full h-auto" />
-          </motion.div>
-        </ScrollAnimationWrapper>
       </div>
     </>
   );

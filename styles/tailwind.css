@@ -51,6 +51,7 @@ li.check:before {
   top: -0.5em;
   font-size: 400%;
 }
+
 /* Slideshow */
 .slick-dots li {
   @apply inline-block;
@@ -63,6 +64,18 @@ li.check:before {
 }
 
 /* ------------------ Generic Styles ------------------ */
+.section {
+  @apply bg-gradient-to-b from-white-300 to-white-500 w-full sm:py-14;
+}
+
+.container {
+  @apply max-w-screen-xl  px-6 sm:px-8 lg:px-16 mx-auto flex flex-col w-full text-center justify-center;
+}
+.section__title {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-normal w-9/12  lg:w-6/12 mx-auto;
+}
+
+/* Navbar */
 .navMenu__link {
   @apply px-4 py-2 mx-2 cursor-pointer animation-hover inline-block hover:text-blue-500 relative;
 }
@@ -82,6 +95,8 @@ li.check:before {
 .cart__itemQty {
   @apply flex bg-blue-500 text-white-500 w-4 h-4 font-extralight text-xs items-center justify-center rounded-full absolute;
 }
+
+/* TopServices Section */
 
 /* purgecss end ignore */
 @tailwind utilities;

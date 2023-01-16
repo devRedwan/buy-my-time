@@ -22,7 +22,10 @@ const Custom404 = () => {
           eager to get you home.
         </p>
         <Link href="/">
-          <Image src={animatedLogo} />
+          <Image
+            src={animatedLogo}
+            className="cursor-pointer hover:scale-50 transition-all duration-500 ease-in-out"
+          />
         </Link>
       </div>
     </div>

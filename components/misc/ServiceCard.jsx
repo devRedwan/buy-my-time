@@ -8,7 +8,7 @@ const ServiceCard = ({ service }) => {
         <div className="serviceBox__container overflow-hidden shadow-lg shadow-blue-100 rounded-xl cursor-pointer">
           <div className="serviceImageWrapper w-full h-1/2 overflow-hidden">
             <img
-              className="h-40 sm:h-60 object-cover w-full hover:scale-105 transition-all duration-500 ease-in-out"
+              className="h-40 sm:h-60 object-cover w-full hover:scale-105 transition-all duration-1000 ease-in-out"
               src={service.imageURL}
               alt="BuyMyTime Services"
             />
@@ -17,17 +17,18 @@ const ServiceCard = ({ service }) => {
             <h3 className="serviceTitle font-semibold text-xl sm:text-3xl my-2 h-20 flex items-center justify-center">
               {service.title}
             </h3>
-            <p className="serviceDescription mb-3 text-sm h-20 flex items-center justify-center">
+            <p className="serviceDescription mb-3 text-sm h-24  flex items-center justify-center">
               {service.description}
             </p>
 
-            <div className="serviceSeller__info flex h-28 flex-col items-center sm:flex-row justify-evenly sm:w-2/3 mx-auto group">
+            <div className="serviceSeller__info flex h-28 flex-col items-center sm:flex-row justify-evenly w-11/12  mx-auto ">
+              <h3 className="service__Price">${service.price} / Hour</h3>
               <img
-                className="serviceSeller__image w-24 h-24 object-cover mb-3 rounded-full shadow-xl shadow-blue-100 group-hover:scale-105 group-hover:shadow-blue-300 transition-all duration-500 ease-in-out"
+                className="serviceSeller__image w-24 h-24 object-cover mb-3 rounded-full shadow-xl shadow-blue-100 hover:scale-105 hover:shadow-blue-300 transition-all duration-500 ease-in-out"
                 src={service.seller.imageURL}
                 alt="Service Professional - buymytime"
               />
-              <div className="serviceSeller__text group-hover:scale-110 transition-all duration-500 ease-in-out">
+              <div className="serviceSeller__text transition-all duration-500 ease-in-out">
                 <h3 className="serviceSeller__name text-md">
                   {service.seller.name}
                 </h3>
