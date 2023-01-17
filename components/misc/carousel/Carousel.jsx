@@ -4,7 +4,6 @@ import ArrowBack from "../../../public/assets/Icon/eva_arrow-back-fill.svg";
 import ArrowNext from "../../../public/assets/Icon/eva_arrow-next-fill.svg";
 import ServiceCard from "../ServiceCard";
 
-
 const Carousel = ({ customServiceData }) => {
   const sliderSettings = {
     dots: true,
@@ -62,15 +61,6 @@ const Carousel = ({ customServiceData }) => {
       </div>
     </>
   );
-};
-
-Carousel.getInitialProps = async (context) => {
-  const largestSlide = Array.from(
-    context.querySelectorAll(".slick-slide")
-  ).reduce((largest, current) => {
-    return current.clientHeight > largest.clientHeight ? current : largest;
-  });
-  return { largestSlideHeight: largestSlide.clientHeight };
 };
 
 export default Carousel;
