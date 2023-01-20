@@ -1,6 +1,8 @@
-import axios from "axios";
+import { groq } from "next-sanity";
+import { sanityClient } from "../../sanity";
 
-export async function getServices() {
-  const res = await axios.get("/api/services");
-  return res.data;
+const servicesData = groq`*[_type == 'service'] {_id,...,seller->{name,sellerImageUrl,sellerRating}}`;
+export default async function handler(request, response) {
+  const services = await sanityClient.fetch(servicesData);
+  response.status(200).json({ services });
 }

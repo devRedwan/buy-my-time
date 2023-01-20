@@ -4,7 +4,7 @@ import getScrollAnimation from "../../utils/getScrollAnimation";
 import getTopRatedServices from "../../utils/getTopRatedServices";
 import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 import Carousel from "../misc/carousel/Carousel";
-import { services } from "../ServicesData";
+import { services } from "../../ServicesData";
 
 const TopServices = () => {
   const scrollAnimation = getScrollAnimation();
