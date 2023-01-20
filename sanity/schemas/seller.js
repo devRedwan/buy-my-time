@@ -9,30 +9,25 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      title: 'Seller Image URL',
+      name: 'sellerImageUrl',
+      type: 'url',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'sellerRating',
       title: 'Seller Rating',
       type: 'number',
-    }),
-    defineField({
-      name: 'sellerImageURL',
-      title: 'Seller Image',
-      type: 'string',
-    }),
-    defineField({
-      name: 'service',
-      title: 'Service',
-      type: 'reference',
-      to: {
-        type: 'service',
-      },
+      validation: (Rule) => Rule.required().min(1).max(5),
     }),
   ],
   preview: {
     select: {
       title: 'name',
-      media: 'imageURL',
+      media: 'image',
       rating: 'sellerRating',
     },
   },

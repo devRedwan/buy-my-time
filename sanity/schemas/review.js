@@ -21,5 +21,13 @@ export default defineType({
           .min(10)
           .error('Review must have a minimum of 10 characters'),
     }),
+    defineField({
+      name: 'service',
+      title: 'Service',
+      type: 'reference',
+      to: {
+        type: 'service',
+      },
+    }),
   ],
 })
