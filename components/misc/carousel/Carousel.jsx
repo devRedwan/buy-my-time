@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import ArrowBack from "../../../public/assets/Icon/eva_arrow-back-fill.svg";
 import ArrowNext from "../../../public/assets/Icon/eva_arrow-next-fill.svg";
-import ServiceCard from "../ServiceCard";
+import ServiceCard from "../service-card/ServiceCard";
 
-const Carousel = ({ customServiceData }) => {
+const Carousel = ({ servicesData }) => {
   const sliderSettings = {
     dots: true,
     dotsClass: "slick-dots w-max absolute left-1/2 -translate-x-1/2 sm:mt-2 ",
@@ -39,7 +39,7 @@ const Carousel = ({ customServiceData }) => {
         arrows={false}
         ref={setSliderRef}
         className="sliderItem flex items-stretch justify-items-stretch">
-        {customServiceData.map((service) => (
+        {servicesData.map((service) => (
           <ServiceCard service={service} key={service.id} />
         ))}
       </Slider>

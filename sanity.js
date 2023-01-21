@@ -1,5 +1,4 @@
 import { createClient } from "next-sanity";
-import { sanityClient } from "./sanity";
 
 export const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, // "pv8y60vp"
@@ -9,13 +8,3 @@ export const config = {
 };
 
 export const sanityClient = createClient(config);
-
-const services = require("./services.json");
-
-services.forEach((service) => {
-  const seller = service.seller;
-  delete service.seller;
-  sanityClient.patch
-    .set({ seller: { _type: "reference", _ref: seller.id } })
-    .commit();
-});

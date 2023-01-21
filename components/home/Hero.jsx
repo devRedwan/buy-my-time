@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useMemo } from "react";
 import getScrollAnimation from "../../utils/getScrollAnimation";
-import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
+import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const Hero = () => {

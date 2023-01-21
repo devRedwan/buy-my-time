@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
+import { getTopRatedServices } from "../../utils/getFilteredServices";
 import getScrollAnimation from "../../utils/getScrollAnimation";
-import getTopRatedServices from "../../utils/getTopRatedServices";
-import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
+import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
 import Carousel from "../misc/carousel/Carousel";
-import { services } from "../../ServicesData";
+import { useContext } from "react";
+import ServicesContext from "../../context/servicesContext";
 
-const TopServices = () => {
+const TopRatedServices = () => {
   const scrollAnimation = getScrollAnimation();
+  const { services, loading } = useContext(ServicesContext);
   const topRatedServices = getTopRatedServices(services);
 
   return (
@@ -23,10 +25,12 @@ const TopServices = () => {
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper className="topServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 relative">
             <motion.div variants={scrollAnimation}>
-              <Carousel
-                className="carousel"
-                customServiceData={topRatedServices}
-              />
+              {!loading && (
+                <Carousel
+                  className="carousel"
+                  servicesData={topRatedServices}
+                />
+              )}
             </motion.div>
           </ScrollAnimationWrapper>
         </div>
@@ -35,4 +39,4 @@ const TopServices = () => {
   );
 };
 
-export default TopServices;
+export default TopRatedServices;
