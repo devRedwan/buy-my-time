@@ -8,7 +8,7 @@ const SellerCard = ({ seller }) => {
         <section className="sellerCard__container mx-auto overflow-hidden shadow-lg shadow-blue-100 rounded-xl cursor-pointer flex flex-col sm:flex-row h-96 sm:h-72 w-full ">
           <div className="sellerImageWrapper w-full md:w-1/2 sm:h-full overflow-hidden ">
             <img
-              className="h-full w-full object-cover hover:scale-105 transition-all duration-1000 ease-in-out"
+              className="sellerImage h-full w-full object-cover hover:scale-105 transition-all duration-1000 ease-in-out"
               src={seller?.sellerImageUrl}
               alt="BuyMyTime sellers"
             />

@@ -13,7 +13,6 @@ const purgecss = [
 ];
 module.exports = {
   plugins: [
-    require("tailwindcss-prettier")(),
     "postcss-import",
     "tailwindcss",
     "autoprefixer",

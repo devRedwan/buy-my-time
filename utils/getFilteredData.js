@@ -13,6 +13,13 @@ export const getTopRatedServices = (services) => {
   return topRatedServices;
 };
 
+export const getMostPopularServices = (services) => {
+  const MostPopularServices = services
+    .sort((a, b) => b.likes - a.likes)
+    .slice(0, 6);
+  return MostPopularServices;
+};
+
 export const getTopRatedSellers = (sellers) => {
   const topRatedSellers = sellers
     .sort((a, b) => b.sellerRating - a.sellerRating)
