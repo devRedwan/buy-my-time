@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useContext } from "react";
 import ServicesContext from "../../context/servicesContext";
 import { getTopRatedSellers } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
+import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 import SellerCard from "../misc/seller-card/SellerCard";
 import SellerSkeletonCard from "../misc/seller-card/SellerSkeletonCard";
 
@@ -35,6 +37,9 @@ const TopRatedSellers = () => {
                 )
               )}
             </motion.div>
+            <ButtonPrimary className="moreSellerButton w-1/2">
+              <Link href="/explore">More Sellers</Link>
+            </ButtonPrimary>
           </ScrollAnimationWrapper>
         </div>
       </section>

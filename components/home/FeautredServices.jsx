@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 import React, { useContext } from "react";
 import ServicesContext from "../../context/servicesContext";
 import {
@@ -7,6 +8,7 @@ import {
 } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
+import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 import Carousel from "../misc/carousel/Carousel";
 
 const FeaturedServices = () => {
@@ -31,6 +33,9 @@ const FeaturedServices = () => {
               <Carousel className="carousel" servicesData={topRatedServices} />
             </motion.div>
           </ScrollAnimationWrapper>
+          <ButtonPrimary addClass="moreServicesButton w-fit mx-auto mt-10 sm:mt-5">
+            <Link href="/explore">More Services</Link>
+          </ButtonPrimary>
         </div>
         <div className="popularServices__carouselWrapper carouselWrapper flex flex-col w-full my-8 sm:my-16 ">
           <ScrollAnimationWrapper className="popularServices__textWrapper section__textWrapper">
@@ -48,6 +53,9 @@ const FeaturedServices = () => {
               />
             </motion.div>
           </ScrollAnimationWrapper>
+          <ButtonPrimary addClass="moreServicesButton w-fit mx-auto mt-10 sm:mt-5">
+            <Link href="/explore">More Services</Link>
+          </ButtonPrimary>
         </div>
       </section>
     </main>
