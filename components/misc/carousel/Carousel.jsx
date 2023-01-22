@@ -50,7 +50,7 @@ const Carousel = ({ servicesData }) => {
         )}
       </Slider>
 
-      <div className="carouselNavigation__wrapper max-w-screen-xl w-full absolute  bottom-1/2 ">
+      <div className="carouselNavigation__wrapper max-w-screen-xl w-full absolute bottom-1/2 ">
         <div className="carousel__Navigation flex flex-none justify-between w-auto">
           <div
             className="carouselNavigation__leftArrow z-20 flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer md:mr-5"
