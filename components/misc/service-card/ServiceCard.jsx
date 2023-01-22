@@ -1,4 +1,6 @@
-import { EyeIcon, HeartIcon, StarIcon } from "@heroicons/react/24/solid";
+import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
+import StarIcon from "../../../public/assets/Icon/stars.svg";
+
 import Link from "next/link";
 
 const ServiceCard = ({ service }) => {
@@ -43,7 +45,7 @@ const ServiceCard = ({ service }) => {
           </div>
           <div className="service_metaData flex justify-around">
             <div className="service__visits flex align-center">
-              <EyeIcon className="h-5 w-5 text-gray-400" /> &nbsp;{" "}
+              <EyeIcon className="h-5 w-5 text-green-500" /> &nbsp;{" "}
               {service?.visits}
             </div>
             <div className="service__likes flex align-center">
@@ -52,7 +54,7 @@ const ServiceCard = ({ service }) => {
               {service?.likes}
             </div>
             <div className="service__rating flex align-center">
-              <StarIcon className="h-5 w-5 text-green-500" />
+              <StarIcon className="h-5 w-5" />
               &nbsp;
               {service?.rating.toFixed(1)}
             </div>
