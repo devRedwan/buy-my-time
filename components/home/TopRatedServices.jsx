@@ -1,20 +1,19 @@
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
-import { getTopRatedServices } from "../../utils/getFilteredServices";
+import React, { useContext } from "react";
+import ServicesContext from "../../context/servicesContext";
+import { getTopRatedServices } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
 import Carousel from "../misc/carousel/Carousel";
-import { useContext } from "react";
-import ServicesContext from "../../context/servicesContext";
 
 const TopRatedServices = () => {
   const scrollAnimation = getScrollAnimation();
-  const { services, loading } = useContext(ServicesContext);
+  const { services } = useContext(ServicesContext);
   const topRatedServices = getTopRatedServices(services);
 
   return (
-    <div className="topServices__section section">
-      <div className="topServices__container container">
+    <main className="topServices__section section">
+      <section className="topServices__container container">
         <div className="topServices__carouselWrapper carouselWrapper flex flex-col w-full my-8 sm:my-16 ">
           <ScrollAnimationWrapper className="topServices__textWrapper section__textWrapper">
             <motion.h3
@@ -25,17 +24,12 @@ const TopRatedServices = () => {
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper className="topServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 relative">
             <motion.div variants={scrollAnimation}>
-              {!loading && (
-                <Carousel
-                  className="carousel"
-                  servicesData={topRatedServices}
-                />
-              )}
+              <Carousel className="carousel" servicesData={topRatedServices} />
             </motion.div>
           </ScrollAnimationWrapper>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

@@ -40,7 +40,8 @@ const Services = () => {
               className="serviceGrid__textWrapper ml-auto flex w-full flex-col items-end justify-center lg:w-9/12"
               variants={scrollAnimation}>
               <h3 className="serviceGrid__textTitle text-2xl  font-medium leading-relaxed text-black-600 md:text-3xl lg:text-4xl">
-                Find the Most Convenient Services on BuyMyTime
+                Find the Most Convenient Services on{" "}
+                <span className="text-blue-500">BuyMyTime</span>
               </h3>
               <p className="serviceGrid__textPara my-2 text-black-500">
                 Explore a variety of services offered by our world-class

@@ -12,3 +12,10 @@ export const getTopRatedServices = (services) => {
   ];
   return topRatedServices;
 };
+
+export const getTopRatedSellers = (sellers) => {
+  const topRatedSellers = sellers
+    .sort((a, b) => b.sellerRating - a.sellerRating)
+    .slice(0, 4);
+  return topRatedSellers;
+};

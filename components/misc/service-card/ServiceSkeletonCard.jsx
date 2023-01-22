@@ -1,4 +1,4 @@
-const SkeletonCard = () => {
+const ServiceSkeletonCard = () => {
   return (
     <section className="serviceCard__container overflow-hidden shadow-lg shadow-blue-100 rounded-xl cursor-pointer bg-gray-100">
       <div className="serviceImageWrapper w-full h-1/2 overflow-hidden animate-pulse ">
@@ -25,4 +25,4 @@ const SkeletonCard = () => {
   );
 };
 
-export default SkeletonCard;
+export default ServiceSkeletonCard;

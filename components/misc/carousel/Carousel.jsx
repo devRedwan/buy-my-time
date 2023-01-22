@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import ArrowBack from "../../../public/assets/Icon/eva_arrow-back-fill.svg";
 import ArrowNext from "../../../public/assets/Icon/eva_arrow-next-fill.svg";
 import ServiceCard from "../service-card/ServiceCard";
+import ServiceSkeletonCard from "../service-card/ServiceSkeletonCard";
 
 const Carousel = ({ servicesData }) => {
   const sliderSettings = {
@@ -39,9 +40,13 @@ const Carousel = ({ servicesData }) => {
         arrows={false}
         ref={setSliderRef}
         className="sliderItem flex items-stretch justify-items-stretch">
-        {servicesData.map((service) => (
-          <ServiceCard service={service} key={service.id} />
-        ))}
+        {servicesData.map((service) =>
+          service ? (
+            <ServiceCard service={service} key={service.id} />
+          ) : (
+            <ServiceSkeletonCard />
+          )
+        )}
       </Slider>
 
       <div className="carouselNavigation__wrapper max-w-screen-xl w-screen  absolute -left-6 sm:-left-8 lg:-left-16 bottom-1/2 ">
