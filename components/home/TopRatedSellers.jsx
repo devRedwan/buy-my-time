@@ -25,9 +25,7 @@ const TopRatedSellers = () => {
             </motion.h3>
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper className="topSellers__grid pt-5 pb-12 relative">
-            <motion.div
-              variants={scrollAnimation}
-              className="topSeller__gridItems w-full flex flex-col sm:flex-row flex-wrap items-center justify-center">
+            <div className="topSeller__gridItems w-full flex flex-col sm:flex-row flex-wrap items-center justify-center">
               {topRatedSellers.map((seller) =>
                 seller ? (
                   <SellerCard seller={seller} key={seller.id} />
@@ -35,7 +33,7 @@ const TopRatedSellers = () => {
                   <SellerSkeletonCard />
                 )
               )}
-            </motion.div>
+            </div>
 
             <ButtonPrimary
               addClass="moreSellersButton w-fit mx-auto mt-10 sm:mt-5"

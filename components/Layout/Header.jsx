@@ -24,14 +24,7 @@ const Header = () => {
         <nav className="navBar max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
           <div className="navLogoWrapper col-start-1 col-end-2 flex items-center ">
             <Link href="/">
-              <Logo
-                className={
-                  "navLogo w-auto cursor-pointer" +
-                  (scrollActive
-                    ? "h-8 sm:h-10 md:h-12"
-                    : "h-10 sm:h-12 md:h-16")
-                }
-              />
+              <Logo className="navLogo w-auto cursor-pointer h-10 sm:h-12 md:h-16" />
             </Link>
           </div>
 
