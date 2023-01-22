@@ -8,7 +8,8 @@ import ServiceSkeletonCard from "../service-card/ServiceSkeletonCard";
 const Carousel = ({ servicesData }) => {
   const sliderSettings = {
     dots: true,
-    dotsClass: "slick-dots w-max absolute left-1/2 -translate-x-1/2 sm:mt-2 ",
+    dotsClass:
+      "slick-dots w-max absolute left-1/2 -translate-x-1/2 mt-12 sm:mt-2 ",
     infinite: true,
     speed: 500,
     slidesToShow: 2,
@@ -39,7 +40,7 @@ const Carousel = ({ servicesData }) => {
         {...sliderSettings}
         arrows={false}
         ref={setSliderRef}
-        className="sliderItem flex items-stretch justify-items-stretch">
+        className="sliderItem flex items-stretch justify-items-stretch ">
         {servicesData.map((service) =>
           service ? (
             <ServiceCard service={service} key={service.id} />
@@ -49,18 +50,18 @@ const Carousel = ({ servicesData }) => {
         )}
       </Slider>
 
-      <div className="carouselNavigation__wrapper max-w-screen-xl w-screen  absolute -left-6 sm:-left-8 lg:-left-16 bottom-1/2 ">
+      <div className="carouselNavigation__wrapper max-w-screen-xl w-full absolute  bottom-1/2 ">
         <div className="carousel__Navigation flex flex-none justify-between w-auto">
           <div
-            className="carouselNavigation__leftArrow ml-3 sm:ml-5 lg:ml-7 flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
+            className="carouselNavigation__leftArrow z-20 flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer md:mr-5"
             onClick={sliderRef?.slickPrev}>
-            <ArrowBack className="h-6 w-6" />
+            <ArrowBack className="h-6 w-6 " />
           </div>
 
           <div
-            className="carouselNavigation__leftArrow mr-3 sm:mr-5 lg:mr-7 flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
+            className="carouselNavigation__leftArrow z-20  flex items-center justify-center h-6 w-6 sm:h-12 sm:w-12 rounded-full bg-white border-blue-500 border hover:bg-blue-500 hover:text-white-500 transition-all text-blue-500 cursor-pointer"
             onClick={sliderRef?.slickNext}>
-            <ArrowNext className="h-6 w-6" />
+            <ArrowNext className="h-6 w-6 " />
           </div>
         </div>
       </div>
