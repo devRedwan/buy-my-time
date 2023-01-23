@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/Layout/index";
 import SeoHead from "../components/SeoHead";
 
 export default function () {

@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import ExploreSellers from "../components/explore/ExploreSellers";
 import ExploreServices from "../components/explore/ExploreServices";
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/layout";
 import ScrollAnimationWrapper from "../components/layout/ScrollAnimationWrapper";
+import AccordianMenu from "../components/misc/AccordianMenu";
 import SeoHead from "../components/SeoHead";
 import getScrollAnimation from "../utils/getScrollAnimation";
 
 export default function Explore() {
   const scrollAnimation = getScrollAnimation();
+
   return (
     <>
       <SeoHead title="Buy My Time | Explore" />
@@ -22,21 +25,23 @@ export default function Explore() {
         <main className="explore px-8 xl:px-16 max-w-screen-xl mx-auto">
           <ScrollAnimationWrapper>
             <motion.div
-              className="grid grid-flow-row grid-rows-2 gap-8 py-6 sm:py-16 sm:grid-flow-col sm:grid-cols-2 md:grid-rows-1"
+              className="grid grid-flow-row gap-8 py-6 sm:py-16 sm:grid-flow-col"
               variants={scrollAnimation}>
-              <ExploreServices />
+              <AccordianMenu title="Services">
+                <ExploreServices />
+              </AccordianMenu>
             </motion.div>
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper>
             <motion.div
-              className="grid grid-flow-row grid-rows-2 gap-8 py-6 sm:py-16 sm:grid-flow-col sm:grid-cols-2 md:grid-rows-1"
+              className="grid grid-flow-row gap-8 pt-6 pb-12 sm:pt-16 sm:pb-32 sm:grid-flow-col"
               variants={scrollAnimation}>
-              <ExploreSellers />
+              <AccordianMenu title="Service Professionals">
+                <ExploreSellers />
+              </AccordianMenu>
             </motion.div>
           </ScrollAnimationWrapper>
         </main>
-
-        
       </Layout>
     </>
   );

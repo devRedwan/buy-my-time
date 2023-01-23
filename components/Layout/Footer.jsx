@@ -52,7 +52,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footerMenu__Engage row-span-2 sm:col-span-2 sm:col-start-9 sm:col-end-11 flex flex-col">
-          <p className="text-black-600 mb-4 font-medium text-lg">Engage</p>
+          <p className="text-black-600 mb-4 font-medium text-lg">About</p>
           <ul className="text-black-500">
             <li className="my-2 hover:text-blue-500 cursor-not-allowed transition-all">
               BuyMyTime ?{" "}
@@ -75,7 +75,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="footerMenu__EarnMoney row-span-2 sm:col-span-2 sm:col-start-11 sm:col-end-13 flex flex-col">
-          <p className="text-black-600 mb-4 font-medium text-lg">Earn Money</p>
+          <p className="text-black-600 mb-4 font-medium text-lg">Support</p>
           <ul className="text-black-500">
             <li className="my-2 hover:text-blue-500 cursor-not-allowed transition-all">
               Help & Support{" "}
