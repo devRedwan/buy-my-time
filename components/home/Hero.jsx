@@ -9,7 +9,7 @@ const Hero = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
 
   return (
-    <div
+    <main
       className="hero__Section max-w-screen-xl mt-24 px-8 xl:px-16 mx-auto"
       id="hero__landing">
       <ScrollAnimationWrapper>
@@ -46,7 +46,7 @@ const Hero = () => {
           </div>
         </motion.div>
       </ScrollAnimationWrapper>
-    </div>
+    </main>
   );
 };
 
