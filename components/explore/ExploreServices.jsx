@@ -13,20 +13,7 @@ const ExploreServices = () => {
   const [displayedServicesIds, setDisplayedServicesIds] = useState(new Set());
 
   const loadMoreData = () => {
-    const newServices = allServices.slice(
-      displayedServices.length,
-      displayedServices.length + 4
-    );
-    const filteredServices = newServices.filter(
-      (service) => !displayedServicesIds.has(service.id)
-    );
-    setDisplayedServicesIds(
-      new Set([
-        ...displayedServicesIds,
-        ...filteredServices.map((svc) => svc.id),
-      ])
-    );
-    setDisplayedServices([...displayedServices, ...filteredServices]);
+    console.log("load more data");
   };
 
   const handleKeyUp = (event) => {
@@ -38,7 +25,6 @@ const ExploreServices = () => {
   useEffect(() => {
     setAllServices(getAllServices(services));
     setDisplayedServices(getAllServices(services).slice(0, 6));
-    setDisplayedServicesIds(new Set());
   }, [services]);
 
   return (
@@ -46,15 +32,14 @@ const ExploreServices = () => {
       <section className="exploreServicesSection flex flex-col justify-center">
         <div className="filterSortWrapper flex flex-wrap justify-evenly mb-5">
           <select
-            name="filterList"
-            id=""
+            name="sortData"
+            id="sortServices"
+            defaultValue=""
             className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center">
-            <option defaultValue disabled>
+            <option value="" disabled>
               Sort By
             </option>
-            <option className="text-blue-500" value="likes">
-              Most Liked
-            </option>
+            <option value="likes">Most Liked</option>
             <option value="rating">Top Rated</option>
             <option value="visits">Most Inquired</option>
           </select>
