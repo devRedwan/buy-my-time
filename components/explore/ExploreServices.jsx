@@ -1,10 +1,33 @@
-import { ArrowDownIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
-import Collapsible from "react-collapsible";
+import { useContext, useEffect, useState } from "react";
+import ServicesContext from "../../context/servicesContext";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
+import ServiceCard from "../misc/service-card/ServiceCard";
+import { getAllServices } from "../../utils/getFilteredData";
+import ServicesSkeletonCard from "../misc/service-card/ServiceSkeletonCard";
 
 const ExploreServices = () => {
   const [inputValue, setInputValue] = useState("");
+  const { services, sellers, loading } = useContext(ServicesContext);
+  const [allServices, setAllServices] = useState([]);
+  const [displayedServices, setDisplayedServices] = useState([]);
+  const [displayedServicesIds, setDisplayedServicesIds] = useState(new Set());
+
+  const loadMoreData = () => {
+    const newServices = allServices.slice(
+      displayedServices.length,
+      displayedServices.length + 4
+    );
+    const filteredServices = newServices.filter(
+      (service) => !displayedServicesIds.has(service.id)
+    );
+    setDisplayedServicesIds(
+      new Set([
+        ...displayedServicesIds,
+        ...filteredServices.map((svc) => svc.id),
+      ])
+    );
+    setDisplayedServices([...displayedServices, ...filteredServices]);
+  };
 
   const handleKeyUp = (event) => {
     if (event.key === "Enter") {
@@ -12,17 +35,22 @@ const ExploreServices = () => {
     }
   };
 
+  useEffect(() => {
+    setAllServices(getAllServices(services));
+    setDisplayedServices(getAllServices(services).slice(0, 6));
+    setDisplayedServicesIds(new Set());
+  }, [services]);
+
   return (
     <main className="exploreServices py-6 px-2 xl:px-5 max-w-screen-xl mx-auto">
-      <section className="exploreServicesSection">
-
-        <div className="filterServices flex flex-wrap justify-evenly mb-5">
+      <section className="exploreServicesSection flex flex-col justify-center">
+        <div className="filterSortWrapper flex flex-wrap justify-evenly mb-5">
           <select
             name="filterList"
             id=""
-            className="servicesFilter__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center">
-            <option value="" disabled selected>
-              Filter Services By
+            className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center">
+            <option defaultValue disabled>
+              Sort By
             </option>
             <option className="text-blue-500" value="likes">
               Most Liked
@@ -40,9 +68,23 @@ const ExploreServices = () => {
           />
         </div>
 
-        <div className="servicesCardList flex flex-wrap justify-evenly"></div>
-        
-        <ButtonPrimary addClass="ServicesLoadMoreButton mx-auto my-4" href="">
+        <div className="servicesCardList flex flex-wrap justify-evenly text-center">
+          {displayedServices.map((service, index) =>
+            service ? (
+              <ServiceCard
+                service={service}
+                key={service.id}
+                className="serviceCard"
+              />
+            ) : (
+              <ServicesSkeletonCard key={index} />
+            )
+          )}
+        </div>
+
+        <ButtonPrimary
+          addClass="ServicesLoadMoreButton w-fit mx-auto my-4"
+          onClick={loadMoreData}>
           Load More
         </ButtonPrimary>
       </section>
