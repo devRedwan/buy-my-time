@@ -41,11 +41,11 @@ const Carousel = ({ servicesData }) => {
         arrows={false}
         ref={setSliderRef}
         className="sliderItem flex items-stretch justify-items-stretch ">
-        {servicesData.map((service) =>
+        {servicesData.map((service, index) =>
           service ? (
             <ServiceCard service={service} key={service.id} />
           ) : (
-            <ServiceSkeletonCard />
+            <ServiceSkeletonCard key={index} />
           )
         )}
       </Slider>
