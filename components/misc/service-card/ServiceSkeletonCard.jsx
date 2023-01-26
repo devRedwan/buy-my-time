@@ -1,6 +1,6 @@
 const ServiceSkeletonCard = () => {
   return (
-    <section className="serviceCard__container overflow-hidden shadow-lg shadow-blue-100 rounded-xl cursor-pointer bg-gray-100">
+    <section className="serviceCard__container w-96 p-6 sm:p-8 mx-auto max-w-lg max-h-screen overflow-hidden m-8 min-h-fit shadow-lg shadow-blue-100 rounded-xl cursor-pointer bg-gray-100">
       <div className="serviceImageWrapper w-full h-1/2 overflow-hidden animate-pulse ">
         <div className="h-40 sm:h-60 w-full bg-gray-400 animate-pulse  "></div>
       </div>

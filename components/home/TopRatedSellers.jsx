@@ -4,6 +4,7 @@ import ServicesContext from "../../context/servicesContext";
 import { getTopRatedSellers } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
+import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 import SellerCard from "../misc/seller-card/SellerCard";
 import SellerSkeletonCard from "../misc/seller-card/SellerSkeletonCard";
 
@@ -24,9 +25,7 @@ const TopRatedSellers = () => {
             </motion.h3>
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper className="topSellers__grid pt-5 pb-12 relative">
-            <motion.div
-              variants={scrollAnimation}
-              className="w-full flex flex-col sm:flex-row flex-wrap items-center justify-center">
+            <div className="topSeller__gridItems w-full flex flex-col sm:flex-row flex-wrap items-center justify-center">
               {topRatedSellers.map((seller) =>
                 seller ? (
                   <SellerCard seller={seller} key={seller.id} />
@@ -34,7 +33,13 @@ const TopRatedSellers = () => {
                   <SellerSkeletonCard />
                 )
               )}
-            </motion.div>
+            </div>
+
+            <ButtonPrimary
+              addClass="moreSellersButton w-fit mx-auto mt-10 sm:mt-5"
+              href="/explore">
+              More Sellers
+            </ButtonPrimary>
           </ScrollAnimationWrapper>
         </div>
       </section>

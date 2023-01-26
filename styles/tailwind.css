@@ -12,6 +12,7 @@ body {
 p {
   @apply text-black-500;
 }
+
 .animation-hover:after {
   background: none repeat scroll 0 0 transparent;
   content: "";
@@ -61,6 +62,24 @@ li.check:before {
 }
 .slick-dots .slick-active span {
   @apply bg-blue-500 rounded-l-full rounded-r-full w-6 sm:w-12;
+}
+
+/* Accordian Menu */
+.accordianMenu {
+  @apply border-b-2 border-solid border-blue-500;
+}
+
+.accordianMenu-title {
+  @apply w-full text-left cursor-pointer sm:text-left text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal py-2 pl-4 pr-16 relative after:content-[''];
+}
+.accordianMenu-title::after {
+  @apply block w-3 h-3 border-l-2 border-b-2 border-blue-500 border-solid absolute top-5 right-9 -rotate-45 transition-transform duration-300 ease-in-out;
+}
+.accordianMenu-title.active::after {
+  @apply rotate-[135deg];
+}
+.accordianMenu-content {
+  @apply pt-0 pb-8 px-4 leading-6 text-base;
 }
 
 /* ------------------ Generic Styles ------------------ */

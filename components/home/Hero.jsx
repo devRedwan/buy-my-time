@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useMemo } from "react";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
@@ -10,7 +9,7 @@ const Hero = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
 
   return (
-    <div
+    <main
       className="hero__Section max-w-screen-xl mt-24 px-8 xl:px-16 mx-auto"
       id="hero__landing">
       <ScrollAnimationWrapper>
@@ -27,8 +26,8 @@ const Hero = () => {
               - waiting in line, events, and more
             </p>
 
-            <ButtonPrimary className="heroButton">
-              <Link href="/explore">Browse Services</Link>
+            <ButtonPrimary addClass="heroButton" href="/explore">
+              Browse Services
             </ButtonPrimary>
           </div>
           <div className="heroIllustration__wrapper flex w-full items-center justify-center relative sm:row-start-1">
@@ -47,7 +46,7 @@ const Hero = () => {
           </div>
         </motion.div>
       </ScrollAnimationWrapper>
-    </div>
+    </main>
   );
 };
 

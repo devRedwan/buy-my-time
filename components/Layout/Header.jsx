@@ -18,13 +18,13 @@ const Header = () => {
     <>
       <header
         className={
-          "header fixed top-0 w-full  z-30 bg-white-500 transition-all " +
+          "header sticky top-0 w-full  z-30 bg-white-500 transition-all " +
           (scrollActive ? " shadow-md pt-0" : " pt-4")
         }>
         <nav className="navBar max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
           <div className="navLogoWrapper col-start-1 col-end-2 flex items-center ">
             <Link href="/">
-              <Logo className="navLogo h-10 sm:h-12 md:h-16 w-auto cursor-pointer" />
+              <Logo className="navLogo w-auto cursor-pointer h-10 sm:h-12 md:h-16" />
             </Link>
           </div>
 
