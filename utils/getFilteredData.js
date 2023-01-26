@@ -10,9 +10,7 @@ export const getAllServices = (services) => {
   const myInterviewService = getMyInterviewService(services);
   const allServices = [
     myInterviewService,
-    ...services
-      .filter((service) => service.id !== myInterviewService.id)
-      .sort(() => 0.5 - Math.random()),
+    ...services.filter((service) => service.id !== myInterviewService.id),
   ];
   return allServices;
 };

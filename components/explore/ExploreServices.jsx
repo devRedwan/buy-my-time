@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import ServicesContext from "../../context/servicesContext";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 import ServiceCard from "../misc/service-card/ServiceCard";
@@ -8,13 +8,8 @@ import ServicesSkeletonCard from "../misc/service-card/ServiceSkeletonCard";
 const ExploreServices = () => {
   const [inputValue, setInputValue] = useState("");
   const { services, sellers, loading } = useContext(ServicesContext);
-  const [allServices, setAllServices] = useState([]);
+  const allServices = useMemo(() => getAllServices(services), [services]);
   const [displayedServices, setDisplayedServices] = useState([]);
-  const [displayedServicesIds, setDisplayedServicesIds] = useState(new Set());
-
-  const loadMoreData = () => {
-    console.log("load more data");
-  };
 
   const handleKeyUp = (event) => {
     if (event.key === "Enter") {
@@ -22,10 +17,19 @@ const ExploreServices = () => {
     }
   };
 
+  const loadMoreData = () => {
+    setDisplayedServices([
+      ...displayedServices,
+      ...allServices.slice(
+        displayedServices.length,
+        displayedServices.length + 4
+      ),
+    ]);
+  };
+
   useEffect(() => {
-    setAllServices(getAllServices(services));
-    setDisplayedServices(getAllServices(services).slice(0, 6));
-  }, [services]);
+    allServices && setDisplayedServices(allServices.slice(0, 6));
+  }, [allServices]);
 
   return (
     <main className="exploreServices py-6 px-2 xl:px-5 max-w-screen-xl mx-auto">
@@ -68,7 +72,9 @@ const ExploreServices = () => {
         </div>
 
         <ButtonPrimary
-          addClass="ServicesLoadMoreButton w-fit mx-auto my-4"
+          addClass={`ServicesLoadMoreButton w-fit mx-auto my-4 ${
+            allServices.length === displayedServices.length ? "hidden" : ""
+          }`}
           onClick={loadMoreData}>
           Load More
         </ButtonPrimary>
