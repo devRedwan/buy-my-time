@@ -59,9 +59,9 @@ const ExploreServices = () => {
             className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center"
             onChange={(event) => setSortDropDown(event.target.value)}>
             <option value="">Sort By</option>
-            <option value="likes">Most Liked</option>
-            <option value="rating">Top Rated</option>
-            <option value="visits">Most Inquired</option>
+            <option value="likes">Likes</option>
+            <option value="rating">Rating</option>
+            <option value="visits">Visits</option>
           </select>
           <input
             type="text"
