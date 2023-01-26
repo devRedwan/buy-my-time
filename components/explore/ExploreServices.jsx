@@ -6,15 +6,21 @@ import { getAllServices } from "../../utils/getFilteredData";
 import ServicesSkeletonCard from "../misc/service-card/ServiceSkeletonCard";
 
 const ExploreServices = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortDropDown, setSortDropDown] = useState("");
   const { services, sellers, loading } = useContext(ServicesContext);
   const allServices = useMemo(() => getAllServices(services), [services]);
   const [displayedServices, setDisplayedServices] = useState([]);
 
-  const handleKeyUp = (event) => {
-    if (event.key === "Enter") {
-      console.log(inputValue);
+  const sortServices = (a, b, sortType) => {
+    if (sortType === "likes") {
+      return b.likes - a.likes;
+    } else if (sortType === "rating") {
+      return b.rating - a.rating;
+    } else if (sortType === "visits") {
+      return b.visits - a.visits;
     }
+    return 0;
   };
 
   const loadMoreData = () => {
@@ -28,8 +34,19 @@ const ExploreServices = () => {
   };
 
   useEffect(() => {
-    allServices && setDisplayedServices(allServices.slice(0, 6));
-  }, [allServices]);
+    allServices &&
+      setDisplayedServices(
+        searchQuery === ""
+          ? allServices
+              .sort((a, b) => sortServices(a, b, sortDropDown))
+              .slice(0, 6)
+          : allServices
+              .sort((a, b) => sortServices(a, b, sortDropDown))
+              .filter((service) =>
+                service.title.toLowerCase().includes(searchQuery.toLowerCase())
+              )
+      );
+  }, [allServices, searchQuery, sortDropDown]);
 
   return (
     <main className="exploreServices py-6 px-2 xl:px-5 max-w-screen-xl mx-auto">
@@ -38,11 +55,10 @@ const ExploreServices = () => {
           <select
             name="sortData"
             id="sortServices"
-            defaultValue=""
-            className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center">
-            <option value="" disabled>
-              Sort By
-            </option>
+            defaultValue="sortDropDown"
+            className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center"
+            onChange={(event) => setSortDropDown(event.target.value)}>
+            <option value="">Sort By</option>
             <option value="likes">Most Liked</option>
             <option value="rating">Top Rated</option>
             <option value="visits">Most Inquired</option>
@@ -51,9 +67,8 @@ const ExploreServices = () => {
             type="text"
             className="serviceFilter__searchbar w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center placeholder:text-gray-400"
             placeholder="Search Services"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
-            onKeyUp={handleKeyUp}
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
           />
         </div>
 
@@ -73,7 +88,10 @@ const ExploreServices = () => {
 
         <ButtonPrimary
           addClass={`ServicesLoadMoreButton w-fit mx-auto my-4 ${
-            allServices.length === displayedServices.length ? "hidden" : ""
+            allServices.length === displayedServices.length ||
+            searchQuery !== ""
+              ? "hidden"
+              : ""
           }`}
           onClick={loadMoreData}>
           Load More
