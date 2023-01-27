@@ -15,7 +15,7 @@ export default function Explore() {
     <>
       <SeoHead title="Buy My Time | Explore" />
       <Layout>
-        <header className="exploreTitleWrapper bg-[url('https://i.postimg.cc/s2j9Dn6S/Explore-title-background.png')] bg-no-repeat bg-cover bg-blend-overlay h-32 sm:h-40 w-screen">
+        <header className="exploreTitleWrapper bg-[url('https://i.postimg.cc/s2j9Dn6S/Explore-title-background.png')] bg-no-repeat bg-cover bg-blend-overlay h-32 sm:h-40 w-full">
           <div className="h-full w-full flex justify-center items-center bg-blue-500 bg-opacity-70">
             <h1 className="exploreTitle text-4xl sm:text-7xl font-semibold  text-white-500 tracking-widest">
               Explore

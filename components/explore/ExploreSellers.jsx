@@ -12,9 +12,9 @@ const ExploreSellers = () => {
   const [displayedSellers, setDisplayedSellers] = useState([]);
 
   const sortSellers = (a, b, sortType) => {
-    if (sortType === "listed_services") {
+    if (sortType === "totalServices") {
       return b.totalServices - a.totalServices;
-    } else if (sortType === "rating") {
+    } else if (sortType === "sellerRating") {
       return b.sellerRating - a.sellerRating;
     }
     return 0;
@@ -63,8 +63,8 @@ const ExploreSellers = () => {
             className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center"
             onChange={(event) => setSortDropDown(event.target.value)}>
             <option value="">Sort By</option>
-            <option value="listed_services">Most Services Listed</option>
-            <option value="rating">Top Rating</option>
+            <option value="totalServices">Most Services Listed</option>
+            <option value="sellerRating">Top Rating</option>
           </select>
           <input
             type="text"
