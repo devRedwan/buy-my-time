@@ -9,8 +9,7 @@ const ExploreServices = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortDropDown, setSortDropDown] = useState("");
-  const { services, sellers } = useContext(ServicesContext);
-
+  const { services } = useContext(ServicesContext);
   const allServices = useMemo(() => getAllServices(services), [services]);
   const [displayedServices, setDisplayedServices] = useState([]);
 
@@ -87,7 +86,7 @@ const ExploreServices = () => {
         </div>
 
         <div className="servicesCardList flex flex-wrap justify-evenly text-center">
-          {loading || !services
+          {loading || !displayedServices
             ? new Array(displayedServices.length)
                 .fill(0)
                 .map((_, index) => <ServicesSkeletonCard key={index} />)
