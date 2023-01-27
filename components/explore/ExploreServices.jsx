@@ -90,13 +90,16 @@ const ExploreServices = () => {
             ? new Array(displayedServices.length)
                 .fill(0)
                 .map((_, index) => <ServicesSkeletonCard key={index} />)
-            : displayedServices.map((service, index) => (
-                <ServiceCard
-                  service={service}
-                  key={service.id}
-                  className="serviceCard"
-                />
-              ))}
+            : displayedServices.map(
+                (service) =>
+                  service && (
+                    <ServiceCard
+                      service={service}
+                      key={service.id}
+                      className="serviceCard"
+                    />
+                  )
+              )}
         </div>
 
         <ButtonPrimary

@@ -79,7 +79,7 @@ li.check:before {
   @apply rotate-[135deg];
 }
 .accordianMenu-content {
-  @apply pt-0 pb-8 px-4 leading-6 text-base;
+  @apply pt-0 pb-8 leading-6 text-base;
 }
 
 /* ------------------ Generic Styles ------------------ */
