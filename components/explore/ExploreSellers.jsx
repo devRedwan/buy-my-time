@@ -23,11 +23,7 @@ const ExploreSellers = () => {
   const loadMoreData = () => {
     setDisplayedSellers([
       ...displayedSellers,
-      ...sellers
-        .filter(
-          (seller) => seller.id !== displayedSellers.map((seller) => seller.id)
-        )
-        .slice(displayedSellers.length, displayedSellers.length + 2),
+      ...sellers.slice(displayedSellers.length, displayedSellers.length + 2),
     ]);
     setLoading(true);
     setTimeout(() => {
