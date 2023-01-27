@@ -40,3 +40,36 @@ export const getTopRatedSellers = (sellers) => {
     .slice(0, 4);
   return topRatedSellers;
 };
+
+export const sortData = (sortingOptions, a, b, sortType) => {
+  return sortingOptions.reduce((result, sortingOption) => {
+    if (sortType === sortingOption.sortingValue) {
+      return b[sortingOption.sortingValue] - a[sortingOption.sortingValue];
+    }
+    return result;
+  }, 0);
+};
+
+export const sortAndFilterData = (
+  data,
+  setDisplayedData,
+  displayedDataLength,
+  filteringProperty,
+  sortingOptions,
+  sortingValue,
+  searchTerm
+) => {
+  return setDisplayedData(
+    searchTerm === ""
+      ? data
+          ?.sort((a, b) => sortData(sortingOptions, a, b, sortingValue))
+          ?.slice(0, displayedDataLength)
+      : data
+          ?.sort((a, b) => sortData(sortingOptions, a, b, sortingValue))
+          ?.filter((item) =>
+            item[filteringProperty]
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          )
+  );
+};

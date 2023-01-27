@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import ExploreSellers from "../components/explore/ExploreSellers";
 import ExploreServices from "../components/explore/ExploreServices";
 import Layout from "../components/layout";
