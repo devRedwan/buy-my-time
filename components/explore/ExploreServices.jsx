@@ -6,9 +6,11 @@ import { getAllServices } from "../../utils/getFilteredData";
 import ServicesSkeletonCard from "../misc/service-card/ServiceSkeletonCard";
 
 const ExploreServices = () => {
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortDropDown, setSortDropDown] = useState("");
-  const { services, sellers, loading } = useContext(ServicesContext);
+  const { services, sellers } = useContext(ServicesContext);
+
   const allServices = useMemo(() => getAllServices(services), [services]);
   const [displayedServices, setDisplayedServices] = useState([]);
 
@@ -31,21 +33,33 @@ const ExploreServices = () => {
         displayedServices.length + 4
       ),
     ]);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
 
   useEffect(() => {
-    allServices &&
-      setDisplayedServices(
-        searchQuery === ""
-          ? allServices
-              .sort((a, b) => sortServices(a, b, sortDropDown))
-              .slice(0, 6)
-          : allServices
-              .sort((a, b) => sortServices(a, b, sortDropDown))
-              .filter((service) =>
-                service.title.toLowerCase().includes(searchQuery.toLowerCase())
-              )
-      );
+    if (allServices) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+
+      allServices &&
+        setDisplayedServices(
+          searchQuery === ""
+            ? allServices
+                .sort((a, b) => sortServices(a, b, sortDropDown))
+                .slice(0, 6)
+            : allServices
+                .sort((a, b) => sortServices(a, b, sortDropDown))
+                .filter((service) =>
+                  service.title
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase())
+                )
+        );
+    }
   }, [allServices, searchQuery, sortDropDown]);
 
   return (
@@ -59,9 +73,9 @@ const ExploreServices = () => {
             className="sorting__DropDown w-full outline-none shadow-lg shadow-blue-100 max-w-xs p-2 mb-4 rounded-lg focus:shadow-blue-300 text-center"
             onChange={(event) => setSortDropDown(event.target.value)}>
             <option value="">Sort By</option>
-            <option value="likes">Likes</option>
-            <option value="rating">Rating</option>
-            <option value="visits">Visits</option>
+            <option value="likes">Most Likes</option>
+            <option value="rating">Top Rating</option>
+            <option value="visits">Most Visits</option>
           </select>
           <input
             type="text"
@@ -73,17 +87,17 @@ const ExploreServices = () => {
         </div>
 
         <div className="servicesCardList flex flex-wrap justify-evenly text-center">
-          {displayedServices.map((service, index) =>
-            service ? (
-              <ServiceCard
-                service={service}
-                key={service.id}
-                className="serviceCard"
-              />
-            ) : (
-              <ServicesSkeletonCard key={index} />
-            )
-          )}
+          {loading || !services
+            ? new Array(displayedServices.length)
+                .fill(0)
+                .map((_, index) => <ServicesSkeletonCard key={index} />)
+            : displayedServices.map((service, index) => (
+                <ServiceCard
+                  service={service}
+                  key={service.id}
+                  className="serviceCard"
+                />
+              ))}
         </div>
 
         <ButtonPrimary
