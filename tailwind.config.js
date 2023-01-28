@@ -1,3 +1,5 @@
+const { transform } = require("framer-motion");
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -56,10 +58,21 @@ module.exports = {
             transform: "translateX(100%)",
           },
         },
+        floatUp: {
+          "0%": {
+            opacity: 0.1,
+            transform: "translateY(15%)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         flicker: "flicker 3s linear infinite",
         shimmer: "shimmer 2s linear infinite",
+        floatUp: "floatUp 1s ease-out ",
       },
     },
   },

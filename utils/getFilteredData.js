@@ -1,7 +1,7 @@
 export const getMyInterviewService = (services) => {
   const interviewServiceId = "e7f5dba1-b25a-4f92-a71f-8c55f9d31405";
-  const interviewService = services.find(
-    (service) => service.id === interviewServiceId
+  const interviewService = services?.find(
+    (service) => service?.id === interviewServiceId
   );
   return interviewService;
 };
@@ -10,7 +10,7 @@ export const getAllServices = (services) => {
   const myInterviewService = getMyInterviewService(services);
   const allServices = [
     myInterviewService,
-    ...services.filter((service) => service.id !== myInterviewService.id),
+    ...services?.filter((service) => service?.id !== myInterviewService.id),
   ];
   return allServices;
 };
@@ -39,6 +39,14 @@ export const getTopRatedSellers = (sellers) => {
     .sort((a, b) => b.sellerRating - a.sellerRating)
     .slice(0, 4);
   return topRatedSellers;
+};
+
+export const getUniqueSellerServices = (services, uniqueSellerId) => {
+  const uniqueSellerServices = services?.filter(
+    (service) => service?.seller.id === uniqueSellerId
+  );
+
+  return uniqueSellerServices;
 };
 
 export const sortData = (sortingOptions, a, b, sortType) => {

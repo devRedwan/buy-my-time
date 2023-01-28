@@ -3,7 +3,7 @@ import Services from "../components/home/Services";
 import TopRatedSellers from "../components/home/TopRatedSellers";
 import FeaturedServices from "../components/home/FeautredServices";
 import Layout from "../components/layout/index";
-import SeoHead from "../components/SeoHead";
+import SeoHead from "../components/layout/SeoHead";
 
 export default function Home() {
   return (
