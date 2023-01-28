@@ -1,9 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from "react";
-import ServicesContext from "../../context/servicesContext";
-import {
-  getAllServices,
-  sortAndFilterData
-} from "../../utils/getFilteredData";
+import { useEffect, useMemo, useState } from "react";
+import { sortAndFilterData } from "../../utils/getFilteredData";
 import ServiceCard from "../misc/service-card/ServiceCard";
 import ServicesSkeletonCard from "../misc/service-card/ServiceSkeletonCard";
 import FilterSearchInput from "./FilterSearchInput";
@@ -11,13 +7,12 @@ import LoadMoreButton from "./LoadMoreButton";
 import SortDropDown from "./SortDropDown";
 import { serviceSortingOptions } from "./SortingOptions";
 
-const ExploreServices = () => {
+const ExploreServices = ({ getFilteredServices, services }) => {
+  const allServices = useMemo(() => getFilteredServices, [services]);
+  const [displayedServices, setDisplayedServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [serviceSearchTerm, setServiceSearchTerm] = useState("");
   const [serviceSortingValue, setServiceSortingValue] = useState("");
-  const { services } = useContext(ServicesContext);
-  const allServices = useMemo(() => getAllServices(services), [services]);
-  const [displayedServices, setDisplayedServices] = useState([]);
 
   useEffect(() => {
     if (allServices) {
@@ -59,7 +54,7 @@ const ExploreServices = () => {
           />
         </div>
 
-        <div className="servicesCardList flex flex-wrap justify-evenly text-center">
+        <div className="servicesCardList flex flex-wrap justify-evenly text-center animate-floatUp">
           {loading || !displayedServices
             ? new Array(displayedServices.length)
                 .fill(0)
@@ -69,8 +64,8 @@ const ExploreServices = () => {
                   service && (
                     <ServiceCard
                       service={service}
-                      key={service.id}
-                      className="serviceCard"
+                      key={service?.id}
+                      className="serviceCard animate-floatUp"
                     />
                   )
               )}

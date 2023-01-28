@@ -3,7 +3,7 @@ import { ArrowLeftCircleIcon, BellAlertIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/layout/index";
-import SeoHead from "../components/SeoHead";
+import SeoHead from "../components/layout/SeoHead";
 import animatedLogo from "../public/assets/buy_my_time_Logo_animated.gif";
 
 const Custom404 = () => {
