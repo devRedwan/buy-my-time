@@ -6,8 +6,8 @@ import Layout from "../../../components/layout/index";
 import ScrollAnimationWrapper from "../../../components/layout/ScrollAnimationWrapper";
 import SeoHead from "../../../components/layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
+import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import ServicesContext from "../../../context/servicesContext";
-import StarIcon from "../../../public/assets/Icon/stars.svg";
 import { getUniqueSellerServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
 
@@ -33,31 +33,10 @@ const Seller = () => {
 
       <main className="sellerProfile py-7 px-8 xl:px-16 max-w-screen-xl mx-auto">
         <ScrollAnimationWrapper className="sellerSection w-full flex justify-center items-center py-6 sm:py-16">
-          <motion.div
-            className="sellerInfoWrapper w-3/4 sm:w-2/3 max-w-xl rounded-lg flex felx-col items-center justify-center shadow-lg shadow-gray-400 relative group overflow-hidden"
-            variants={scrollAnimation}>
-            <img
-              src={selectedSeller?.sellerImageUrl}
-              alt="BuyMyTime Service Professional Image"
-              className="w-full overflow-hidden rounded-lg group-hover:scale-105 group-hover:blur-sm transition-all duration-500 ease-in-out"
-            />
-            <div className="sellerInfo__bg absolute top-0 left-0 w-full h-full bg-gradient-to-t from-blue-300 to-blue-100  rounded-lg overflow-hidden opacity-0 group-hover:opacity-80 transition-opacity duration-500 ease-in-out"></div>
-
-            <div className="sellerDescription flex flex-col absolute opacity-0 translate-y-72 group-hover:opacity-100 group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
-              <h2 className="sellerName w-full text-center font-semibold mb-3 text-2xl sm:text-4xl md:text-5xl">
-                {selectedSeller?.name}
-              </h2>
-              <h3 className="sellerSeller__info flex flex-col items-center sm:flex-row justify-evenly mx-auto ">
-                Total Listed Services: {selectedSeller?.totalServices}
-              </h3>
-              <div className="sellerDescription leading-relaxed mb-3 text-md flex items-center justify-center">
-                <p className="text-black-600">
-                  Rating: {selectedSeller?.sellerRating}{" "}
-                </p>
-                <StarIcon className="h-5 w-5 mb-1" />
-              </div>
-            </div>
-          </motion.div>
+          <SellerImageCard
+            selectedSeller={selectedSeller}
+            className="w-3/4 sm:w-2/3"
+          />
         </ScrollAnimationWrapper>
 
         <ScrollAnimationWrapper className="listedServicesSection w-full flex flex-col py-6 sm:py-16">
