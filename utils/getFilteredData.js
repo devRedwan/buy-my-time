@@ -15,6 +15,19 @@ export const getAllServices = (services) => {
   return allServices;
 };
 
+export const getFeaturedServices = (services, currentlyDisplayedServiceId) => {
+  const featuredServices = services
+    .filter(
+      (featuredService) =>
+        featuredService.rating === 5 &&
+        featuredService?.id !== currentlyDisplayedServiceId
+    )
+    .sort(() => 0.6 - Math.random())
+    .slice(0, 6);
+
+  return featuredServices;
+};
+
 export const getTopRatedServices = (services) => {
   const myInterviewService = getMyInterviewService(services);
   const topRatedServices = [

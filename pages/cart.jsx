@@ -1,5 +1,5 @@
 import Layout from "../components/Layout/index";
-import SeoHead from "../components/SeoHead";
+import SeoHead from "../components/layout/SeoHead";
 
 export default function () {
   return (
