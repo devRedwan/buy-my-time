@@ -12,12 +12,13 @@ body {
 p {
   @apply text-black-500;
 }
+
 .animation-hover:after {
   background: none repeat scroll 0 0 transparent;
   content: "";
   height: 2px;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
-  @apply w-0 bg-orange-500 left-1/2 block bottom-0 absolute;
+  @apply w-0 bg-blue-500 left-1/2 block bottom-0 absolute;
 }
 .animation-active:after {
   @apply left-0 w-full;
@@ -51,6 +52,7 @@ li.check:before {
   top: -0.5em;
   font-size: 400%;
 }
+
 /* Slideshow */
 .slick-dots li {
   @apply inline-block;
@@ -59,8 +61,61 @@ li.check:before {
   @apply bg-gray-500;
 }
 .slick-dots .slick-active span {
-  @apply bg-orange-500 rounded-l-full rounded-r-full w-12;
+  @apply bg-blue-500 rounded-l-full rounded-r-full w-6 sm:w-12;
 }
+
+/* Accordian Menu */
+.accordianMenu {
+  @apply border-b-2 border-solid border-blue-500;
+}
+
+.accordianMenu-title {
+  @apply w-full text-left cursor-pointer sm:text-left text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal py-2 pl-4 pr-16 relative after:content-[''];
+}
+.accordianMenu-title::after {
+  @apply block w-3 h-3 border-l-2 border-b-2 border-blue-500 border-solid absolute top-5 right-9 -rotate-45 transition-transform duration-300 ease-in-out;
+}
+.accordianMenu-title.active::after {
+  @apply rotate-[135deg];
+}
+.accordianMenu-content {
+  @apply pt-0 pb-8 leading-6 text-base;
+}
+
+/* ------------------ Generic Styles ------------------ */
+.section {
+  @apply bg-gradient-to-b from-white-300 to-white-500 w-full sm:py-14;
+}
+
+.container {
+  @apply max-w-screen-xl  px-6 sm:px-8 lg:px-16 mx-auto flex flex-col w-full text-center justify-center;
+}
+.section__title {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-medium text-black-600 leading-normal w-9/12  lg:w-6/12 mx-auto;
+}
+
+/* Navbar */
+.navMenu__link {
+  @apply px-4 py-2 mx-2 cursor-pointer animation-hover inline-block hover:text-blue-500 relative;
+}
+.navMenu__link--active {
+  @apply text-blue-500 font-semibold;
+}
+.navMenu__link--active:after {
+  @apply left-0 w-full;
+}
+.mobileNav__menuLink {
+  @apply mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 border-transparent transition-all relative;
+}
+.mobileNav__menuLink--active {
+  @apply text-blue-500 border-blue-500;
+}
+
+.cart__itemQty {
+  @apply flex bg-blue-500 text-white-500 w-4 h-4 font-extralight text-xs items-center justify-center rounded-full absolute;
+}
+
+/* TopServices Section */
 
 /* purgecss end ignore */
 @tailwind utilities;
