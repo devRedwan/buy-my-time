@@ -4,6 +4,8 @@ const bgImageUrls = {
   SellerProfileBGImage:
     "https://i.postimg.cc/jjf1SLKb/raniputul-full-frame-filled-with-small-customer-se.png",
   ExploreBGImage: "https://i.postimg.cc/s2j9Dn6S/Explore-title-background.png",
+  CartBGImage:
+    "https://cdn.discordapp.com/attachments/997271750368833636/1070889793686339634/nee3hoe_completely_filled_with_small_shopping_icons_cart_icons__48ad55c9-7414-4a16-a2e2-31b9abf0c103.png",
 };
 
 const PageHeader = ({ title, bgImageKey }) => {
