@@ -25,6 +25,7 @@ export const NavMenu = ({ navLinks }) => {
 };
 
 export const MobileNavMenu = ({ navLinks }) => {
+  
   return (
     <ul className="mobileNav__menuList flex w-full justify-between items-center text-black-500">
       {navLinks.map(({ href, icon, cartItemQty }, index) => (

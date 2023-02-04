@@ -7,10 +7,10 @@ import ButtonPrimary from "../components/misc/buttons/ButtonPrimary";
 import CartItem from "../components/cart/CartItem";
 import ButtonOutline from "../components/misc/buttons/ButtonOutline";
 
-export default function () {
-  const { services } = useContext(ServicesContext);
 
-  const [cart, setCart] = useState([]);
+export default function () {
+  const { cart } = useContext(ServicesContext);
+
   return (
     <>
       <SeoHead title="Buy My Time | Cart" />
@@ -18,9 +18,9 @@ export default function () {
         <PageHeader title="Cart" bgImageKey="CartBGImage" />
 
         <main className="cart px-8 xl:px-16 max-w-screen-xl mx-auto py-6 sm:py-16 flex flex-wrap justify-evenly">
-          <section className="cart__details  my-4 flex-auto ">
-            <div className="cartHeading__text">
-              <h4 className="cartItems text-xl font-medium">
+          <section className="cart__details  my-4 flex-auto mr-4">
+            <div className="cartHeading__text ">
+              <h4 className="cartItems text-xl font-medium md:text-2xl">
                 Services in Your Cart
               </h4>
               <p className="subtotal text-sm font-thin">
@@ -28,16 +28,18 @@ export default function () {
               </p>
             </div>
             <div className="cart__serviceItems">
-              <CartItem services={services} />
-              <CartItem services={services} />
+              {cart?.map((service) => (
+                <CartItem service={service} key={service?.id} />
+              ))}
+
               <ButtonOutline addClass="my-2" href="/explore">
                 Add More Services
               </ButtonOutline>
             </div>
           </section>
-          <section className="cart__summary  my-4 flex-auto">
+          <section className="cart__summary  my-4 flex-auto ml-4 h-fit  lg:sticky top-28">
             <div className="cartSummary__headingText mb-4">
-              <h4 className="cartSummary__heading text-xl font-medium">
+              <h4 className="cartSummary__heading text-xl font-medium md:text-2xl">
                 Order Summary
               </h4>
             </div>

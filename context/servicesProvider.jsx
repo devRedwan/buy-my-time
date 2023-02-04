@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { getSellers } from "../utils/getSellers";
 import { getServices } from "../utils/getServices";
 import ServicesContext from "./servicesContext";
@@ -13,6 +13,8 @@ const ServicesProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(servicesReducer, initialState);
+
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     async function fetchServices() {
@@ -42,6 +44,8 @@ const ServicesProvider = ({ children }) => {
         sellers: state.sellers,
         loading: state.loading,
         dispatch,
+        cart,
+        setCart,
       }}>
       {children}
     </ServicesContext.Provider>

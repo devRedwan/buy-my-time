@@ -13,6 +13,7 @@ const Header = () => {
       setScrollActive(window.scrollY > 20);
     });
   }, []);
+  const links = NavLinks();
 
   return (
     <>
@@ -28,7 +29,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <NavMenu navLinks={NavLinks} />
+          <NavMenu navLinks={links} />
 
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
             <Link href="/">
@@ -46,7 +47,7 @@ const Header = () => {
       {/* Mobile Navigation */}
       <nav className="mobileNavBar fixed md:hidden bottom-0 left-0 right-0 z-20 px-4 sm:px-8 shadow-t ">
         <div className="mobileNav bg-white-500 sm:px-3">
-          <MobileNavMenu navLinks={NavLinks} />
+          <MobileNavMenu navLinks={links} />
         </div>
       </nav>
       {/* End Mobile Navigation */}
