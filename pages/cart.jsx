@@ -7,8 +7,7 @@ import ButtonPrimary from "../components/misc/buttons/ButtonPrimary";
 import CartItem from "../components/cart/CartItem";
 import ButtonOutline from "../components/misc/buttons/ButtonOutline";
 
-
-export default function () {
+const Cart = () => {
   const { cart } = useContext(ServicesContext);
 
   return (
@@ -67,4 +66,6 @@ export default function () {
       </Layout>
     </>
   );
-}
+};
+
+export default Cart;

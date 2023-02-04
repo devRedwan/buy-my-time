@@ -8,7 +8,6 @@ import ServicesContext from "../../../context/servicesContext";
 
 const navLinks = () => {
   const { cart } = useContext(ServicesContext);
-  console.log(cart);
 
   return [
     {

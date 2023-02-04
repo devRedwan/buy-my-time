@@ -46,7 +46,7 @@ const Service = () => {
 
   useEffect(() => {
     cart?.includes(selectedService) && setServiceAddedToCart(true);
-  });
+  }, [cart]);
 
   return (
     <Layout>
