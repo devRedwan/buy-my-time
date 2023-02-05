@@ -1,13 +1,9 @@
-import {
-  ArrowSmallLeftIcon,
-  EyeIcon,
-  HeartIcon,
-} from "@heroicons/react/24/solid";
+import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import Layout from "../../../components/layout/index";
+import Layout from "../../../components/layout/Layout";
 import ScrollAnimationWrapper from "../../../components/layout/ScrollAnimationWrapper";
 import SeoHead from "../../../components/layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
@@ -25,7 +21,6 @@ const Service = () => {
   const { id: serviceSelectedId } = router?.query;
   const { services, sellers, setCart, cart } = useContext(ServicesContext);
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
-  const [serviceAddedToCart, setServiceAddedToCart] = useState(false);
 
   const selectedService = services.find(
     (service) => service?.id === serviceSelectedId
@@ -43,10 +38,6 @@ const Service = () => {
   const serviceExistsOnCart = () => {
     return cart?.find((service) => service?.id === serviceSelectedId);
   };
-
-  useEffect(() => {
-    cart?.includes(selectedService) && setServiceAddedToCart(true);
-  }, [cart]);
 
   return (
     <Layout>
@@ -108,7 +99,7 @@ const Service = () => {
                 <h3 className="serviceSelected__Price text-xl mt-4">
                   ${selectedService?.price} / Hour
                 </h3>
-                {serviceAddedToCart && serviceExistsOnCart() ? (
+                {serviceExistsOnCart() ? (
                   <ButtonPrimary addClass="my-4 mr-4" href="/cart">
                     Checkout
                   </ButtonPrimary>
@@ -176,7 +167,7 @@ const Service = () => {
             Featured Services
           </motion.h3>
         </ScrollAnimationWrapper>
-        <ScrollAnimationWrapper className="topServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 relative">
+        <ScrollAnimationWrapper className="featuredServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 mb-8 sm:mb-16 relative">
           <motion.div variants={scrollAnimation}>
             <Carousel className="carousel" servicesData={featuredServices} />
           </motion.div>

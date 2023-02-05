@@ -14,7 +14,6 @@ const ServicesProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(servicesReducer, initialState);
   const [cart, setCart] = useState([]);
-
   const initialRender = useRef(true);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const ServicesProvider = ({ children }) => {
       initialRender.current = false;
       return;
     }
-    window.localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   return (
