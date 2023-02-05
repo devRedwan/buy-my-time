@@ -1,13 +1,9 @@
-import {
-  ArrowSmallLeftIcon,
-  EyeIcon,
-  HeartIcon,
-} from "@heroicons/react/24/solid";
+import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
-import Layout from "../../../components/layout/index";
+import { useContext, useEffect, useState } from "react";
+import Layout from "../../../components/layout/Layout";
 import ScrollAnimationWrapper from "../../../components/layout/ScrollAnimationWrapper";
 import SeoHead from "../../../components/layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
@@ -23,15 +19,25 @@ const Service = () => {
   const scrollAnimation = getScrollAnimation();
   const router = useRouter();
   const { id: serviceSelectedId } = router?.query;
-  const { services, sellers } = useContext(ServicesContext);
+  const { services, sellers, setCart, cart } = useContext(ServicesContext);
+  const featuredServices = getFeaturedServices(services, serviceSelectedId);
+
   const selectedService = services.find(
     (service) => service?.id === serviceSelectedId
   );
+
   const sellerOfSelectedService = sellers.find(
     (seller) => seller?.id === selectedService?.seller?.id
   );
 
-  const featuredServices = getFeaturedServices(services, serviceSelectedId);
+  const addToCart = (selectedService) => {
+    setCart([...cart, selectedService]);
+    localStorage.setItem("cart", JSON.stringify([...cart, selectedService]));
+  };
+
+  const serviceExistsOnCart = () => {
+    return cart?.find((service) => service?.id === serviceSelectedId);
+  };
 
   return (
     <Layout>
@@ -93,11 +99,21 @@ const Service = () => {
                 <h3 className="serviceSelected__Price text-xl mt-4">
                   ${selectedService?.price} / Hour
                 </h3>
-                <ButtonPrimary addClass="my-4 mr-4">Add to Cart</ButtonPrimary>
+                {serviceExistsOnCart() ? (
+                  <ButtonPrimary addClass="my-4 mr-4" href="/cart">
+                    Checkout
+                  </ButtonPrimary>
+                ) : (
+                  <ButtonPrimary
+                    addClass="my-4 mr-4"
+                    onClick={() => addToCart(selectedService)}>
+                    Add to Cart
+                  </ButtonPrimary>
+                )}
                 <button
                   className="py-2 lg:py-3 px-9 lg:px-13 text-blue-500 font-semibold rounded-lg transition-all border-blue-500 border-2 cursor-not-allowed"
                   onClick={() => {
-                    alert("Feature under construction");
+                    alert("Feature under construction. Coming Soon :)");
                   }}>
                   Contact Seller
                 </button>
@@ -144,14 +160,14 @@ const Service = () => {
           </motion.div>
         </ScrollAnimationWrapper>
 
-        <ScrollAnimationWrapper className="featuredServices__textWrapper section__textWrapper">
+        <ScrollAnimationWrapper className="featuredServices__textWrapper section__textWrapper text-center">
           <motion.h3
             variants={scrollAnimation}
             className="featuredServices__title section__title">
             Featured Services
           </motion.h3>
         </ScrollAnimationWrapper>
-        <ScrollAnimationWrapper className="topServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 relative">
+        <ScrollAnimationWrapper className="featuredServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 mb-8 sm:mb-16 relative">
           <motion.div variants={scrollAnimation}>
             <Carousel className="carousel" servicesData={featuredServices} />
           </motion.div>

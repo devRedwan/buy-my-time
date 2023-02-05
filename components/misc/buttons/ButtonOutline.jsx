@@ -1,6 +1,7 @@
+import Link from "next/link";
 import React from "react";
 
-const ButtonOutline = ({ children, addClass, onClick }) => {
+const CommonButton = ({ children, addClass, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -11,6 +12,22 @@ const ButtonOutline = ({ children, addClass, onClick }) => {
       {" "}
       {children}
     </button>
+  );
+};
+
+const ButtonOutline = ({ children, addClass, onClick, href }) => {
+  return (
+    <>
+      {href ? (
+        <Link href={href}>
+          <CommonButton addClass={addClass}>{children}</CommonButton>
+        </Link>
+      ) : (
+        <CommonButton addClass={addClass} onClick={onClick}>
+          {children}
+        </CommonButton>
+      )}
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState, useRef } from "react";
 import { getSellers } from "../utils/getSellers";
 import { getServices } from "../utils/getServices";
 import ServicesContext from "./servicesContext";
@@ -13,6 +13,8 @@ const ServicesProvider = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(servicesReducer, initialState);
+  const [cart, setCart] = useState([]);
+  const initialRender = useRef(true);
 
   useEffect(() => {
     async function fetchServices() {
@@ -31,9 +33,21 @@ const ServicesProvider = ({ children }) => {
         console.error(error);
       }
     }
+    if (JSON.parse(localStorage.getItem("cart"))) {
+      const storedCart = JSON.parse(localStorage.getItem("cart"));
+      setCart([...cart, ...storedCart]);
+    }
     fetchServices();
     fetchSellers();
   }, []);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <ServicesContext.Provider
@@ -42,6 +56,8 @@ const ServicesProvider = ({ children }) => {
         sellers: state.sellers,
         loading: state.loading,
         dispatch,
+        cart,
+        setCart,
       }}>
       {children}
     </ServicesContext.Provider>

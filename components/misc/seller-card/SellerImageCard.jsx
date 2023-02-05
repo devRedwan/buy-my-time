@@ -7,11 +7,11 @@ const SellerImageCard = ({ selectedSeller, customSellerNameStyle }) => {
       <img
         src={selectedSeller?.sellerImageUrl}
         alt="BuyMyTime Service Professional Image"
-        className="w-full overflow-hidden rounded-lg group-hover:scale-105 group-hover:blur-sm transition-all duration-500 ease-in-out"
+        className="w-full overflow-hidden rounded-lg scale-105 blur-sm group-hover:scale-100 group-hover:blur-none transition-all duration-500 ease-in-out"
       />
-      <div className="sellerInfo__bg absolute top-0 left-0 w-full h-full bg-gradient-to-t from-blue-300 to-blue-100  rounded-lg overflow-hidden opacity-0 group-hover:opacity-80 transition-opacity duration-500 ease-in-out"></div>
+      <div className="sellerInfo__bg absolute top-0 left-0 w-full h-full bg-gradient-to-t from-blue-300 to-blue-100  rounded-lg overflow-hidden group-hover:opacity-0 opacity-80 transition-opacity duration-500 ease-in-out"></div>
 
-      <div className="sellerDescription flex flex-col absolute opacity-0 translate-y-72 group-hover:opacity-100 group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
+      <div className="sellerDescription flex flex-col absolute group-hover:opacity-0 group-hover:translate-y-72 opacity-100 translate-y-0 transition-transform duration-500 ease-in-out">
         <h2
           className={`sellerName ${customSellerNameStyle} w-full text-center font-semibold mb-3 text-2xl sm:text-4xl md:text-5xl`}>
           {selectedSeller?.name}
