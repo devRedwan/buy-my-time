@@ -12,6 +12,7 @@ import PageHeader from "../../../components/misc/PageHeader";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import ServicesContext from "../../../context/servicesContext";
 import StarIcon from "../../../public/assets/Icon/stars.svg";
+import { sanityClient } from "../../../sanity";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
 
@@ -19,9 +20,9 @@ const Service = () => {
   const scrollAnimation = getScrollAnimation();
   const router = useRouter();
   const { id: serviceSelectedId } = router?.query;
-  const { services, sellers, setCart, cart } = useContext(ServicesContext);
+  const { services, setServices, sellers, setCart, cart } =
+    useContext(ServicesContext);
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
-
   const selectedService = services.find(
     (service) => service?.id === serviceSelectedId
   );
@@ -37,6 +38,31 @@ const Service = () => {
 
   const serviceExistsOnCart = () => {
     return cart?.find((service) => service?.id === serviceSelectedId);
+  };
+
+  const addToLikes = async () => {
+    try {
+      const updatedService = {
+        ...selectedService,
+        likes: selectedService.likes + 1,
+      };
+
+      await fetch(`/api/updateLikes`, {
+        body: JSON.stringify(updatedService),
+        method: "PATCH",
+      });
+
+      const updatedServices = services.map((service) => {
+        if (service.id === selectedService.id) {
+          return updatedService;
+        }
+        return service;
+      });
+
+      setServices(updatedServices);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -74,7 +100,9 @@ const Service = () => {
                       <EyeIcon className="h-5 w-5 text-green-500" /> &nbsp;
                       {selectedService?.visits}
                     </div>
-                    <div className="serviceMeta__likes flex px-2">
+                    <div
+                      className="serviceMeta__likes flex px-2 cursor-pointer"
+                      onClick={() => addToLikes()}>
                       <HeartIcon className="h-5 w-5 text-blue-500" />
                       &nbsp;
                       {selectedService?.likes}
@@ -144,7 +172,9 @@ const Service = () => {
                     Vists:&nbsp;
                     {selectedService?.visits}
                   </div>
-                  <div className="serviceMeta__likes flex px-2 text-left">
+                  <div
+                    className="serviceMeta__likes flex px-2 text-left cursor-pointer"
+                    onClick={() => addToLikes()}>
                     <HeartIcon className="h-5 w-5 text-blue-500 mr-1" />
                     Likes: &nbsp;
                     {selectedService?.likes}
