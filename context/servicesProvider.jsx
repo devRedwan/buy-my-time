@@ -16,6 +16,10 @@ const ServicesProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const initialRender = useRef(true);
 
+  const setServices = (newServices) => {
+    dispatch({ type: GET_SERVICES, payload: newServices });
+  };
+
   useEffect(() => {
     async function fetchServices() {
       try {
@@ -58,6 +62,7 @@ const ServicesProvider = ({ children }) => {
         dispatch,
         cart,
         setCart,
+        setServices,
       }}>
       {children}
     </ServicesContext.Provider>
