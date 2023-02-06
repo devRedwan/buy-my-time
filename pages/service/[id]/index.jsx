@@ -2,7 +2,7 @@ import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Layout from "../../../components/layout/Layout";
 import ScrollAnimationWrapper from "../../../components/layout/ScrollAnimationWrapper";
 import SeoHead from "../../../components/layout/SeoHead";
@@ -12,9 +12,10 @@ import PageHeader from "../../../components/misc/PageHeader";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import ServicesContext from "../../../context/servicesContext";
 import StarIcon from "../../../public/assets/Icon/stars.svg";
-import { sanityClient } from "../../../sanity";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
+
+
 
 const Service = () => {
   const scrollAnimation = getScrollAnimation();
