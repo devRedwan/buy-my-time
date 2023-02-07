@@ -1,14 +1,15 @@
 export default async function handler(req, res) {
   try {
     const data = JSON.parse(req.body);
-    const { id, likes } = data;
+
+    const { id, likes, visits } = data;
 
     const mutations = {
       mutations: [
         {
           patch: {
             id: id,
-            set: { likes: likes },
+            set: { likes: likes, visits: visits },
           },
         },
       ],

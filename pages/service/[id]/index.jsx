@@ -2,7 +2,8 @@ import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import Layout from "../../../components/layout/Layout";
 import ScrollAnimationWrapper from "../../../components/layout/ScrollAnimationWrapper";
 import SeoHead from "../../../components/layout/SeoHead";
@@ -15,14 +16,13 @@ import StarIcon from "../../../public/assets/Icon/stars.svg";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
 
-
-
 const Service = () => {
   const scrollAnimation = getScrollAnimation();
   const router = useRouter();
   const { id: serviceSelectedId } = router?.query;
   const { services, setServices, sellers, setCart, cart } =
     useContext(ServicesContext);
+
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
   const selectedService = services.find(
     (service) => service?.id === serviceSelectedId
@@ -33,38 +33,65 @@ const Service = () => {
   );
 
   const addToCart = (selectedService) => {
+    const LoadingToast = toast.loading("adding ...");
     setCart([...cart, selectedService]);
     localStorage.setItem("cart", JSON.stringify([...cart, selectedService]));
+    toast.success("Added to Cart", {
+      id: LoadingToast,
+    });
   };
 
   const serviceExistsOnCart = () => {
     return cart?.find((service) => service?.id === serviceSelectedId);
   };
 
-  const addToLikes = async () => {
+  const updateServiceStats = async (stat) => {
+    const updatedService = {
+      ...selectedService,
+      stat: selectedService?.stat + 1,
+    };
+    await fetch(`/api/updateServiceStats`, {
+      body: JSON.stringify(updatedService),
+      method: "PATCH",
+    });
+    const updatedServices = services?.map((service) => {
+      if (service?.id === selectedService?.id) {
+        return updatedService;
+      }
+      return service;
+    });
+    return setServices(updatedServices);
+  };
+
+  const addToLikes = () => {
     try {
-      const updatedService = {
-        ...selectedService,
-        likes: selectedService.likes + 1,
-      };
+      const LoadingToast = toast.loading("Updating");
+      updateServiceStats(likes);
 
-      await fetch(`/api/updateLikes`, {
-        body: JSON.stringify(updatedService),
-        method: "PATCH",
+      toast.success("Updated", {
+        id: LoadingToast,
       });
+    } catch (error) {
+      console.error(error);
+      toast.error("We are sorry, there was issue");
+    }
+  };
 
-      const updatedServices = services.map((service) => {
-        if (service.id === selectedService.id) {
-          return updatedService;
-        }
-        return service;
-      });
+  const updateVisits = () => {
+    try {
+      if (sessionStorage.getItem(selectedService?.id) !== "visited") {
+        updateServiceStats(visits);
 
-      setServices(updatedServices);
+        sessionStorage.setItem(selectedService?.id, "visited");
+      }
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    updateVisits();
+  }, []);
 
   return (
     <Layout>
@@ -97,18 +124,18 @@ const Service = () => {
                     </h3>
                   </div>
                   <div className="service__metaData flex xs:border-l-2 border-gray-500">
-                    <div className="serviceMeta__visits flex px-2 ">
+                    <div className="serviceMeta__visits flex  px-2 ">
                       <EyeIcon className="h-5 w-5 text-green-500" /> &nbsp;
                       {selectedService?.visits}
                     </div>
                     <div
-                      className="serviceMeta__likes flex px-2 cursor-pointer"
+                      className="serviceMeta__likes flex mx-2 px-2 cursor-pointer items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform "
                       onClick={() => addToLikes()}>
                       <HeartIcon className="h-5 w-5 text-blue-500" />
                       &nbsp;
                       {selectedService?.likes}
                     </div>
-                    <div className="serviceMeta__rating flex px-2">
+                    <div className="serviceMeta__rating flex mx-2 px-2 items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform ">
                       <StarIcon className="h-5 w-5" />
                       &nbsp;
                       {selectedService?.rating.toFixed(1)}
@@ -168,19 +195,19 @@ const Service = () => {
                   <h3 className="serviceMeta__Title text-lg py-3 text-center">
                     Service Stats
                   </h3>
-                  <div className="serviceMeta__visits flex px-2 text-left">
+                  <div className="serviceMeta__visits flex text-lg items-center  px-2 text-left mb-4">
                     <EyeIcon className="h-5 w-5 text-green-500 mr-1" />
                     Vists:&nbsp;
                     {selectedService?.visits}
                   </div>
                   <div
-                    className="serviceMeta__likes flex px-2 text-left cursor-pointer"
+                    className="serviceMeta__likes flex  text-lg items-center hover:scale-110 px-2 text-left cursor-pointer rounded-lg bg-blue-100 mb-4 transition-transform"
                     onClick={() => addToLikes()}>
                     <HeartIcon className="h-5 w-5 text-blue-500 mr-1" />
                     Likes: &nbsp;
                     {selectedService?.likes}
                   </div>
-                  <div className="serviceMeta__rating flex px-2">
+                  <div className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform">
                     <StarIcon className="h-5 w-5 mr-1" />
                     Rating: &nbsp;
                     {selectedService?.rating.toFixed(1)}
