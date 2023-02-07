@@ -48,7 +48,7 @@ const Service = () => {
   const updateServiceStats = async (stat) => {
     const updatedService = {
       ...selectedService,
-      stat: selectedService?.stat + 1,
+      [stat]: selectedService?.[stat] + 1,
     };
     await fetch(`/api/updateServiceStats`, {
       body: JSON.stringify(updatedService),
@@ -60,14 +60,13 @@ const Service = () => {
       }
       return service;
     });
-    return setServices(updatedServices);
+    setServices(updatedServices);
   };
 
-  const addToLikes = () => {
+  const addToLikes = async () => {
     try {
       const LoadingToast = toast.loading("Updating");
-      updateServiceStats(likes);
-
+      updateServiceStats("likes");
       toast.success("Updated", {
         id: LoadingToast,
       });
@@ -77,11 +76,10 @@ const Service = () => {
     }
   };
 
-  const updateVisits = () => {
+  const updateVisits = async () => {
     try {
       if (sessionStorage.getItem(selectedService?.id) !== "visited") {
-        updateServiceStats(visits);
-
+        updateServiceStats("visits");
         sessionStorage.setItem(selectedService?.id, "visited");
       }
     } catch (error) {
