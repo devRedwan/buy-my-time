@@ -109,125 +109,136 @@ const Service = () => {
           <motion.div
             className="serviceSelectedInfo py-6 sm:py-16 flex justify-center"
             variants={scrollAnimation}>
-            <section className="serviceSelected__Details realtive flex">
+            <section className="serviceSelected__Details realtive">
               {loading ? (
-                <SkeletonServiceDetails />
+                <div className="flex">
+                  <SkeletonServiceDetails />
+                  <SkeletonSeller />
+                </div>
               ) : (
-                <div className="serviceSelected__LeftColumn max-w-2xl">
-                  <h2 className="serviceSelected__Title text-3xl lg:text-4xl font-medium">
-                    {selectedService?.title}
-                  </h2>
-                  <div className="service__metaData flex flex-wrap justify-start items-center py-3 lg:hidden">
-                    <div className="sellerinfo__wrapper flex items-center my-3 group ">
-                      <Link
-                        href="/seller/[id]"
-                        as={`/seller/${sellerOfSelectedService?.id}`}>
-                        <img
-                          className="seller__image w-12 h-12 object-cover rounded-full shadow-xl shadow-blue-100 group-hover:scale-125 hover:shadow-blue-300 transition-all duration-500 ease-in-out cursor-pointer "
-                          src={selectedService?.seller.sellerImageUrl}
-                          alt="Service Professional - buymytime"
-                        />
-                      </Link>
-                      <h3 className="seller__name text-md transition-all duration-500 ease-in-out m-3">
-                        {selectedService?.seller.name}
-                      </h3>
+                <div className="serviceDetails flex">
+                  <div className="serviceSelected__LeftColumn max-w-2xl">
+                    <h2 className="serviceSelected__Title text-3xl lg:text-4xl font-medium">
+                      {selectedService?.title}
+                    </h2>
+                    <div className="service__metaData flex flex-wrap justify-start items-center py-3 lg:hidden">
+                      <div className="sellerinfo__wrapper flex items-center my-3 group ">
+                        <Link
+                          href="/seller/[id]"
+                          as={`/seller/${sellerOfSelectedService?.id}`}>
+                          <img
+                            className="seller__image w-12 h-12 object-cover rounded-full shadow-xl shadow-blue-100 group-hover:scale-125 hover:shadow-blue-300 transition-all duration-500 ease-in-out cursor-pointer "
+                            src={selectedService?.seller.sellerImageUrl}
+                            alt="Service Professional - buymytime"
+                          />
+                        </Link>
+                        <h3 className="seller__name text-md transition-all duration-500 ease-in-out m-3">
+                          {selectedService?.seller.name}
+                        </h3>
+                      </div>
+                      <div className="service__metaData flex xs:border-l-2 border-gray-500">
+                        <div className="serviceMeta__visits flex  px-2 ">
+                          <EyeIcon className="h-5 w-5 text-green-500" /> &nbsp;
+                          {selectedService?.visits}
+                        </div>
+                        <div
+                          className="serviceMeta__likes flex mx-2 px-2 cursor-pointer items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform "
+                          onClick={() => addToLikes()}>
+                          <HeartIcon className="h-5 w-5 text-blue-500" />
+                          &nbsp;
+                          {selectedService?.likes}
+                        </div>
+                        <div className="serviceMeta__rating flex mx-2 px-2 items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform ">
+                          <StarIcon className="h-5 w-5" />
+                          &nbsp;
+                          {selectedService?.rating.toFixed(1)}
+                        </div>
+                      </div>
                     </div>
-                    <div className="service__metaData flex xs:border-l-2 border-gray-500">
-                      <div className="serviceMeta__visits flex  px-2 ">
-                        <EyeIcon className="h-5 w-5 text-green-500" /> &nbsp;
+                    <figure className="serviceSelected__ImgWrapper my-4">
+                      <img
+                        src={selectedService?.serviceImageUrl}
+                        alt="service Image"
+                        className="serviceSelected__Img w-full object-cover overflow-hidden rounded-lg shadow-lg shadow-blue-100  hover:shadow-lg hover:shadow-blue-300 transition-all duration-200 ease-in-out"
+                      />
+                    </figure>
+                    <p className="serviceSelected__description mt-4">
+                      {selectedService?.description}
+                    </p>
+                    <h3 className="serviceSelected__Price text-xl mt-4">
+                      ${selectedService?.price} / Hour
+                    </h3>
+                    {serviceExistsOnCart() ? (
+                      <ButtonPrimary addClass="my-4 mr-4" href="/cart">
+                        Checkout
+                      </ButtonPrimary>
+                    ) : (
+                      <ButtonPrimary
+                        addClass="my-4 mr-4"
+                        onClick={() => addToCart(selectedService)}>
+                        Add to Cart
+                      </ButtonPrimary>
+                    )}
+                    <button
+                      className="py-2 lg:py-3 px-9 lg:px-13 text-blue-500 font-semibold rounded-lg transition-all border-blue-500 border-2 cursor-not-allowed"
+                      onClick={() => {
+                        alert("Feature under construction. Coming Soon :)");
+                      }}>
+                      Contact Seller
+                    </button>
+                  </div>
+
+                  <div className="serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16">
+                    <Link
+                      href="/seller/[id]"
+                      as={`/seller/${sellerOfSelectedService?.id}`}>
+                      <div className="sellerImageInfo__wrapper flex flex-col justify-center items-center my-3 w-60 cursor-pointer">
+                        <h3 className="serviceSeller__meta text-lg">
+                          Service Provided By
+                        </h3>
+                        <SellerImageCard
+                          selectedSeller={sellerOfSelectedService}
+                          customSellerNameStyle="lg:text-xl"
+                          className="cursor-pointer"
+                        />
+                      </div>
+                    </Link>
+                    <div className="service__metaData flex flex-col mt-5">
+                      <h3 className="serviceMeta__Title text-lg py-3 text-center">
+                        Service Stats
+                      </h3>
+                      <div className="serviceMeta__visits flex text-lg items-center  px-2 text-left mb-4">
+                        <EyeIcon className="h-5 w-5 text-green-500 mr-1" />
+                        Vists:&nbsp;
                         {selectedService?.visits}
                       </div>
                       <div
-                        className="serviceMeta__likes flex mx-2 px-2 cursor-pointer items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform "
+                        className="serviceMeta__likes flex  text-lg items-center hover:scale-110 px-2 text-left cursor-pointer rounded-lg bg-blue-100 mb-4 transition-transform"
                         onClick={() => addToLikes()}>
-                        <HeartIcon className="h-5 w-5 text-blue-500" />
-                        &nbsp;
+                        <HeartIcon className="h-5 w-5 text-blue-500 mr-1" />
+                        Likes: &nbsp;
                         {selectedService?.likes}
                       </div>
-                      <div className="serviceMeta__rating flex mx-2 px-2 items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform ">
-                        <StarIcon className="h-5 w-5" />
-                        &nbsp;
+                      <div className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform">
+                        <StarIcon className="h-5 w-5 mr-1" />
+                        Rating: &nbsp;
                         {selectedService?.rating.toFixed(1)}
                       </div>
                     </div>
                   </div>
-                  <figure className="serviceSelected__ImgWrapper my-4">
-                    <img
-                      src={selectedService?.serviceImageUrl}
-                      alt="service Image"
-                      className="serviceSelected__Img w-full object-cover overflow-hidden rounded-lg shadow-lg shadow-blue-100  hover:shadow-lg hover:shadow-blue-300 transition-all duration-200 ease-in-out"
-                    />
-                  </figure>
-                  <p className="serviceSelected__description mt-4">
-                    {selectedService?.description}
-                  </p>
-                  <h3 className="serviceSelected__Price text-xl mt-4">
-                    ${selectedService?.price} / Hour
-                  </h3>
-                  {serviceExistsOnCart() ? (
-                    <ButtonPrimary addClass="my-4 mr-4" href="/cart">
-                      Checkout
-                    </ButtonPrimary>
-                  ) : (
-                    <ButtonPrimary
-                      addClass="my-4 mr-4"
-                      onClick={() => addToCart(selectedService)}>
-                      Add to Cart
-                    </ButtonPrimary>
-                  )}
-                  <button
-                    className="py-2 lg:py-3 px-9 lg:px-13 text-blue-500 font-semibold rounded-lg transition-all border-blue-500 border-2 cursor-not-allowed"
-                    onClick={() => {
-                      alert("Feature under construction. Coming Soon :)");
-                    }}>
-                    Contact Seller
-                  </button>
                 </div>
               )}
-
-              {loading ? (
-                <SkeletonSeller />
-              ) : (
-                <div className="serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16">
-                  <Link
-                    href="/seller/[id]"
-                    as={`/seller/${sellerOfSelectedService?.id}`}>
-                    <div className="sellerImageInfo__wrapper flex flex-col justify-center items-center my-3 w-60 cursor-pointer">
-                      <h3 className="serviceSeller__meta text-lg">
-                        Service Provided By
-                      </h3>
-                      <SellerImageCard
-                        selectedSeller={sellerOfSelectedService}
-                        customSellerNameStyle="lg:text-xl"
-                        className="cursor-pointer"
-                      />
-                    </div>
-                  </Link>
-
-                  <div className="service__metaData flex flex-col mt-5">
-                    <h3 className="serviceMeta__Title text-lg py-3 text-center">
-                      Service Stats
-                    </h3>
-                    <div className="serviceMeta__visits flex text-lg items-center  px-2 text-left mb-4">
-                      <EyeIcon className="h-5 w-5 text-green-500 mr-1" />
-                      Vists:&nbsp;
-                      {selectedService?.visits}
-                    </div>
-                    <div
-                      className="serviceMeta__likes flex  text-lg items-center hover:scale-110 px-2 text-left cursor-pointer rounded-lg bg-blue-100 mb-4 transition-transform"
-                      onClick={() => addToLikes()}>
-                      <HeartIcon className="h-5 w-5 text-blue-500 mr-1" />
-                      Likes: &nbsp;
-                      {selectedService?.likes}
-                    </div>
-                    <div className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform">
-                      <StarIcon className="h-5 w-5 mr-1" />
-                      Rating: &nbsp;
-                      {selectedService?.rating.toFixed(1)}
-                    </div>
-                  </div>
+              <div className="serviceSelectedReviews my-24">
+                <div className="serviceReviers__newReview h-28 text-center">
+                  <input type="number" min={1} max={5} />
+                  <textarea
+                    type="text"
+                    className="h-full w-full md:w-1/2 shadow-lg outline-none shadow-blue-100  p-2 mb-4 rounded-lg focus:shadow-blue-300 placeholder:text-gray-400 align-text-top flex-wrap"
+                    placeholder="Write a review"
+                  />
                 </div>
-              )}
+                <ButtonPrimary>Post Review</ButtonPrimary>
+              </div>
             </section>
           </motion.div>
         </ScrollAnimationWrapper>
