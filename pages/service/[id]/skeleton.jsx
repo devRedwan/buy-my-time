@@ -1,6 +1,3 @@
-import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
-import StarIcon from "../../../public/assets/Icon/stars.svg";
-
 export const SkeletonServiceDetails = () => {
   return (
     <>

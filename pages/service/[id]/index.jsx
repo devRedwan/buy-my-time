@@ -1,4 +1,8 @@
-import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
+import {
+  ChatBubbleLeftRightIcon,
+  EyeIcon,
+  HeartIcon,
+} from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,6 +14,7 @@ import SeoHead from "../../../components/layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
 import Carousel from "../../../components/misc/carousel/Carousel";
 import PageHeader from "../../../components/misc/PageHeader";
+import ReviewModal from "../../../components/misc/reviews/ReviewModal";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import ServicesContext from "../../../context/servicesContext";
 import StarIcon from "../../../public/assets/Icon/stars.svg";
@@ -24,6 +29,7 @@ const Service = () => {
   const { services, setServices, sellers, setCart, cart } =
     useContext(ServicesContext);
   const [loading, setLoading] = useState();
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
 
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
 
@@ -46,6 +52,10 @@ const Service = () => {
 
   const serviceExistsOnCart = () => {
     return cart?.find((service) => service?.id === serviceSelectedId);
+  };
+
+  const showReviews = () => {
+    !reviewModalOpen ? setReviewModalOpen(true) : setReviewModalOpen(false);
   };
 
   const updateServiceStats = async (stat) => {
@@ -95,7 +105,7 @@ const Service = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 300);
+    }, 1000);
   }, []);
 
   return (
@@ -104,19 +114,25 @@ const Service = () => {
 
       <PageHeader title="Service Details" bgImageKey="ServiceDetailsBGImage" />
 
-      <main className="serviceSelectedInfoWrapper px-8 xl:px-16 max-w-screen-xl mx-auto">
+      <main
+        className={
+          "serviceSelectedInfoWrapper px-8 xl:px-16 max-w-screen-xl mx-auto"
+        }>
         <ScrollAnimationWrapper>
           <motion.div
             className="serviceSelectedInfo py-6 sm:py-16 flex justify-center"
             variants={scrollAnimation}>
-            <section className="serviceSelected__Details realtive">
+            <section className="serviceSelected__Details realtive flex flex-col justify-center items-center">
               {loading ? (
                 <div className="flex">
                   <SkeletonServiceDetails />
                   <SkeletonSeller />
                 </div>
               ) : (
-                <div className="serviceDetails flex">
+                <div
+                  className={`serviceDetails flex transition-all duration-300 ease-in-out ${
+                    reviewModalOpen ? "blur-md" : "blur-none"
+                  }`}>
                   <div className="serviceSelected__LeftColumn max-w-2xl">
                     <h2 className="serviceSelected__Title text-3xl lg:text-4xl font-medium">
                       {selectedService?.title}
@@ -137,21 +153,30 @@ const Service = () => {
                         </h3>
                       </div>
                       <div className="service__metaData flex xs:border-l-2 border-gray-500">
-                        <div className="serviceMeta__visits flex  px-2 ">
+                        <div className="serviceMeta__visits flex items-center mx-2 px-2 border border-blue-500 rounded-lg">
                           <EyeIcon className="h-5 w-5 text-green-500" /> &nbsp;
                           {selectedService?.visits}
                         </div>
                         <div
-                          className="serviceMeta__likes flex mx-2 px-2 cursor-pointer items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform "
+                          className="serviceMeta__likes flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
                           onClick={() => addToLikes()}>
                           <HeartIcon className="h-5 w-5 text-blue-500" />
                           &nbsp;
                           {selectedService?.likes}
                         </div>
-                        <div className="serviceMeta__rating flex mx-2 px-2 items-center hover:scale-110 rounded-lg bg-blue-100 transition-transform ">
+                        <div
+                          className="serviceMeta__rating flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
+                          onClick={() => showReviews()}>
                           <StarIcon className="h-5 w-5" />
                           &nbsp;
                           {selectedService?.rating.toFixed(1)}
+                        </div>
+                        <div
+                          className="serviceMeta__review flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
+                          onClick={() => showReviews()}>
+                          <ChatBubbleLeftRightIcon className="h-5 w-5 text-red" />
+                          &nbsp;
+                          {selectedService?.reviews.length}
                         </div>
                       </div>
                     </div>
@@ -188,11 +213,14 @@ const Service = () => {
                     </button>
                   </div>
 
-                  <div className="serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16">
+                  <div
+                    className={`serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16 ${
+                      reviewModalOpen ? "lg:hidden" : "flex"
+                    }`}>
                     <Link
                       href="/seller/[id]"
                       as={`/seller/${sellerOfSelectedService?.id}`}>
-                      <div className="sellerImageInfo__wrapper flex flex-col justify-center items-center my-3 w-60 cursor-pointer">
+                      <div className="sellerImageInfo__wrapper  flex-col justify-center items-center my-3 w-60 cursor-pointer">
                         <h3 className="serviceSeller__meta text-lg">
                           Service Provided By
                         </h3>
@@ -207,54 +235,62 @@ const Service = () => {
                       <h3 className="serviceMeta__Title text-lg py-3 text-center">
                         Service Stats
                       </h3>
-                      <div className="serviceMeta__visits flex text-lg items-center  px-2 text-left mb-4">
-                        <EyeIcon className="h-5 w-5 text-green-500 mr-1" />
+                      <div className="serviceMeta__visits flex text-lg items-center  px-2 text-left mb-4 rounded-lg border border-blue-500">
+                        <EyeIcon className="h-5 w-5 text-green-500 mr-1 " />
                         Vists:&nbsp;
                         {selectedService?.visits}
                       </div>
                       <div
-                        className="serviceMeta__likes flex  text-lg items-center hover:scale-110 px-2 text-left cursor-pointer rounded-lg bg-blue-100 mb-4 transition-transform"
+                        className="serviceMeta__likes flex  text-lg items-center hover:scale-110 px-2 text-left cursor-pointer rounded-lg bg-blue-100 mb-4 transition-transform border border-blue-500"
                         onClick={() => addToLikes()}>
                         <HeartIcon className="h-5 w-5 text-blue-500 mr-1" />
                         Likes: &nbsp;
                         {selectedService?.likes}
                       </div>
-                      <div className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform">
+                      <div
+                        className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
+                        onClick={() => showReviews()}>
                         <StarIcon className="h-5 w-5 mr-1" />
                         Rating: &nbsp;
                         {selectedService?.rating.toFixed(1)}
+                      </div>
+                      <div
+                        className="serviceMeta__review flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
+                        onClick={() => showReviews()}>
+                        <ChatBubbleLeftRightIcon className="h-5 w-5 mr-1 text-red" />
+                        Reviews: &nbsp;
+                        {selectedService?.reviews.length}
                       </div>
                     </div>
                   </div>
                 </div>
               )}
-              <div className="serviceSelectedReviews my-24">
-                <div className="serviceReviers__newReview h-28 text-center">
-                  <input type="number" min={1} max={5} />
-                  <textarea
-                    type="text"
-                    className="h-full w-full md:w-1/2 shadow-lg outline-none shadow-blue-100  p-2 mb-4 rounded-lg focus:shadow-blue-300 placeholder:text-gray-400 align-text-top flex-wrap"
-                    placeholder="Write a review"
-                  />
-                </div>
-                <ButtonPrimary>Post Review</ButtonPrimary>
-              </div>
+
+              <ReviewModal
+                showReviews={showReviews}
+                reviewModalOpen={reviewModalOpen}
+              />
             </section>
           </motion.div>
         </ScrollAnimationWrapper>
 
-        <ScrollAnimationWrapper className="featuredServices__textWrapper section__textWrapper text-center">
-          <motion.h3
-            variants={scrollAnimation}
-            className="featuredServices__title section__title">
-            Featured Services
-          </motion.h3>
-        </ScrollAnimationWrapper>
-        <ScrollAnimationWrapper className="featuredServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 mb-8 sm:mb-16 relative">
-          <motion.div variants={scrollAnimation}>
-            <Carousel className="carousel" servicesData={featuredServices} />
-          </motion.div>
-        </ScrollAnimationWrapper>
+        <div
+          className={`featuredServices__wrapper ${
+            reviewModalOpen ? "blur-md" : "blur-none"
+          }`}>
+          <ScrollAnimationWrapper className="featuredServices__textWrapper section__textWrapper text-center">
+            <motion.h3
+              variants={scrollAnimation}
+              className="featuredServices__title section__title">
+              Featured Services
+            </motion.h3>
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper className="featuredServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 mb-8 sm:mb-16 relative">
+            <motion.div variants={scrollAnimation}>
+              <Carousel className="carousel" servicesData={featuredServices} />
+            </motion.div>
+          </ScrollAnimationWrapper>
+        </div>
       </main>
     </Layout>
   );
