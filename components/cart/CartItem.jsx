@@ -21,6 +21,7 @@ const CartItem = ({ service, removeFromCart }) => {
       });
       setCart(updatedCart);
     }
+    return () => {};
   }, [totalPrice]);
 
   return (

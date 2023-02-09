@@ -47,6 +47,7 @@ module.exports = {
         500: "#DDDDDD",
       },
       red: "crimson",
+      starYellow: "#FEA250",
     },
     extend: {
       keyframes: {

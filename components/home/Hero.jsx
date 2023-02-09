@@ -38,8 +38,6 @@ const Hero = () => {
                 src="/assets/Illustration1.svg"
                 alt="BMT Illustrasion"
                 quality={100}
-                width={612}
-                height={383}
                 layout="fill"
               />
             </motion.div>
