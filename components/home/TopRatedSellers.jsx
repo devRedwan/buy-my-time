@@ -3,7 +3,7 @@ import { useContext } from "react";
 import ServicesContext from "../../context/servicesContext";
 import { getTopRatedSellers } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
-import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 import SellerCard from "../misc/seller-card/SellerCard";
 import SellerSkeletonCard from "../misc/seller-card/SellerSkeletonCard";

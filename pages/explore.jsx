@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import ExploreSellers from "../components/explore/ExploreSellers";
 import ExploreServices from "../components/explore/ExploreServices";
-import Layout from "../components/layout/MainLayout";
-import SeoHead from "../components/layout/SeoHead";
+import Layout from "../components/Layout/MainLayout";
+import SeoHead from "../components/Layout/SeoHead";
 import AccordianMenu from "../components/misc/AccordianMenu";
 import PageHeader from "../components/misc/PageHeader";
 import ServicesContext from "../context/servicesContext";

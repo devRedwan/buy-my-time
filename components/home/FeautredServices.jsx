@@ -3,10 +3,10 @@ import React, { useContext } from "react";
 import ServicesContext from "../../context/servicesContext";
 import {
   getMostPopularServices,
-  getTopRatedServices
+  getTopRatedServices,
 } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
-import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 import Carousel from "../misc/carousel/Carousel";
 

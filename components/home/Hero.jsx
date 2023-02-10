@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useMemo } from "react";
 import getScrollAnimation from "../../utils/getScrollAnimation";
-import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
+import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const Hero = () => {

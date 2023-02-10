@@ -1,8 +1,8 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import MainLayout from "../components/layout/MainLayout.jsx";
-import SeoHead from "../components/layout/SeoHead";
+import MainLayout from "../components/Layout/MainLayout.jsx";
+import SeoHead from "../components/Layout/SeoHead";
 import animatedLogo from "../public/assets/buy_my_time_Logo_animated.gif";
 
 const Custom404 = () => {
