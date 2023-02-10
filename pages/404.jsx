@@ -1,5 +1,4 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { ArrowLeftCircleIcon, BellAlertIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/layout/Layout";
