@@ -1,23 +1,31 @@
-import React, { useEffect, useReducer, useState, useRef } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
+import { getReviewsData } from "../utils/getReviewsData";
 import { getSellersData } from "../utils/getSellersData";
 import { getServicesData } from "../utils/getServicesData";
 import ServicesContext from "./servicesContext";
 import servicesReducer from "./servicesReducer";
-import { GET_SERVICES, GET_SELLERS } from "./servicesTypes";
+import { GET_REVIEWS, GET_SELLERS, GET_SERVICES } from "./servicesTypes";
 
 const ServicesProvider = ({ children }) => {
   const initialState = {
     services: [],
     sellers: [],
+    reviews: [],
     loading: true,
   };
 
   const [state, dispatch] = useReducer(servicesReducer, initialState);
   const [cart, setCart] = useState([]);
+  const [serviceId, setServiceId] = useState();
+
   const initialRender = useRef(true);
 
   const setServices = (newServices) => {
     dispatch({ type: GET_SERVICES, payload: newServices });
+  };
+
+  const setReviews = (newReviews) => {
+    dispatch({ type: GET_REVIEWS, payload: newReviews });
   };
 
   useEffect(() => {
@@ -37,13 +45,22 @@ const ServicesProvider = ({ children }) => {
         console.error(error);
       }
     }
+    async function fetchReviews() {
+      try {
+        const reviewsData = await getReviewsData(serviceId);
+        dispatch({ type: GET_REVIEWS, payload: reviewsData });
+      } catch (error) {
+        console.error(error);
+      }
+    }
     if (JSON.parse(localStorage.getItem("cart"))) {
       const storedCart = JSON.parse(localStorage.getItem("cart"));
       setCart([...cart, ...storedCart]);
     }
     fetchServices();
     fetchSellers();
-  }, []);
+    fetchReviews();
+  }, [serviceId]);
 
   useEffect(() => {
     if (initialRender.current) {
@@ -58,11 +75,14 @@ const ServicesProvider = ({ children }) => {
       value={{
         services: state.services,
         sellers: state.sellers,
+        reviews: state.reviews,
         loading: state.loading,
         dispatch,
         cart,
         setCart,
         setServices,
+        setReviews,
+        setServiceId,
       }}>
       {children}
     </ServicesContext.Provider>

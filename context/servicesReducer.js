@@ -1,4 +1,4 @@
-import { GET_SERVICES, GET_SELLERS } from "./servicesTypes";
+import { GET_SERVICES, GET_SELLERS, GET_REVIEWS } from "./servicesTypes";
 
 const servicesReducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +12,12 @@ const servicesReducer = (state, action) => {
       return {
         ...state,
         sellers: action.payload,
+        loading: false,
+      };
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
         loading: false,
       };
     default:

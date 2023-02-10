@@ -1,13 +1,12 @@
 import { StarIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 
-const UserRating = ({ onClick }) => {
-  const [selectedRating, setSelectedRating] = useState(null);
+const UserRating = ({ onClick, selectedRating, setSelectedRating }) => {
   const [hoverRating, setHoverRating] = useState(5);
 
   const handleClick = (value) => {
     setSelectedRating(Math.max(value, 1));
-    onClick(value);
+    onClick(Math.max(value, 1));
   };
 
   return (
