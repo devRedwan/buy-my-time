@@ -4,7 +4,7 @@ import StarIcon from "../../../public/assets/Icon/stars.svg";
 const SellerCard = ({ seller }) => {
   return (
     <main className="sellerCardWrapper max-w-xl max-h-screen overflow-hidden p-4 sm:p-5 mx-auto w-full m-2 min-h-fit min-w-fit">
-      <Link href="/seller/[id]" as={`/seller/${seller?.id}`}>
+      <Link legacyBehavior href="/seller/[id]" as={`/seller/${seller?.id}`}>
         <section className="sellerCard__container mx-auto overflow-hidden shadow-lg shadow-blue-100 rounded-xl cursor-pointer flex flex-col sm:flex-row h-96 sm:h-72 w-full ">
           <div className="sellerImageWrapper w-full md:w-1/2 sm:h-full overflow-hidden ">
             <img

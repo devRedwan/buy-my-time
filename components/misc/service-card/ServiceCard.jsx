@@ -6,7 +6,7 @@ import Link from "next/link";
 const ServiceCard = ({ service }) => {
   return (
     <main className="serviceCardWrapper max-w-lg max-h-screen overflow-hidden p-6 sm:p-8 mx-auto min-h-fit ">
-      <Link href="/service/[id]" as={`/service/${service?.id}`}>
+      <Link legacyBehavior href="/service/[id]" as={`/service/${service?.id}`}>
         <section className="serviceCard__container overflow-hidden shadow-lg shadow-blue-100 rounded-xl cursor-pointer">
           <div className="serviceImageWrapper w-full h-1/2 overflow-hidden ">
             <img
@@ -26,7 +26,10 @@ const ServiceCard = ({ service }) => {
 
             <div className="serviceSeller__info flex sm:h-28 flex-col items-center sm:flex-row justify-evenly w-11/12  mx-auto ">
               <h3 className="service__Price">${service?.price} / Hour</h3>
-              <Link href="/seller/[id]" as={`/seller/${service?.seller.id}`}>
+              <Link
+                legacyBehavior
+                href="/seller/[id]"
+                as={`/seller/${service?.seller.id}`}>
                 <img
                   className="serviceSeller__image w-24 h-24 object-cover mb-3 rounded-full shadow-xl shadow-blue-100 hover:scale-105 hover:shadow-blue-300 transition-all duration-500 ease-in-out cursor-pointer"
                   src={service?.seller.sellerImageUrl}

@@ -24,7 +24,7 @@ const Header = () => {
         }>
         <nav className="navBar max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
           <div className="navLogoWrapper col-start-1 col-end-2 flex items-center ">
-            <Link href="/">
+            <Link legacyBehavior href="/">
               <Logo className="navLogo w-auto cursor-pointer h-10 sm:h-12 md:h-16" />
             </Link>
           </div>
@@ -32,7 +32,7 @@ const Header = () => {
           <NavMenu navLinks={links} />
 
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
-            <Link href="/">
+            <Link legacyBehavior href="/">
               <a className="navMenu__authSignIn text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-blue-500 transition-all">
                 Sign In
               </a>

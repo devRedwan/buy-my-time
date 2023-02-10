@@ -15,7 +15,7 @@ const NavLink = ({ children, href, activeLinkStyles }) => {
   }
 
   return (
-    <Link href={href}>
+    <Link legacyBehavior href={href}>
       {cloneElement(children, {
         className,
       })}

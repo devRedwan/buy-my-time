@@ -19,7 +19,7 @@ const ButtonOutline = ({ children, addClass, onClick, href }) => {
   return (
     <>
       {href ? (
-        <Link href={href}>
+        <Link legacyBehavior href={href}>
           <CommonButton addClass={addClass}>{children}</CommonButton>
         </Link>
       ) : (

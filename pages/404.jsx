@@ -26,7 +26,7 @@ const Custom404 = () => {
             </span>{" "}
             eager to get you home.
           </p>
-          <Link href="/">
+          <Link legacyBehavior href="/">
             <Image
               src={animatedLogo}
               className="cursor-pointer hover:scale-50 transition-all duration-500 ease-in-out"

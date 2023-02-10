@@ -27,7 +27,10 @@ const CartItem = ({ service, removeFromCart }) => {
   return (
     <div className="cartService__itemWrapper my-5 py-6 border-b border-blue-300 max-w-2xl">
       <div className="cartService__itemDetails">
-        <Link href="/service/[id]" as={`/service/${service?.id}`}>
+        <Link
+          legacyBehavior
+          href="/service/[id]"
+          as={`/service/${service?.id}`}>
           <div
             className="cartService__textWrapper rounded-lg bg-no-repeat bg-cover bg-center bg-blend-overlay h-full w-full bg-blue-100 bg-opacity-95 p-2 xs:py-8 sm:py-12 md:py-16 max-w-2xl cursor-pointer"
             style={{

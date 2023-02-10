@@ -19,7 +19,7 @@ const ButtonPrimary = ({ children, addClass, href, onClick, type }) => {
   return (
     <>
       {href ? (
-        <Link href={href}>
+        <Link legacyBehavior href={href}>
           <CommonButton addClass={addClass} type={type}>
             {children}
           </CommonButton>
