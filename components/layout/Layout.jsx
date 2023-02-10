@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./Footer";
+import Footer from "/components/layout/Footer.jsx";
 import Header from "./Header";
 
 const Layout = ({ children }) => {
