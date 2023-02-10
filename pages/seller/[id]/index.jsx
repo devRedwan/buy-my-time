@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import ExploreServices from "../../../components/explore/ExploreServices";
-import Layout from "../../../components/layout/Layout";
+import Layout from "../../../components/layout/MainLayout";
 import ScrollAnimationWrapper from "../../../components/layout/ScrollAnimationWrapper";
 import SeoHead from "../../../components/layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
