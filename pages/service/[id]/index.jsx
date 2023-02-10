@@ -16,11 +16,14 @@ import Carousel from "../../../components/misc/carousel/Carousel";
 import PageHeader from "../../../components/misc/PageHeader";
 import ReviewModal from "../../../components/misc/reviews/ReviewModal";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
+import {
+  SkeletonSeller,
+  SkeletonServiceDetails,
+} from "../../../components/misc/service-card/skeleton";
 import ServicesContext from "../../../context/servicesContext";
 import StarIcon from "../../../public/assets/Icon/stars.svg";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
-import { SkeletonSeller, SkeletonServiceDetails } from "./skeleton";
 
 const Service = () => {
   const scrollAnimation = getScrollAnimation();
