@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import CartItem from "../components/cart/CartItem";
 import EmptyCart from "../components/cart/EmptyCart";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/layout/MainLayout";
 import SeoHead from "../components/layout/SeoHead";
 import ButtonOutline from "../components/misc/buttons/ButtonOutline";
 import ButtonPrimary from "../components/misc/buttons/ButtonPrimary";

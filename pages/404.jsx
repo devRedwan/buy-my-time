@@ -1,13 +1,13 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import Layout from "../components/layout/Layout";
+import MainLayout from "../components/layout/MainLayout";
 import SeoHead from "../components/layout/SeoHead";
 import animatedLogo from "../public/assets/buy_my_time_Logo_animated.gif";
 
 const Custom404 = () => {
   return (
-    <Layout>
+    <MainLayout>
       <SeoHead title="Buy My Time" />
       <main className="h-screen flex items-center justify-center flex-col  bg-gradient-to-b from-white-100 to-white-500">
         <section className="error__container flex flex-col w-3/4 items-center justify-center">
@@ -33,7 +33,7 @@ const Custom404 = () => {
           </Link>
         </section>
       </main>
-    </Layout>
+    </MainLayout>
   );
 };
 
