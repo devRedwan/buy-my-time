@@ -87,7 +87,11 @@ const Cart = () => {
                   </span>
                 </h4>
                 <div className="cart__checkout mt-8 text-center">
-                  <ButtonPrimary addClass="my-2">
+                  <ButtonPrimary
+                    addClass="my-2"
+                    onClick={() => {
+                      alert("Feature Under Construction. Coming Soon !!!");
+                    }}>
                     Proceed to Checkout
                   </ButtonPrimary>
                 </div>
