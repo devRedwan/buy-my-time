@@ -1,6 +1,5 @@
 import Image from "next/image";
-import BMTSymbol from "../../../public/assets/icon_bmt.png";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { animateScroll as scroll } from "react-scroll";
 
 function BackToTopButton() {
@@ -24,7 +23,12 @@ function BackToTopButton() {
         showButton ? "block" : "hidden"
       }`}>
       <button onClick={handleClick}>
-        <Image src={BMTSymbol} alt="BuyMyTime" height={25} width={25} />
+        <Image
+          src="/assets/icon_bmt.png"
+          alt="BuyMyTime"
+          height={25}
+          width={25}
+        />
       </button>
     </div>
   );

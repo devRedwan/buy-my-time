@@ -1,5 +1,4 @@
-import StarIcon from "../../../public/assets/Icon/stars.svg";
-import getScrollAnimation from "../../../utils/getScrollAnimation";
+import Image from "next/image";
 
 const SellerImageCard = ({ selectedSeller, customSellerNameStyle }) => {
   return (
@@ -23,7 +22,14 @@ const SellerImageCard = ({ selectedSeller, customSellerNameStyle }) => {
           <p className="text-black-600">
             Rating: {selectedSeller?.sellerRating}{" "}
           </p>
-          <StarIcon className="h-5 w-5 mb-1" />
+
+          <Image
+            src="/assets/Icon/stars.svg"
+            alt="BuyMyTime StarIcon"
+            height={50}
+            width={50}
+            className="h-5 w-5 ml-1"
+          />
         </div>
       </div>
     </div>

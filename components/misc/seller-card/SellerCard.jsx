@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import StarIcon from "../../../public/assets/Icon/stars.svg";
 
 const SellerCard = ({ seller }) => {
   return (
@@ -23,7 +23,13 @@ const SellerCard = ({ seller }) => {
             </h3>
             <div className="sellerDescription leading-relaxed mb-3 text-md  flex items-center justify-center">
               <p>Rating: {seller?.sellerRating} </p>
-              <StarIcon className="h-5 w-5 ml-1" />
+              <Image
+                src="/assets/Icon/stars.svg"
+                alt="BuyMyTime StarIcon"
+                height={50}
+                width={50}
+                className="h-5 w-5 ml-1"
+              />
             </div>
           </div>
         </section>

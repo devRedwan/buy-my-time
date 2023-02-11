@@ -2,6 +2,7 @@ import { EyeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import StarIcon from "../../../public/assets/Icon/stars.svg";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const ServiceCard = ({ service }) => {
   return (
@@ -57,7 +58,13 @@ const ServiceCard = ({ service }) => {
               {service?.likes}
             </div>
             <div className="service__rating flex align-center">
-              <StarIcon className="h-5 w-5" />
+              <Image
+                src="/assets/Icon/stars.svg"
+                alt="BuyMyTime StarIcon"
+                height={50}
+                width={50}
+                className="h-5 w-5"
+              />
               &nbsp;
               {service?.rating.toFixed(1)}
             </div>

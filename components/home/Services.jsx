@@ -22,15 +22,15 @@ const Services = () => {
         <div className="serviceGrid__container p y-8 my-12 grid grid-flow-row grid-cols-1 gap-8  sm:grid-flow-col sm:grid-cols-2">
           <ScrollAnimationWrapper className="serviceGrid__imageWrapper flex w-full justify-end">
             <motion.div
-              className="serviceGrid__image h-full w-full p-4"
+              className="serviceGrid__image h-full w-full p-4 relative"
               variants={scrollAnimation}>
               <Image
+                priority
                 src="/assets/Illustration2.svg"
-                alt="BMT Illustrasion"
-                layout="responsive"
-                quality={100}
-                height={414}
-                width={508}
+                alt="BuyMyTime Illustrasion"
+                className="h-auto w-auto"
+                height={500}
+                width={500}
               />
             </motion.div>
           </ScrollAnimationWrapper>

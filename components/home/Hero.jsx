@@ -30,15 +30,17 @@ const Hero = () => {
               Browse Services
             </ButtonPrimary>
           </div>
-          <div className="heroIllustration__wrapper flex w-full items-center justify-center relative sm:row-start-1">
+          <div className="heroIllustration__wrapper flex h-auto w-full items-center justify-center relative sm:row-start-1">
             <motion.div
-              className="heroIllustration__img w-full"
+              className="heroIllustration__img h-full w-full relative"
               variants={scrollAnimation}>
               <Image
+                priority
                 src="/assets/Illustration1.svg"
-                alt="BMT Illustrasion"
-                quality={100}
-                layout="fill"
+                alt="BuyMyTime Illustrasion"
+                height={500}
+                width={500}
+                className="h-auto w-auto"
               />
             </motion.div>
           </div>

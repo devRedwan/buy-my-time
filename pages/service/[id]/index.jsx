@@ -4,6 +4,7 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/solid";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -14,14 +15,12 @@ import SeoHead from "../../../components/Layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
 import Carousel from "../../../components/misc/carousel/Carousel";
 import PageHeader from "../../../components/misc/PageHeader";
-import ReviewModal from "../../../components/misc/reviews/ReviewModal";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import {
   SkeletonSeller,
   SkeletonServiceDetails,
 } from "../../../components/misc/service-card/skeleton";
 import ServicesContext from "../../../context/servicesContext";
-import StarIcon from "../../../public/assets/Icon/stars.svg";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
 
@@ -46,8 +45,27 @@ const Service = () => {
 
   const addToCart = (selectedService) => {
     const LoadingToast = toast.loading("adding ...");
-    setCart([...cart, selectedService]);
-    localStorage.setItem("cart", JSON.stringify([...cart, selectedService]));
+
+    setCart((prevCart) => {
+      const existingService = prevCart.find(
+        (service) => service._id === selectedService._id
+      );
+      if (existingService) {
+        existingService.quantity += 1;
+        return [...prevCart];
+      } else {
+        const updatedCart = [
+          ...prevCart,
+          {
+            ...selectedService,
+            quantity: 1,
+          },
+        ];
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
+      }
+    });
+
     toast.success("Added to Cart", {
       id: LoadingToast,
     });
@@ -170,7 +188,13 @@ const Service = () => {
                         <div
                           className="serviceMeta__rating flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
                           onClick={() => showReviews()}>
-                          <StarIcon className="h-5 w-5" />
+                          <Image
+                            src="/assets/Icon/stars.svg"
+                            alt="BuyMyTime Icon"
+                            height={50}
+                            width={50}
+                            className="h-5 w-5"
+                          />
                           &nbsp;
                           {selectedService?.rating.toFixed(1)}
                         </div>
@@ -253,7 +277,13 @@ const Service = () => {
                       <div
                         className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
                         onClick={() => showReviews()}>
-                        <StarIcon className="h-5 w-5 mr-1" />
+                        <Image
+                          src="/assets/Icon/stars.svg"
+                          alt="BuyMyTime Icon"
+                          height={50}
+                          width={50}
+                          className="h-5 w-5 mr-1"
+                        />
                         Rating: &nbsp;
                         {selectedService?.rating.toFixed(1)}
                       </div>
@@ -269,10 +299,11 @@ const Service = () => {
                 </div>
               )}
 
-              <ReviewModal
+              {/* <ReviewModal
                 showReviews={showReviews}
                 reviewModalOpen={reviewModalOpen}
-              />
+                selectedService={selectedService}
+              /> */}
             </section>
           </motion.div>
         </ScrollAnimationWrapper>

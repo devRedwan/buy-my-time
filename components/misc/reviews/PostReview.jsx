@@ -1,13 +1,10 @@
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import ServicesContext from "../../../context/servicesContext";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import UserRating from "./UserRating";
 
-const PostReview = () => {
-  const router = useRouter();
-  const { id: serviceSelectedId } = router?.query;
+const PostReview = ({ serviceSelectedId }) => {
   const { reviews, setReviews, setServiceId } = useContext(ServicesContext);
   const [userRating, setUserRating] = useState(0);
   const [review, setReview] = useState("");
@@ -18,6 +15,7 @@ const PostReview = () => {
     setUserRating(value);
   };
   const postNewReview = async () => {
+    setServiceId(serviceSelectedId);
     if (!selectedRating) {
       alert("Please select a rating.");
       return;
@@ -57,10 +55,6 @@ const PostReview = () => {
       id: reviewToast,
     });
   };
-
-  useEffect(() => {
-    setServiceId(serviceSelectedId);
-  }, [serviceSelectedId]);
 
   return (
     <>

@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Logo from "../../public/assets/Logo.svg";
 import ButtonOutline from "../misc/buttons/ButtonOutline";
 import { MobileNavMenu, NavMenu } from "../misc/nav/NavMenu";
 import NavLinks from "../misc/nav/NavMenuLinks";
@@ -25,7 +25,14 @@ const Header = () => {
         <nav className="navBar max-w-screen-xl px-6 sm:px-8 lg:px-16 mx-auto grid grid-flow-col py-3 sm:py-4">
           <div className="navLogoWrapper col-start-1 col-end-2 flex items-center ">
             <Link legacyBehavior href="/">
-              <Logo className="navLogo w-auto cursor-pointer h-10 sm:h-12 md:h-16" />
+              <Image
+                priority
+                src="/assets/Logo.svg"
+                alt="BuyMyTime Logo"
+                width={500}
+                height={500}
+                className="navLogo w-auto cursor-pointer h-10 sm:h-12 md:h-16"
+              />
             </Link>
           </div>
 

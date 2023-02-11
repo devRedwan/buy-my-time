@@ -9,17 +9,14 @@ import PageHeader from "../components/misc/PageHeader";
 import ServicesContext from "../context/servicesContext";
 
 const Cart = () => {
-  const { cart, setCart } = useContext(ServicesContext);
-  const removeFromCart = (selectedService) => {
-    setCart(
-      cart.filter((service) => service.id !== selectedService.id && service)
-    );
-  };
+  const { cart } = useContext(ServicesContext);
+
   const subTotalPrice = cart.reduce(
     (sum, service) => sum + service.totalPrice,
     0
   );
   const convinienceFee = 2.5 * cart.length;
+  const totalPrice = (subTotalPrice + convinienceFee).toFixed(2);
 
   return (
     <>
@@ -44,11 +41,7 @@ const Cart = () => {
                 </div>
                 <div className="cart__serviceItems">
                   {cart?.map((service) => (
-                    <CartItem
-                      service={service}
-                      key={service?.id}
-                      removeFromCart={removeFromCart}
-                    />
+                    <CartItem service={service} key={service?.id} />
                   ))}
 
                   <ButtonOutline addClass="my-2" href="/explore">
@@ -82,9 +75,7 @@ const Cart = () => {
                 </div>
                 <h4 className="costBreakdown__total flex justify-between">
                   <p className="fees font-medium ">Total:</p>
-                  <span className="subtotal  font-medium ">
-                    ${(subTotalPrice + convinienceFee).toFixed(2)}
-                  </span>
+                  <span className="subtotal  font-medium ">${totalPrice}</span>
                 </h4>
                 <div className="cart__checkout mt-8 text-center">
                   <ButtonPrimary
