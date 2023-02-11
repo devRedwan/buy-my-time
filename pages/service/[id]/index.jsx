@@ -23,6 +23,7 @@ import {
 import ServicesContext from "../../../context/servicesContext";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
+import ReviewModal from "../../../components/misc/reviews/ReviewModal";
 
 const Service = () => {
   const scrollAnimation = getScrollAnimation();
@@ -302,11 +303,11 @@ const Service = () => {
                 </div>
               )}
 
-              {/* <ReviewModal
+              <ReviewModal
                 showReviews={showReviews}
                 reviewModalOpen={reviewModalOpen}
                 selectedService={selectedService}
-              /> */}
+              />
             </section>
           </motion.div>
         </ScrollAnimationWrapper>
