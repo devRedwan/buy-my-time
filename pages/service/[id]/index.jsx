@@ -101,9 +101,11 @@ const Service = () => {
     try {
       const LoadingToast = toast.loading("Updating");
       updateServiceStats("likes");
-      toast.success("Updated", {
-        id: LoadingToast,
-      });
+      setTimeout(() => {
+        toast.success("Updated", {
+          id: LoadingToast,
+        });
+      }, 1000);
     } catch (error) {
       console.error(error);
       toast.error("We are sorry, there was issue");
