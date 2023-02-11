@@ -59,6 +59,7 @@ const Service = () => {
           {
             ...selectedService,
             quantity: 1,
+            totalPrice: selectedService?.price,
           },
         ];
         localStorage.setItem("cart", JSON.stringify(updatedCart));

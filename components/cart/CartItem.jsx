@@ -1,14 +1,14 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import ServicesContext from "../../context/servicesContext";
 
 const CartItem = ({ service }) => {
   const { cart, setCart } = useContext(ServicesContext);
-  const [quantity, setQuantity] = useState(() => {
+  const quantity = (() => {
     const cartItem = JSON.parse(localStorage.getItem(service?.id));
     return cartItem?.quantity || 1;
-  });
+  })();
   const totalPrice = parseFloat(service?.price * quantity);
 
   const removeFromCart = (selectedService) => {
@@ -17,30 +17,33 @@ const CartItem = ({ service }) => {
     );
   };
 
-  useEffect(() => {
+  const handleQuantityChange = (change) => {
+    const updatedQuantity = Math.max(1, quantity + change);
+    localStorage.setItem(
+      service.id,
+      JSON.stringify({
+        ...service,
+        quantity: updatedQuantity,
+        totalPrice: parseFloat(service?.price * updatedQuantity),
+      })
+    );
     const serviceInCart = cart?.find(
       (cartService) => cartService?.id === service?.id
     );
     if (serviceInCart) {
       const updatedCart = cart.map((cartService) => {
         if (cartService.id === service.id) {
-          return { ...cartService, quantity, totalPrice };
+          return {
+            ...cartService,
+            quantity: updatedQuantity,
+            totalPrice: parseFloat(service?.price * updatedQuantity),
+          };
         }
         return cartService;
       });
       setCart(updatedCart);
     }
-    localStorage.setItem(
-      service.id,
-      JSON.stringify({
-        ...service,
-        quantity,
-        totalPrice,
-      })
-    );
-
-    return () => {};
-  }, [totalPrice, quantity]);
+  };
 
   return (
     <div className="cartService__itemWrapper my-5 py-6 border-b border-blue-300 max-w-2xl">
@@ -68,14 +71,11 @@ const CartItem = ({ service }) => {
         </Link>
         <div className="cartService__qtyTotalPrice mt-4">
           <div className="cartService__qty flex items-center font-thin">
-            <button
-              onClick={() =>
-                setQuantity((prevQty) => Math.max(1, prevQty - 1))
-              }>
+            <button onClick={() => handleQuantityChange(-1)}>
               <MinusIcon className="h-6 w-6 mr-4 border rounded-full border-blue-300" />
             </button>
             {quantity} {quantity === 1 ? "Hour" : "Hours"}
-            <button onClick={() => setQuantity((prevQty) => prevQty + 1)}>
+            <button onClick={() => handleQuantityChange(+1)}>
               <PlusIcon className="h-6 2-6 ml-4 border rounded-full border-blue-300" />
             </button>
             <button
