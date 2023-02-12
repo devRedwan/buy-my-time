@@ -275,7 +275,7 @@ const Service = () => {
                       </h3>
                       <div className="serviceMeta__visits flex text-lg items-center  px-2 text-left mb-4 rounded-lg border border-blue-500">
                         <EyeIcon className="h-5 w-5 text-green-500 mr-1 " />
-                        Vists:&nbsp;
+                        Visits:&nbsp;
                         {selectedService?.visits}
                       </div>
                       <div
