@@ -11,12 +11,6 @@ import ServicesContext from "../context/servicesContext";
 const Cart = () => {
   const { cart } = useContext(ServicesContext);
 
-  console.log(
-    "cart",
-    cart,
-    "totalPrice",
-    cart.map((service) => console.log(service?.totalPrice))
-  );
   const subTotalPrice = cart.reduce(
     (sum, service) => sum + service?.totalPrice,
     0

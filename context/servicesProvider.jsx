@@ -29,38 +29,20 @@ const ServicesProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    async function fetchServices() {
+    async function fetchData() {
       try {
         const serviceData = await getServicesData();
         dispatch({ type: GET_SERVICES, payload: serviceData });
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    async function fetchSellers() {
-      try {
         const sellerData = await getSellersData();
         dispatch({ type: GET_SELLERS, payload: sellerData });
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    async function fetchReviews() {
-      try {
         const reviewsData = await getReviewsData(serviceId);
         dispatch({ type: GET_REVIEWS, payload: reviewsData });
       } catch (error) {
         console.error(error);
       }
     }
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      const storedCart = JSON.parse(localStorage.getItem("cart"));
-      setCart([...cart, ...storedCart]);
-    }
-    fetchServices();
-    fetchSellers();
-    fetchReviews();
-  }, [serviceId]);
+    fetchData();
+  }, [serviceId, dispatch]);
 
   useEffect(() => {
     if (initialRender.current) {
@@ -70,6 +52,13 @@ const ServicesProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("cart"))) {
+      const storedCart = JSON.parse(localStorage.getItem("cart"));
+      setCart([...cart, ...storedCart]);
+    }
+  }, []);
+
   return (
     <ServicesContext.Provider
       value={{
@@ -77,8 +66,8 @@ const ServicesProvider = ({ children }) => {
         sellers: state.sellers,
         reviews: state.reviews,
         loading: state.loading,
-        dispatch,
         cart,
+        dispatch,
         setCart,
         setServices,
         setReviews,

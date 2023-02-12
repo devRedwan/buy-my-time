@@ -2,7 +2,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import ExistingReviews from "./ExistingReviews";
 import PostReview from "./PostReview";
 
-const ReviewModal = ({ reviewModalOpen, showReviews, selectedService }) => {
+const ReviewModal = ({ reviewModalOpen, showReviews }) => {
   return (
     <div
       className={`serviceReview__wrapper fixed bottom-1/2 translate-y-1/2 left-1/2 -translate-x-1/2 p-4  w-full lg:w-3/4 max-w-2xl transition-opacity duration-300 ease-in-out rounded-lg drop-shadow-lg ${
@@ -16,8 +16,8 @@ const ReviewModal = ({ reviewModalOpen, showReviews, selectedService }) => {
           onClick={showReviews}
           className="h-7 w-7 text-blue-500 absolute top-3 right-3 cursor-pointer"
         />
-        <PostReview serviceSelectedId={selectedService?.id} />
-        <ExistingReviews selectedService={selectedService} />
+        <PostReview />
+        <ExistingReviews />
       </div>
     </div>
   );

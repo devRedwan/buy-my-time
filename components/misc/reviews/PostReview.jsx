@@ -1,11 +1,14 @@
+import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import ServicesContext from "../../../context/servicesContext";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import UserRating from "./UserRating";
 
-const PostReview = ({ serviceSelectedId }) => {
-  const { reviews, setReviews, setServiceId } = useContext(ServicesContext);
+const PostReview = () => {
+  const router = useRouter();
+  const { id } = router?.query;
+  const { reviews, setReviews } = useContext(ServicesContext);
   const [userRating, setUserRating] = useState(0);
   const [review, setReview] = useState("");
   const [reviewer, setReviewer] = useState("");
@@ -14,8 +17,8 @@ const PostReview = ({ serviceSelectedId }) => {
   const handleRating = (value) => {
     setUserRating(value);
   };
+
   const postNewReview = async () => {
-    setServiceId(serviceSelectedId);
     if (!selectedRating) {
       alert("Please select a rating.");
       return;
@@ -24,7 +27,6 @@ const PostReview = ({ serviceSelectedId }) => {
       alert(
         "Please correct your name. Name should be at least 4 characters and no more than 60 characters long."
       );
-
       return;
     }
     if (review.length < 15) {
@@ -33,18 +35,22 @@ const PostReview = ({ serviceSelectedId }) => {
       );
       return;
     }
+
     const reviewToast = toast.loading("Posting Review...");
+
     const newReview = {
-      serviceId: serviceSelectedId,
+      serviceId: id,
       rating: userRating,
       reviewer: reviewer,
       review: review,
+      _createdAt: Date.now(),
     };
 
     await fetch(`/api/addReview`, {
       body: JSON.stringify(newReview),
       method: "POST",
     });
+
     const updatedReviews = [...reviews, newReview];
     setReviews(updatedReviews);
 
@@ -52,6 +58,7 @@ const PostReview = ({ serviceSelectedId }) => {
     setReview("");
     setReviewer("");
     toast.success("Review Posted!", {
+      icon: "🚀",
       id: reviewToast,
     });
   };

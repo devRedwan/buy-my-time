@@ -29,12 +29,19 @@ const Service = () => {
   const scrollAnimation = getScrollAnimation();
   const router = useRouter();
   const { id: serviceSelectedId } = router?.query;
-  const { services, setServices, sellers, setCart, cart } =
-    useContext(ServicesContext);
+  const {
+    services,
+    setServices,
+    sellers,
+    setCart,
+    cart,
+    reviews,
+    setServiceId,
+  } = useContext(ServicesContext);
   const [loading, setLoading] = useState();
   const [reviewModalOpen, setReviewModalOpen] = useState(false);
-
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
+  setServiceId(serviceSelectedId);
 
   const selectedService = services.find(
     (service) => service?.id === serviceSelectedId
@@ -207,7 +214,7 @@ const Service = () => {
                           onClick={() => showReviews()}>
                           <ChatBubbleLeftRightIcon className="h-5 w-5 text-red" />
                           &nbsp;
-                          {selectedService?.reviews.length}
+                          {reviews?.length}
                         </div>
                       </div>
                     </div>
@@ -296,7 +303,7 @@ const Service = () => {
                         onClick={() => showReviews()}>
                         <ChatBubbleLeftRightIcon className="h-5 w-5 mr-1 text-red" />
                         Reviews: &nbsp;
-                        {selectedService?.reviews.length}
+                        {reviews?.length}
                       </div>
                     </div>
                   </div>
@@ -306,7 +313,6 @@ const Service = () => {
               <ReviewModal
                 showReviews={showReviews}
                 reviewModalOpen={reviewModalOpen}
-                selectedService={selectedService}
               />
             </section>
           </motion.div>
