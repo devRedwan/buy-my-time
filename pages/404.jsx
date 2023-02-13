@@ -28,6 +28,8 @@ const Custom404 = () => {
           <Link legacyBehavior href="/">
             <Image
               src="/assets/buy_my_time_Logo_animated.gif"
+              width={500}
+              height={500}
               alt="BuyMyTime Animated Logo"
               className="cursor-pointer hover:scale-50 transition-all duration-500 ease-in-out"
             />
