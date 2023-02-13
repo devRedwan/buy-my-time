@@ -10,11 +10,14 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import Layout from "../../../components/Layout/MainLayout.jsx";
-import ScrollAnimationWrapper from "../../../components/Layout/ScrollAnimationWrapper.jsx";
+import  ScrollAnimationWrapper  from "../../../components/Layout/ScrollAnimationWrapper.jsx";
 import SeoHead from "../../../components/Layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
 import Carousel from "../../../components/misc/carousel/Carousel";
 import PageHeader from "../../../components/misc/PageHeader";
+import ExistingReviews from "../../../components/misc/reviews/ExistingReviews.jsx";
+import PostReview from "../../../components/misc/reviews/PostReview.jsx";
+import Modal from "../../../components/misc/Modal";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import {
   SkeletonSeller,
@@ -23,7 +26,6 @@ import {
 import ServicesContext from "../../../context/servicesContext";
 import { getFeaturedServices } from "../../../utils/getFilteredData";
 import getScrollAnimation from "../../../utils/getScrollAnimation";
-import ReviewModal from "../../../components/misc/reviews/ReviewModal";
 
 const Service = () => {
   const scrollAnimation = getScrollAnimation();
@@ -39,7 +41,7 @@ const Service = () => {
     setServiceId,
   } = useContext(ServicesContext);
   const [loading, setLoading] = useState();
-  const [reviewModalOpen, setReviewModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
   setServiceId(serviceSelectedId);
 
@@ -84,8 +86,8 @@ const Service = () => {
     return cart?.find((service) => service?.id === serviceSelectedId);
   };
 
-  const showReviews = () => {
-    !reviewModalOpen ? setReviewModalOpen(true) : setReviewModalOpen(false);
+  const toggleModal = () => {
+    !modalOpen ? setModalOpen(true) : setModalOpen(false);
   };
 
   const updateServiceStats = async (stat) => {
@@ -163,7 +165,7 @@ const Service = () => {
               ) : (
                 <div
                   className={`serviceDetails flex transition-all duration-300 ease-in-out ${
-                    reviewModalOpen ? "blur-md" : "blur-none"
+                    modalOpen ? "blur-md" : "blur-none"
                   }`}>
                   <div className="serviceSelected__LeftColumn max-w-2xl">
                     <h2 className="serviceSelected__Title text-3xl lg:text-4xl font-medium">
@@ -198,7 +200,7 @@ const Service = () => {
                         </div>
                         <div
                           className="serviceMeta__rating flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
-                          onClick={() => showReviews()}>
+                          onClick={() => toggleModal()}>
                           <Image
                             src="/assets/Icon/stars.svg"
                             alt="BuyMyTime Icon"
@@ -211,7 +213,7 @@ const Service = () => {
                         </div>
                         <div
                           className="serviceMeta__review flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
-                          onClick={() => showReviews()}>
+                          onClick={() => toggleModal()}>
                           <ChatBubbleLeftRightIcon className="h-5 w-5 text-red" />
                           &nbsp;
                           {reviews?.length}
@@ -253,7 +255,7 @@ const Service = () => {
 
                   <div
                     className={`serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16 ${
-                      reviewModalOpen ? "lg:hidden" : "flex"
+                      modalOpen ? "lg:hidden" : "flex"
                     }`}>
                     <Link
                       href="/seller/[id]"
@@ -287,7 +289,7 @@ const Service = () => {
                       </div>
                       <div
                         className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
-                        onClick={() => showReviews()}>
+                        onClick={() => toggleModal()}>
                         <Image
                           src="/assets/Icon/stars.svg"
                           alt="BuyMyTime Icon"
@@ -300,7 +302,7 @@ const Service = () => {
                       </div>
                       <div
                         className="serviceMeta__review flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
-                        onClick={() => showReviews()}>
+                        onClick={() => toggleModal()}>
                         <ChatBubbleLeftRightIcon className="h-5 w-5 mr-1 text-red" />
                         Reviews: &nbsp;
                         {reviews?.length}
@@ -309,19 +311,11 @@ const Service = () => {
                   </div>
                 </div>
               )}
-
-              <ReviewModal
-                showReviews={showReviews}
-                reviewModalOpen={reviewModalOpen}
-              />
             </section>
           </motion.div>
         </ScrollAnimationWrapper>
 
-        <div
-          className={`featuredServices__wrapper ${
-            reviewModalOpen ? "blur-md" : "blur-none"
-          }`}>
+        <section className={"featuredServices__wrapper"}>
           <ScrollAnimationWrapper className="featuredServices__textWrapper section__textWrapper text-center">
             <motion.h3
               variants={scrollAnimation}
@@ -334,8 +328,12 @@ const Service = () => {
               <Carousel className="carousel" servicesData={featuredServices} />
             </motion.div>
           </ScrollAnimationWrapper>
-        </div>
+        </section>
       </main>
+      <Modal toggleModal={toggleModal} modalOpen={modalOpen} title="Reviews">
+        <PostReview />
+        <ExistingReviews />
+      </Modal>
     </Layout>
   );
 };

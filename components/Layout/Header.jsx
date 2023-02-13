@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ButtonOutline from "../misc/buttons/ButtonOutline";
 import { MobileNavMenu, NavMenu } from "../misc/nav/NavMenu";
 import NavLinks from "../misc/nav/NavMenuLinks";
+import SignIn from "./SignIn";
 
 const Header = () => {
   const [scrollActive, setScrollActive] = useState(false);
@@ -39,11 +40,8 @@ const Header = () => {
           <NavMenu navLinks={links} />
 
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
-            <Link legacyBehavior href="/">
-              <a className="navMenu__authSignIn text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-blue-500 transition-all">
-                Sign In
-              </a>
-            </Link>
+            <SignIn />
+
             <ButtonOutline className="navMenu__authSignUp">
               Sign Up
             </ButtonOutline>
