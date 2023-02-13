@@ -40,7 +40,7 @@ const Service = () => {
     reviews,
     setServiceId,
   } = useContext(ServicesContext);
-  const { modalOpen, toggleModal } = useContext(AuthContext);
+  const { toggleModalOpen } = useContext(AuthContext);
   const [loading, setLoading] = useState();
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
   setServiceId(serviceSelectedId);
@@ -161,10 +161,7 @@ const Service = () => {
                     <SkeletonSeller />
                   </div>
                 ) : (
-                  <div
-                    className={`serviceDetails flex transition-all duration-300 ease-in-out ${
-                      modalOpen ? "blur-md" : "blur-none"
-                    }`}>
+                  <div className="serviceDetails flex transition-all duration-300 ease-in-out">
                     <div className="serviceSelected__LeftColumn max-w-2xl">
                       <h2 className="serviceSelected__Title text-3xl lg:text-4xl font-medium">
                         {selectedService?.title}
@@ -199,7 +196,7 @@ const Service = () => {
                           </div>
                           <div
                             className="serviceMeta__rating flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
-                            onClick={() => toggleModal()}>
+                            onClick={() => toggleModalOpen("reviews")}>
                             <Image
                               src="/assets/Icon/stars.svg"
                               alt="BuyMyTime Icon"
@@ -212,7 +209,7 @@ const Service = () => {
                           </div>
                           <div
                             className="serviceMeta__review flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
-                            onClick={() => toggleModal()}>
+                            onClick={() => toggleModalOpen("reviews")}>
                             <ChatBubbleLeftRightIcon className="h-5 w-5 text-red" />
                             &nbsp;
                             {reviews?.length}
@@ -255,9 +252,9 @@ const Service = () => {
                       </button>
                     </div>
                     <div
-                      className={`serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16 ${
-                        modalOpen ? "lg:hidden" : "flex"
-                      }`}>
+                      className={
+                        "serviceSelected__rightColumn service__metaData hidden lg:flex flex-col items-center justify-center py-3 ml-16 "
+                      }>
                       <Link
                         href="/seller/[id]"
                         as={`/seller/${sellerOfSelectedService?.id}`}>
@@ -290,7 +287,7 @@ const Service = () => {
                         </div>
                         <div
                           className="serviceMeta__rating flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
-                          onClick={() => toggleModal()}>
+                          onClick={() => toggleModalOpen("reviews")}>
                           <Image
                             src="/assets/Icon/stars.svg"
                             alt="BuyMyTime Icon"
@@ -303,7 +300,7 @@ const Service = () => {
                         </div>
                         <div
                           className="serviceMeta__review flex text-lg items-center hover:scale-110  px-2 rounded-lg bg-blue-100 mb-4 cursor-pointer transition-transform border border-blue-500"
-                          onClick={() => toggleModal()}>
+                          onClick={() => toggleModalOpen("reviews")}>
                           <ChatBubbleLeftRightIcon className="h-5 w-5 mr-1 text-red" />
                           Reviews: &nbsp;
                           {reviews?.length}
@@ -334,7 +331,7 @@ const Service = () => {
           </section>
         </main>
       </Layout>
-      <Modal toggleModal={toggleModal} modalOpen={modalOpen} title="Reviews">
+      <Modal title="Reviews" id="reviews">
         <PostReview />
         <ExistingReviews />
       </Modal>

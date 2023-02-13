@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { toast } from "react-hot-toast";
 import CartItem from "../components/cart/CartItem";
 import EmptyCart from "../components/cart/EmptyCart";
 import Layout from "../components/Layout/MainLayout";
@@ -81,7 +82,10 @@ const Cart = () => {
                   <ButtonPrimary
                     addClass="my-2"
                     onClick={() => {
-                      alert("Feature Under Construction. Coming Soon !!!");
+                      toast.error("Feature under construction...🛠️", {
+                        icon: "🚧",
+                        duration: 3000,
+                      });
                     }}>
                     Proceed to Checkout
                   </ButtonPrimary>

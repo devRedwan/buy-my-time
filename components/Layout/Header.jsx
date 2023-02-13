@@ -1,20 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/Contexts";
 import ButtonOutline from "../misc/buttons/ButtonOutline";
 import { MobileNavMenu, NavMenu } from "../misc/nav/NavMenu";
 import NavLinks from "../misc/nav/NavMenuLinks";
-import SignIn from "./SignIn";
+import Modal from "../misc/Modal";
+import SignInForm from "./SignInForm";
 
-const Header = () => {
+const Header = ({ toggleModalOpen }) => {
   const [scrollActive, setScrollActive] = useState(false);
+  const links = NavLinks();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScrollActive(window.scrollY > 20);
     });
   }, []);
-  const links = NavLinks();
 
   return (
     <>
@@ -42,7 +44,7 @@ const Header = () => {
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
             <button
               className="signIn__button text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-blue-500 transition-all"
-              onClick={() => toggleModal()}>
+              onClick={toggleModalOpen}>
               Sign In
             </button>
 
