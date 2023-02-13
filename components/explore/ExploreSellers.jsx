@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import ServicesContext from "../../context/servicesContext";
+import { ServicesContext } from "../../context/Contexts";
 import { sortAndFilterData } from "../../utils/getFilteredData";
 import SellerCard from "../misc/seller-card/SellerCard";
 import SellerSkeletonCard from "../misc/seller-card/SellerSkeletonCard";

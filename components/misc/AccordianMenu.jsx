@@ -3,7 +3,7 @@ import Collapsible from "react-collapsible";
 
 const AccordianMenu = ({ title, children }) => (
   <Collapsible
-    className="accordianMenu"
+    className="accordianMenu hover:bg-blue-100 hover:rounded-lg active:bg-blue-100 active:rounded-lg"
     open={true}
     openedClassName="accordianMenu active"
     triggerClassName="accordianMenu-title"

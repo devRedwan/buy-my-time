@@ -5,7 +5,7 @@ import Layout from "../components/Layout/MainLayout";
 import SeoHead from "../components/Layout/SeoHead";
 import AccordianMenu from "../components/misc/AccordianMenu";
 import PageHeader from "../components/misc/PageHeader";
-import ServicesContext from "../context/servicesContext";
+import { ServicesContext } from "../context/Contexts";
 import { getAllServices } from "../utils/getFilteredData";
 
 export default function Explore() {
@@ -28,7 +28,9 @@ export default function Explore() {
           </section>
 
           <section className="grid grid-flow-row gap-8 pt-6 pb-12 sm:pt-16 sm:pb-32 sm:grid-flow-col">
-            <AccordianMenu title="Service Professionals">
+            <AccordianMenu
+              title="Service Professionals"
+              className="hover:bg-blue-100">
               <ExploreSellers />
             </AccordianMenu>
           </section>

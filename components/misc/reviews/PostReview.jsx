@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import ServicesContext from "../../../context/servicesContext";
+import { ServicesContext } from "../../../context/Contexts";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import UserRating from "./UserRating";
 
@@ -20,18 +20,20 @@ const PostReview = () => {
 
   const postNewReview = async () => {
     if (!selectedRating) {
-      alert("Please select a rating.");
+      toast.error("Please select a rating.", { duration: 2000 });
       return;
     }
     if (reviewer.length < 4 || reviewer.length > 60) {
-      alert(
-        "Please correct your name. Name should be at least 4 characters and no more than 60 characters long."
+      toast.error(
+        "Please correct your name. Name should be at least 4 characters and no more than 60 characters long.",
+        { duration: 3000 }
       );
       return;
     }
     if (review.length < 15) {
-      alert(
-        "Please re-write your review. Review should be at least 15 characters long."
+      toast.error(
+        "Please re-write your review. Review should be at least 15 characters long.",
+        { duration: 3000 }
       );
       return;
     }
@@ -69,7 +71,7 @@ const PostReview = () => {
         <input
           type="text"
           placeholder="Write Your Name..."
-          className={`ml-2 mb-2 bg-transparent border-b border-blue-500 outline-none ${
+          className={`ml-2 mb-2 bg-transparent border-b border-x-0 border-t-0 border-blue-500 outline-none focus:ring-0 ${
             reviewer && "border-none"
           }`}
           onChange={(event) => setReviewer(event.target.value)}
@@ -77,13 +79,13 @@ const PostReview = () => {
         />
         <textarea
           type="text"
-          className="h-full outline-none w-full p-2 rounded-lg focus:outline-blue-500 placeholder:text-gray-400 resize-none"
+          className="h-full outline-none w-full p-2 rounded-lg focus:outline-blue-500 focus:ring-0 focus:border-0 placeholder:text-gray-400 resize-none"
           placeholder="Write a review..."
           onChange={(event) => setReview(event.target.value)}
           value={review}
         />
       </div>
-      <div className="review__ratingSubmit flex flex-wrap justify-evenly items-center relative w-full mt-4">
+      <div className="review__ratingSubmit flex flex-wrap justify-evenly items-center relative w-full my-10">
         <div className="review__rating h-10 relative flex items-center flex-wrap">
           Rate the Service:
           <UserRating

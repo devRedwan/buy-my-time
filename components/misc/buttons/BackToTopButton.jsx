@@ -19,16 +19,21 @@ function BackToTopButton() {
 
   return (
     <div
-      className={`fixed bottom-2 right-2 m-4 z-10 opacity-60 hover:scale-110 hover:opacity-100 transition-all duration-200 ease-in-out hover:bg-gray-100 rounded-full p-1 pt-2 ${
+      className={`fixed bottom-2 right-2 m-4 z-10 hover:scale-110 hover:opacity-100 transition-all duration-500 ease-in-out cursor-pointer hover:bg-gray-100 group rounded-full p-4 pt-2 ${
         showButton ? "block" : "hidden"
       }`}>
-      <button onClick={handleClick}>
+      <button
+        onClick={handleClick}
+        className="flex flex-col items-center justify-center transition-all duration-500 ease-in-out">
         <Image
           src="/assets/icon_bmt.png"
           alt="BuyMyTime"
           height={25}
           width={25}
         />
+        <span className="text-xs hidden group-hover:inline-block transition-all duration-500 ease-in-out">
+          Back To Top
+        </span>
       </button>
     </div>
   );

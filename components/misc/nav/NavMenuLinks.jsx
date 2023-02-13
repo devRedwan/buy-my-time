@@ -4,7 +4,7 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/solid";
 import { useContext } from "react";
-import ServicesContext from "../../../context/servicesContext";
+import { ServicesContext } from "../../../context/Contexts";
 
 const navLinks = () => {
   const { cart } = useContext(ServicesContext);
