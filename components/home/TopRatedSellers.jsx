@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import ServicesContext from "../../context/servicesContext";
+import { ServicesContext } from "../../context/Contexts";
 import { getTopRatedSellers } from "../../utils/getFilteredData";
 import getScrollAnimation from "../../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "../Layout/ScrollAnimationWrapper";

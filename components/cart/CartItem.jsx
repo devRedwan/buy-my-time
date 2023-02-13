@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useContext } from "react";
-import ServicesContext from "../../context/servicesContext";
+import { ServicesContext } from "../../context/Contexts";
 
 const CartItem = ({ service }) => {
   const { cart, setCart } = useContext(ServicesContext);

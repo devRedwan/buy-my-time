@@ -1,6 +1,10 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useContext } from "react";
+import { AuthContext } from "../../context/Contexts";
 
-const Modal = ({ modalOpen, toggleModal, title, children }) => {
+const Modal = ({ title, children }) => {
+  const { modalOpen, toggleModal } = useContext(AuthContext);
+
   return (
     <div
       className={`modal__wrapper fixed bottom-1/2 translate-y-1/2 left-1/2 -translate-x-1/2 p-4  w-full lg:w-3/4 max-w-2xl transition-opacity duration-300 ease-in-out rounded-lg drop-shadow-lg ${

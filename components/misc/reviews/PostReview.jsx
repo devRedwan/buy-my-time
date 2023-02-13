@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import ServicesContext from "../../../context/servicesContext";
+import { ServicesContext } from "../../../context/Contexts";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import UserRating from "./UserRating";
 

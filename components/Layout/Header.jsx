@@ -40,7 +40,11 @@ const Header = () => {
           <NavMenu navLinks={links} />
 
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
-            <SignIn />
+            <button
+              className="signIn__button text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-blue-500 transition-all"
+              onClick={() => toggleModal()}>
+              Sign In
+            </button>
 
             <ButtonOutline className="navMenu__authSignUp">
               Sign Up

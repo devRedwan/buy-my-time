@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React, { useContext } from "react";
-import ServicesContext from "../../context/servicesContext";
+import { ServicesContext } from "../../context/Contexts";
 import {
   getMostPopularServices,
   getTopRatedServices,

@@ -2,7 +2,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import TimeAgo from "react-timeago";
-import ServicesContext from "../../../context/servicesContext";
+import { ServicesContext } from "../../../context/Contexts";
 
 const ExistingReviews = () => {
   const router = useRouter();

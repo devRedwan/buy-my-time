@@ -7,7 +7,7 @@ import SeoHead from "../../../components/Layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
 import PageHeader from "../../../components/misc/PageHeader";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
-import ServicesContext from "../../../context/servicesContext";
+import { ServicesContext } from "../../../context/Contexts";
 import { getUniqueSellerServices } from "../../../utils/getFilteredData";
 
 const Seller = () => {

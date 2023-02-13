@@ -6,7 +6,7 @@ import SeoHead from "../components/Layout/SeoHead";
 import ButtonOutline from "../components/misc/buttons/ButtonOutline";
 import ButtonPrimary from "../components/misc/buttons/ButtonPrimary";
 import PageHeader from "../components/misc/PageHeader";
-import ServicesContext from "../context/servicesContext";
+import { ServicesContext } from "../context/Contexts";
 
 const Cart = () => {
   const { cart } = useContext(ServicesContext);
