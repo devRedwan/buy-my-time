@@ -3,12 +3,30 @@ import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const SignInForm = () => {
-  const { toggleModalOpen } = useContext(AuthContext);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const { toggleModalOpen, signIn, setModalOpen, currentUser } =
+    useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      await signIn(email, password);
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <form className="SignIn__form w-3/4 max-w-md mx-auto flex flex-col my-4">
+    <form
+      className="SignIn__form w-3/4 max-w-md mx-auto flex flex-col my-4"
+      onSubmit={handleSubmit}>
       <div className="mb-6">
         {email && (
           <label htmlFor="email" className="font-medium">
@@ -48,15 +66,16 @@ const SignInForm = () => {
             type="checkbox"
             value=""
             className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
-            required
           />
         </div>
         <label htmlFor="remember" className="ml-2 text-sm ">
           Remember me
         </label>
       </div>
-      <ButtonPrimary type="submit" addClass="">
-        Submit
+      <ButtonPrimary
+        type="submit"
+        addClass={`${loading && "bg-gray-400 pointer-events-none"}`}>
+        Sign In
       </ButtonPrimary>
       <p className="mt-1">
         Don't have an Account?

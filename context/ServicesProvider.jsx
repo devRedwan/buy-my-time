@@ -59,20 +59,21 @@ const ServicesProvider = ({ children }) => {
     }
   }, []);
 
+  const values = {
+    services: state.services,
+    sellers: state.sellers,
+    reviews: state.reviews,
+    loading: state.loading,
+    cart,
+    dispatch,
+    setCart,
+    setServices,
+    setReviews,
+    setServiceId,
+  };
+
   return (
-    <ServicesContext.Provider
-      value={{
-        services: state.services,
-        sellers: state.sellers,
-        reviews: state.reviews,
-        loading: state.loading,
-        cart,
-        dispatch,
-        setCart,
-        setServices,
-        setReviews,
-        setServiceId,
-      }}>
+    <ServicesContext.Provider value={values}>
       {children}
     </ServicesContext.Provider>
   );

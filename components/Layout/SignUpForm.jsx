@@ -1,15 +1,35 @@
 import { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const SignUpForm = () => {
-  const { toggleModalOpen } = useContext(AuthContext);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const { toggleModalOpen, signUp, setModalOpen, currentUser } =
+    useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      await signUp(name, email, password);
+      setEmail("");
+      setName("");
+      setPassword("");
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <form className="SignUp__form w-3/4 max-w-md mx-auto flex flex-col my-4">
+    <form
+      className="SignUp__form w-3/4 max-w-md mx-auto flex flex-col my-4"
+      onSubmit={handleSubmit}>
       <div className="mb-6">
         {name && (
           <label htmlFor="name" className="font-medium">
@@ -63,8 +83,11 @@ const SignUpForm = () => {
         />
       </div>
 
-      <ButtonPrimary type="submit" addClass="">
-        Submit
+      <ButtonPrimary
+        type="submit"
+        addClass={`${loading && "bg-gray-400 pointer-events-none"}`}
+        disabled>
+        Sign Up
       </ButtonPrimary>
       <p className="mt-1">
         Already have an Account?
