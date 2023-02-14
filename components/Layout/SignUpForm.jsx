@@ -1,50 +1,39 @@
 import { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase/init";
-import { toast } from "react-hot-toast";
 
 const SignUpForm = () => {
-  const { toggleModalOpen } = useContext(AuthContext);
+  const { toggleModalOpen, signUp, setModalOpen } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signUp = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Creating Profile ...");
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const newUser = auth.currentUser;
-        updateProfile(newUser, {
-          displayName: name,
-        }).then(() => {
-          toast.success(`Welcome ${userCredential.user.displayName} 🎊🥳`, {
-            id: loadingToast,
-            icon: "🙌",
-            style: {
-              background: "#E2F1FF",
-              fontSize: "20px",
-              maxWidth: "100vw",
-            },
-          });
-        });
-      })
-      .catch((error) => {
-        toast.error(
-          `Oops! ${error.message
-            .replace("Firebase: Error (auth/", " ")
-            .replace(").", " ")}. Please Try Again.`,
-          {
-            id: loadingToast,
-          }
-        );
+
+    try {
+      setLoading(true);
+      await signUp(name, email, password);
+    } catch {
+      toast.error("Failed to create an account. Please Try again Later", {
+        icon: "😢",
       });
+    }
+    setEmail("");
+    setName("");
+    setPassword("");
+    setLoading(false);
+    setTimeout(() => {
+      setModalOpen(false);
+    });
   };
 
   return (
-    <form className="SignUp__form w-3/4 max-w-md mx-auto flex flex-col my-4">
+    <form
+      className="SignUp__form w-3/4 max-w-md mx-auto flex flex-col my-4"
+      onSubmit={handleSubmit}>
       <div className="mb-6">
         {name && (
           <label htmlFor="name" className="font-medium">
@@ -98,7 +87,10 @@ const SignUpForm = () => {
         />
       </div>
 
-      <ButtonPrimary type="submit" addClass="" onClick={signUp}>
+      <ButtonPrimary
+        type="submit"
+        addClass={`${loading && "pointer-events-none"}`}
+        disabled>
         Sign Up
       </ButtonPrimary>
       <p className="mt-1">
