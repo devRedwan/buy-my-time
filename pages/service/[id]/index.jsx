@@ -14,10 +14,10 @@ import ScrollAnimationWrapper from "../../../components/Layout/ScrollAnimationWr
 import SeoHead from "../../../components/Layout/SeoHead";
 import ButtonPrimary from "../../../components/misc/buttons/ButtonPrimary";
 import Carousel from "../../../components/misc/carousel/Carousel";
+import Modal from "../../../components/misc/Modal";
 import PageHeader from "../../../components/misc/PageHeader";
 import ExistingReviews from "../../../components/misc/reviews/ExistingReviews.jsx";
 import PostReview from "../../../components/misc/reviews/PostReview.jsx";
-import Modal from "../../../components/misc/Modal";
 import SellerImageCard from "../../../components/misc/seller-card/SellerImageCard";
 import {
   SkeletonSeller,
@@ -135,6 +135,16 @@ const Service = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      toast.success("Like the service to show your support", {
+        duration: 4000,
+        icon: "💙",
+        style: { background: "#E2F1FF", fontSize: "20px", maxWidth: "100vw" },
+      });
+      toast.success("Post a review to help us improve", {
+        duration: 4000,
+        style: { background: "#ffb3c1", fontSize: "20px", maxWidth: "100vw" },
+        icon: "⭐",
+      });
     }, 1000);
   }, []);
 

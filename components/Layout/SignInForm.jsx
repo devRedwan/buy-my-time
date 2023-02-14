@@ -1,11 +1,44 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/init";
+import { toast } from "react-hot-toast";
 
 const SignInForm = () => {
   const { toggleModalOpen } = useContext(AuthContext);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signIn = (e) => {
+    e.preventDefault();
+    const loadingToast = toast.loading("Creating Profile ...");
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        const currentUser = auth.currentUser;
+        currentUser &&
+          toast.success(`Welcome ${currentUser.displayName} 🎊🥳`, {
+            id: loadingToast,
+            icon: "🙌",
+            style: {
+              background: "#E2F1FF",
+              fontSize: "20px",
+              maxWidth: "100vw",
+            },
+          });
+      })
+      .catch((error) => {
+        toast.error(
+          `Oops! ${error.message
+            .replace("Firebase: Error (auth/", " ")
+            .replace("-", " ")
+            .replace(").", " ")}. Please Try Again.`,
+          {
+            id: loadingToast,
+          }
+        );
+      });
+  };
 
   return (
     <form className="SignIn__form w-3/4 max-w-md mx-auto flex flex-col my-4">
@@ -55,8 +88,8 @@ const SignInForm = () => {
           Remember me
         </label>
       </div>
-      <ButtonPrimary type="submit" addClass="">
-        Submit
+      <ButtonPrimary type="submit" addClass="" onClick={signIn}>
+        Sign In
       </ButtonPrimary>
       <p className="mt-1">
         Don't have an Account?

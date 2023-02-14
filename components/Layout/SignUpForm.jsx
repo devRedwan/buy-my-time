@@ -1,12 +1,47 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase/init";
+import { toast } from "react-hot-toast";
 
 const SignUpForm = () => {
   const { toggleModalOpen } = useContext(AuthContext);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signUp = (e) => {
+    e.preventDefault();
+    const loadingToast = toast.loading("Creating Profile ...");
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const newUser = auth.currentUser;
+        updateProfile(newUser, {
+          displayName: name,
+        }).then(() => {
+          toast.success(`Welcome ${userCredential.user.displayName} 🎊🥳`, {
+            id: loadingToast,
+            icon: "🙌",
+            style: {
+              background: "#E2F1FF",
+              fontSize: "20px",
+              maxWidth: "100vw",
+            },
+          });
+        });
+      })
+      .catch((error) => {
+        toast.error(
+          `Oops! ${error.message
+            .replace("Firebase: Error (auth/", " ")
+            .replace(").", " ")}. Please Try Again.`,
+          {
+            id: loadingToast,
+          }
+        );
+      });
+  };
 
   return (
     <form className="SignUp__form w-3/4 max-w-md mx-auto flex flex-col my-4">
@@ -63,8 +98,8 @@ const SignUpForm = () => {
         />
       </div>
 
-      <ButtonPrimary type="submit" addClass="">
-        Submit
+      <ButtonPrimary type="submit" addClass="" onClick={signUp}>
+        Sign Up
       </ButtonPrimary>
       <p className="mt-1">
         Already have an Account?
