@@ -31,15 +31,18 @@ const AuthContextProvider = ({ children }) => {
         updateProfile(newUser, {
           displayName: name,
         }).then(() => {
-          toast.success(`Welcome ${userCredential.user.displayName} 🎊🥳`, {
-            id: loadingToast,
-            icon: "🙌",
-            style: {
-              background: "#E2F1FF",
-              fontSize: "20px",
-              maxWidth: "100vw",
-            },
-          });
+          toast.success(
+            `Welcome to BuyMyTime, ${userCredential.user.displayName} 🎊🥳`,
+            {
+              id: loadingToast,
+              icon: "🙌",
+              style: {
+                background: "#E2F1FF",
+                fontSize: "20px",
+                maxWidth: "100vw",
+              },
+            }
+          );
         });
       })
       .catch((error) => {
@@ -50,6 +53,37 @@ const AuthContextProvider = ({ children }) => {
           {
             id: loadingToast,
             duration: 3000,
+          }
+        );
+      });
+  };
+
+  const signIn = (email, password) => {
+    const loadingToast = toast.loading("Creating Profile ...");
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        currentUser &&
+          toast.success(
+            `Welcome to BuyMyTime, ${currentUser.displayName} 🎊🥳`,
+            {
+              id: loadingToast,
+              icon: "🙌",
+              style: {
+                background: "#E2F1FF",
+                fontSize: "20px",
+                maxWidth: "100vw",
+              },
+            }
+          );
+      })
+      .catch((error) => {
+        toast.error(
+          `Oops! ${error.message
+            .replace("Firebase: Error (auth/", " ")
+            .replace("-", " ")
+            .replace(").", " ")}. Please Try Again.`,
+          {
+            id: loadingToast,
           }
         );
       });
@@ -68,6 +102,7 @@ const AuthContextProvider = ({ children }) => {
     modalOpen,
     setModalOpen,
     signUp,
+    signIn,
     toggleModalOpen,
     toggleModalClose,
   };

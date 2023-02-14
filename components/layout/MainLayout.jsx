@@ -13,7 +13,8 @@ const MainLayout = ({ children }) => {
     <>
       <div
         className={`${
-          modalOpen && "blur-md pointer-events-none fixed w-full"
+          modalOpen &&
+          "blur-md pointer-events-none fixed w-full transition-all duration-500"
         }`}>
         <Header
           modalSignIn={() => toggleModalOpen("signIn")}

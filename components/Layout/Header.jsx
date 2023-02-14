@@ -3,12 +3,12 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Contexts";
 import ButtonOutline from "../misc/buttons/ButtonOutline";
-import { MobileNavMenu, NavMenu } from "../misc/nav/NavMenu";
-import NavLinks from "../misc/nav/NavMenuLinks";
-import Modal from "../misc/Modal";
-import SignInForm from "./SignInForm";
+import { MobileNavMenu, NavMenu } from "./nav/NavMenu";
+import NavLinks from "./nav/NavMenuLinks";
 
 const Header = ({ modalSignIn, modalSignUp }) => {
+  const { currentUser } = useContext(AuthContext);
+
   const [scrollActive, setScrollActive] = useState(false);
   const links = NavLinks();
 

@@ -75,11 +75,22 @@ module.exports = {
             transform: "translateY(0)",
           },
         },
+        fadeIn: {
+          "0%": {
+            opacity: 0.1,
+            scale: "50%",
+          },
+          "100%": {
+            opacity: 1,
+            scale: "100%",
+          },
+        },
       },
       animation: {
         flicker: "flicker 3s linear infinite",
         shimmer: "shimmer 2s linear infinite",
         floatUp: "floatUp 1s ease-out ",
+        fadeIn: "fadeIn 0.5s ease-out ",
       },
     },
   },

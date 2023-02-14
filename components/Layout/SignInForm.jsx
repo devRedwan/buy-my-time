@@ -1,47 +1,36 @@
 import { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/init";
-import { toast } from "react-hot-toast";
 
 const SignInForm = () => {
-  const { toggleModalOpen } = useContext(AuthContext);
+  const { toggleModalOpen, signIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const loadingToast = toast.loading("Creating Profile ...");
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        const currentUser = auth.currentUser;
-        currentUser &&
-          toast.success(`Welcome ${currentUser.displayName} 🎊🥳`, {
-            id: loadingToast,
-            icon: "🙌",
-            style: {
-              background: "#E2F1FF",
-              fontSize: "20px",
-              maxWidth: "100vw",
-            },
-          });
-      })
-      .catch((error) => {
-        toast.error(
-          `Oops! ${error.message
-            .replace("Firebase: Error (auth/", " ")
-            .replace("-", " ")
-            .replace(").", " ")}. Please Try Again.`,
-          {
-            id: loadingToast,
-          }
-        );
+
+    try {
+      setLoading(true);
+      await signIn(email, password);
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+      setTimeout(() => {
+        setModalOpen(false);
       });
+    } catch {
+      toast.error("Failed to Sign in. Please Try again.", {
+        icon: "❌",
+      });
+    }
   };
 
   return (
-    <form className="SignIn__form w-3/4 max-w-md mx-auto flex flex-col my-4">
+    <form
+      className="SignIn__form w-3/4 max-w-md mx-auto flex flex-col my-4"
+      onSubmit={handleSubmit}>
       <div className="mb-6">
         {email && (
           <label htmlFor="email" className="font-medium">
@@ -88,7 +77,7 @@ const SignInForm = () => {
           Remember me
         </label>
       </div>
-      <ButtonPrimary type="submit" addClass="" onClick={signIn}>
+      <ButtonPrimary type="submit" addClass="">
         Sign In
       </ButtonPrimary>
       <p className="mt-1">

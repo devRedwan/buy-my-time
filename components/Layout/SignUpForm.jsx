@@ -16,18 +16,18 @@ const SignUpForm = () => {
     try {
       setLoading(true);
       await signUp(name, email, password);
+      setEmail("");
+      setName("");
+      setPassword("");
+      setLoading(false);
+      setTimeout(() => {
+        setModalOpen(false);
+      });
     } catch {
-      toast.error("Failed to create an account. Please Try again Later", {
-        icon: "😢",
+      toast.error("Failed to create an account. Please Try again.", {
+        icon: "❌",
       });
     }
-    setEmail("");
-    setName("");
-    setPassword("");
-    setLoading(false);
-    setTimeout(() => {
-      setModalOpen(false);
-    });
   };
 
   return (

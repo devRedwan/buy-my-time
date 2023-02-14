@@ -8,10 +8,13 @@ export const NavMenu = ({ navLinks }) => {
           href={href}
           activeLinkStyles="navMenu__link--active"
           key={index}>
-          <a className="navMenu__link">
+          <a
+            className={`navMenu__link ${
+              label === "Cart" && cartItemQty && "animate-bounce"
+            }`}>
             {label !== "Cart" ? label : icon}
             {cartItemQty ? (
-              <span className="cart__itemQty  bottom-1 right-2">
+              <span className="cart__itemQty  bottom-1 right-2 animate-bounce">
                 {cartItemQty}
               </span>
             ) : (
@@ -25,7 +28,6 @@ export const NavMenu = ({ navLinks }) => {
 };
 
 export const MobileNavMenu = ({ navLinks }) => {
-  
   return (
     <ul className="mobileNav__menuList flex w-full justify-between items-center text-black-500">
       {navLinks.map(({ href, icon, cartItemQty }, index) => (
@@ -33,7 +35,10 @@ export const MobileNavMenu = ({ navLinks }) => {
           href={href}
           activeLinkStyles="mobileNav__menuLink--active"
           key={index}>
-          <a className="mobileNav__menuLink">
+          <a
+            className={`mobileNav__menuLink ${
+              href === "/cart" && cartItemQty && "animate-bounce"
+            }`}>
             {icon}
             {cartItemQty ? (
               <span className="cart__itemQty  bottom-1 right-2">
