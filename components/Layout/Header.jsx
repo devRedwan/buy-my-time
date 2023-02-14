@@ -34,7 +34,7 @@ const Header = ({ modalSignIn, modalSignUp }) => {
       setScrollActive(window.scrollY > 20);
     });
   }, []);
-  console.log("currentUser", currentUser);
+
 
   return (
     <>
