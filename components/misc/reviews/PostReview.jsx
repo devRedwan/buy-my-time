@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { ServicesContext } from "../../../context/Contexts";
+import { AuthContext, ServicesContext } from "../../../context/Contexts";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import UserRating from "./UserRating";
 
@@ -9,6 +9,7 @@ const PostReview = () => {
   const router = useRouter();
   const { id } = router?.query;
   const { reviews, setReviews } = useContext(ServicesContext);
+  const { currentUser } = useContext(AuthContext);
   const [userRating, setUserRating] = useState(0);
   const [review, setReview] = useState("");
   const [reviewer, setReviewer] = useState("");
@@ -19,50 +20,56 @@ const PostReview = () => {
   };
 
   const postNewReview = async () => {
-    if (!selectedRating) {
-      toast.error("Please select a rating.", { duration: 2000 });
-      return;
-    }
-    if (reviewer.length < 4 || reviewer.length > 60) {
+    if (currentUser) {
+      if (!selectedRating) {
+        toast.error("Please select a rating.", { duration: 2000 });
+        return;
+      }
+      if (reviewer.length < 4 || reviewer.length > 60) {
+        toast.error(
+          "Please correct your name. Name should be at least 4 characters and no more than 60 characters long.",
+          { duration: 3000 }
+        );
+        return;
+      }
+      if (review.length < 15) {
+        toast.error(
+          "Please re-write your review. Review should be at least 15 characters long.",
+          { duration: 3000 }
+        );
+        return;
+      }
+
+      const reviewToast = toast.loading("Posting Review...");
+
+      const newReview = {
+        serviceId: id,
+        rating: userRating,
+        reviewer: reviewer,
+        review: review,
+        _createdAt: Date.now(),
+      };
+
+      await fetch(`/api/addReview`, {
+        body: JSON.stringify(newReview),
+        method: "POST",
+      });
+
+      const updatedReviews = [...reviews, newReview];
+      setReviews(updatedReviews);
+
+      setUserRating(5);
+      setReview("");
+      setReviewer("");
+      toast.success("Review Posted!", {
+        icon: "🚀",
+        id: reviewToast,
+      });
+    } else {
       toast.error(
-        "Please correct your name. Name should be at least 4 characters and no more than 60 characters long.",
-        { duration: 3000 }
+        "You Must be a registered User to Post Reviews. Sign Up for free now."
       );
-      return;
     }
-    if (review.length < 15) {
-      toast.error(
-        "Please re-write your review. Review should be at least 15 characters long.",
-        { duration: 3000 }
-      );
-      return;
-    }
-
-    const reviewToast = toast.loading("Posting Review...");
-
-    const newReview = {
-      serviceId: id,
-      rating: userRating,
-      reviewer: reviewer,
-      review: review,
-      _createdAt: Date.now(),
-    };
-
-    await fetch(`/api/addReview`, {
-      body: JSON.stringify(newReview),
-      method: "POST",
-    });
-
-    const updatedReviews = [...reviews, newReview];
-    setReviews(updatedReviews);
-
-    setUserRating(5);
-    setReview("");
-    setReviewer("");
-    toast.success("Review Posted!", {
-      icon: "🚀",
-      id: reviewToast,
-    });
   };
 
   return (

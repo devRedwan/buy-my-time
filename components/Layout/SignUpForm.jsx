@@ -4,7 +4,8 @@ import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const SignUpForm = () => {
-  const { toggleModalOpen, signUp, setModalOpen } = useContext(AuthContext);
+  const { toggleModalOpen, signUp, setModalOpen, currentUser } =
+    useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,13 +21,8 @@ const SignUpForm = () => {
       setName("");
       setPassword("");
       setLoading(false);
-      setTimeout(() => {
-        setModalOpen(false);
-      });
-    } catch {
-      toast.error("Failed to create an account. Please Try again.", {
-        icon: "❌",
-      });
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -89,7 +85,7 @@ const SignUpForm = () => {
 
       <ButtonPrimary
         type="submit"
-        addClass={`${loading && "pointer-events-none"}`}
+        addClass={`${loading && "bg-gray-400 pointer-events-none"}`}
         disabled>
         Sign Up
       </ButtonPrimary>

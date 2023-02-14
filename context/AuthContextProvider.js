@@ -1,4 +1,8 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { auth } from "../firebase/init";
@@ -8,6 +12,7 @@ const AuthContextProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalId, setModalId] = useState("");
   const [currentUser, setCurrentUser] = useState();
+  const [userLoading, setUserLoading] = useState(true);
 
   const toggleModalOpen = (Id) => {
     if (modalId === Id) {
@@ -32,7 +37,7 @@ const AuthContextProvider = ({ children }) => {
           displayName: name,
         }).then(() => {
           toast.success(
-            `Welcome to BuyMyTime, ${userCredential.user.displayName} 🎊🥳`,
+            `Welcome to BuyMyTime, ${userCredential?.user?.displayName} 🎊🥳`,
             {
               id: loadingToast,
               icon: "🙌",
@@ -44,6 +49,7 @@ const AuthContextProvider = ({ children }) => {
             }
           );
         });
+        setModalOpen(false);
       })
       .catch((error) => {
         toast.error(
@@ -52,19 +58,20 @@ const AuthContextProvider = ({ children }) => {
             .replace(").", " ")}. Please Try Again.`,
           {
             id: loadingToast,
-            duration: 3000,
+            duration: 2000,
           }
         );
       });
   };
 
   const signIn = (email, password) => {
-    const loadingToast = toast.loading("Creating Profile ...");
+    const loadingToast = toast.loading("Signing In ...");
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        currentUser &&
+      .then((userCreds) => {
+        setModalOpen(false);
+        userCreds &&
           toast.success(
-            `Welcome to BuyMyTime, ${currentUser.displayName} 🎊🥳`,
+            `Welcome to BuyMyTime, ${userCreds?.user?.displayName} 🎊🥳`,
             {
               id: loadingToast,
               icon: "🙌",
@@ -84,25 +91,36 @@ const AuthContextProvider = ({ children }) => {
             .replace(").", " ")}. Please Try Again.`,
           {
             id: loadingToast,
+            duration: 2000,
           }
         );
       });
+  };
+
+  const signOut = () => {
+    auth.signOut();
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
+    setTimeout(() => {
+      setUserLoading(false);
+    }, 500);
+
     return unsubscribe;
   }, []);
 
   const values = {
+    userLoading,
     currentUser,
     modalId,
     modalOpen,
     setModalOpen,
     signUp,
     signIn,
+    signOut,
     toggleModalOpen,
     toggleModalClose,
   };

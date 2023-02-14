@@ -3,20 +3,38 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/Contexts";
 import ButtonOutline from "../misc/buttons/ButtonOutline";
+import AuthMenu from "./nav/AuthMenu";
+import UserProfileMenu from "./nav/UserProfileMenu";
 import { MobileNavMenu, NavMenu } from "./nav/NavMenu";
 import NavLinks from "./nav/NavMenuLinks";
+import { toast } from "react-hot-toast";
 
 const Header = ({ modalSignIn, modalSignUp }) => {
-  const { currentUser } = useContext(AuthContext);
-
+  const { currentUser, userLoading, signOut } = useContext(AuthContext);
   const [scrollActive, setScrollActive] = useState(false);
   const links = NavLinks();
+
+  const handleSignOut = async () => {
+    const loadingToast = toast.loading("Signing out");
+    try {
+      setTimeout(async () => {
+        await signOut();
+      }, 1000);
+      toast.success("Signed Out", {
+        id: loadingToast,
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to Sign Out");
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScrollActive(window.scrollY > 20);
     });
   }, []);
+  console.log("currentUser", currentUser);
 
   return (
     <>
@@ -40,19 +58,24 @@ const Header = ({ modalSignIn, modalSignUp }) => {
           </div>
 
           <NavMenu navLinks={links} />
-
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
-            <button
-              className="signIn__button text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-blue-500 transition-all"
-              onClick={modalSignIn}>
-              Sign In
-            </button>
-
-            <ButtonOutline
-              className="navMenu__authSignUp"
-              onClick={modalSignUp}>
-              Sign Up
-            </ButtonOutline>
+            {!userLoading ? (
+              <>
+                {currentUser ? (
+                  <UserProfileMenu user={currentUser} signOut={handleSignOut} />
+                ) : (
+                  <AuthMenu
+                    modalSignIn={modalSignIn}
+                    modalSignUp={modalSignUp}
+                  />
+                )}
+              </>
+            ) : (
+              <div className="flex justify-evenly">
+                <div className="mx-2 rounded-lg h-10 w-32 bg-gray-500 animate-pulse"></div>
+                <div className="mx-2 rounded-lg h-10 w-32 bg-gray-500 animate-pulse"></div>
+              </div>
+            )}
           </div>
         </nav>
       </header>

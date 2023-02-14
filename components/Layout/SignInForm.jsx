@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
-import { toast } from "react-hot-toast";
 import { AuthContext } from "../../context/Contexts";
 import ButtonPrimary from "../misc/buttons/ButtonPrimary";
 
 const SignInForm = () => {
-  const { toggleModalOpen, signIn } = useContext(AuthContext);
+  const { toggleModalOpen, signIn, setModalOpen, currentUser } =
+    useContext(AuthContext);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
@@ -17,13 +18,8 @@ const SignInForm = () => {
       setEmail("");
       setPassword("");
       setLoading(false);
-      setTimeout(() => {
-        setModalOpen(false);
-      });
-    } catch {
-      toast.error("Failed to Sign in. Please Try again.", {
-        icon: "❌",
-      });
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -70,14 +66,15 @@ const SignInForm = () => {
             type="checkbox"
             value=""
             className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
-            required
           />
         </div>
         <label htmlFor="remember" className="ml-2 text-sm ">
           Remember me
         </label>
       </div>
-      <ButtonPrimary type="submit" addClass="">
+      <ButtonPrimary
+        type="submit"
+        addClass={`${loading && "bg-gray-400 pointer-events-none"}`}>
         Sign In
       </ButtonPrimary>
       <p className="mt-1">

@@ -40,7 +40,7 @@ const Service = () => {
     reviews,
     setServiceId,
   } = useContext(ServicesContext);
-  const { toggleModalOpen } = useContext(AuthContext);
+  const { toggleModalOpen, currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState();
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
 
@@ -55,30 +55,38 @@ const Service = () => {
   const addToCart = (selectedService) => {
     const LoadingToast = toast.loading("adding ...");
 
-    setCart((prevCart) => {
-      const existingService = prevCart.find(
-        (service) => service._id === selectedService._id
+    if (currentUser) {
+      setCart((prevCart) => {
+        const existingService = prevCart.find(
+          (service) => service._id === selectedService._id
+        );
+        if (existingService) {
+          existingService.quantity += 1;
+          return [...prevCart];
+        } else {
+          const updatedCart = [
+            ...prevCart,
+            {
+              ...selectedService,
+              quantity: 1,
+              totalPrice: selectedService?.price,
+            },
+          ];
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+          return updatedCart;
+        }
+      });
+      toast.success("Added to Cart", {
+        id: LoadingToast,
+      });
+    } else {
+      toast.error(
+        "You Must be a registered User to Add Services to Cart. Sign Up for free now.",
+        {
+          id: LoadingToast,
+        }
       );
-      if (existingService) {
-        existingService.quantity += 1;
-        return [...prevCart];
-      } else {
-        const updatedCart = [
-          ...prevCart,
-          {
-            ...selectedService,
-            quantity: 1,
-            totalPrice: selectedService?.price,
-          },
-        ];
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
-        return updatedCart;
-      }
-    });
-
-    toast.success("Added to Cart", {
-      id: LoadingToast,
-    });
+    }
   };
 
   const serviceExistsOnCart = () => {
@@ -106,12 +114,22 @@ const Service = () => {
   const addToLikes = async () => {
     try {
       const LoadingToast = toast.loading("Updating");
-      updateServiceStats("likes");
-      setTimeout(() => {
-        toast.success("Updated", {
-          id: LoadingToast,
-        });
-      }, 1000);
+
+      if (currentUser) {
+        updateServiceStats("likes");
+        setTimeout(() => {
+          toast.success("Updated", {
+            id: LoadingToast,
+          });
+        }, 1000);
+      } else {
+        toast.error(
+          "You Must be a registered User to Like a Service. Sign Up for free now.",
+          {
+            id: LoadingToast,
+          }
+        );
+      }
     } catch (error) {
       console.error(error);
       toast.error("We are sorry, there was issue");
