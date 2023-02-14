@@ -23,7 +23,6 @@ const AuthContextProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         modalOpen,
-        setModalOpen,
         toggleModalOpen,
         toggleModalClose,
         modalId,
