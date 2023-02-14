@@ -8,7 +8,7 @@ import NavLinks from "../misc/nav/NavMenuLinks";
 import Modal from "../misc/Modal";
 import SignInForm from "./SignInForm";
 
-const Header = ({ toggleModalOpen }) => {
+const Header = ({ modalSignIn, modalSignUp }) => {
   const [scrollActive, setScrollActive] = useState(false);
   const links = NavLinks();
 
@@ -44,11 +44,13 @@ const Header = ({ toggleModalOpen }) => {
           <div className="navMenu__authorizations col-start-10 col-end-12 font-medium flex justify-end items-center">
             <button
               className="signIn__button text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-blue-500 transition-all"
-              onClick={toggleModalOpen}>
+              onClick={modalSignIn}>
               Sign In
             </button>
 
-            <ButtonOutline className="navMenu__authSignUp">
+            <ButtonOutline
+              className="navMenu__authSignUp"
+              onClick={modalSignUp}>
               Sign Up
             </ButtonOutline>
           </div>

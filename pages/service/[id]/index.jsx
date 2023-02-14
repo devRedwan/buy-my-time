@@ -43,7 +43,6 @@ const Service = () => {
   const { toggleModalOpen } = useContext(AuthContext);
   const [loading, setLoading] = useState();
   const featuredServices = getFeaturedServices(services, serviceSelectedId);
-  setServiceId(serviceSelectedId);
 
   const selectedService = services.find(
     (service) => service?.id === serviceSelectedId
@@ -131,6 +130,7 @@ const Service = () => {
   };
 
   useEffect(() => {
+    services && setServiceId(serviceSelectedId);
     updateVisits();
     setLoading(true);
     setTimeout(() => {
