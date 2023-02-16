@@ -7,7 +7,7 @@ const Modal = ({ title, children, id }) => {
 
   return (
     <div
-      className={`modal__wrapper top-1/4 left-1/2 -translate-x-1/2 p-4  w-full lg:w-3/4 max-w-2xl rounded-lg drop-shadow-lg animate-fadeIn ${
+      className={`modal__wrapper bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 p-4  w-full lg:w-3/4 max-w-2xl rounded-lg drop-shadow-lg animate-fadeIn ${
         modalId === id && modalOpen ? "fixed z-50" : "hidden"
       }`}>
       <div className="modalBody relative p-4 rounded-lg bg-blue-100 shadow-lg shadow-blue-100 flex flex-col  w-full max-h-[70vh] overflow-y-auto">

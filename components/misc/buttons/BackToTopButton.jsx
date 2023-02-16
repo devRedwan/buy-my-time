@@ -7,7 +7,7 @@ function BackToTopButton() {
 
   useEffect(() => {
     function handleScroll() {
-      setShowButton(window.scrollY > 300);
+      setShowButton(window.scrollY > 200);
     }
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -19,7 +19,7 @@ function BackToTopButton() {
 
   return (
     <div
-      className={`fixed bottom-2 right-2 m-4 z-10 hover:scale-110 hover:opacity-100 transition-all duration-500 ease-in-out cursor-pointer hover:bg-gray-100 group rounded-full p-4 pt-2 ${
+      className={`fixed bottom-7 right-0 lg:bottom-2 lg:right-2 m-4 z-10 hover:scale-110 hover:opacity-100 transition-all duration-500 ease-in-out cursor-pointer hover:bg-gray-100 group rounded-full p-4 pt-2 ${
         showButton ? "block" : "hidden"
       }`}>
       <button

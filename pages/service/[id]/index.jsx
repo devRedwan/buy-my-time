@@ -154,16 +154,20 @@ const Service = () => {
     setTimeout(() => {
       setLoading(false);
       toast.success("Like the service to show your support", {
-        duration: 4000,
+        duration: 3000,
         icon: "💙",
         style: { background: "#E2F1FF", fontSize: "20px", maxWidth: "100vw" },
       });
+    }, 1000);
+    setTimeout(() => {
+      setLoading(false);
+
       toast.success("Post a review to help us improve", {
-        duration: 4000,
+        duration: 3000,
         style: { background: "#ffb3c1", fontSize: "20px", maxWidth: "100vw" },
         icon: "⭐",
       });
-    }, 1000);
+    }, 1500);
   }, []);
 
   return (
@@ -209,21 +213,21 @@ const Service = () => {
                             {selectedService?.seller.name}
                           </h3>
                         </div>
-                        <div className="service__metaData flex xs:border-l-2 border-gray-500">
-                          <div className="serviceMeta__visits flex items-center mx-2 px-2 border border-blue-500 rounded-lg">
+                        <div className="service__metaData flex xs:border-l-2 border-gray-500 w-auto">
+                          <div className="serviceMeta__visits flex items-center mr-1 px-1 xs:mx-2 xs:px-2 border border-blue-500 rounded-lg">
                             <EyeIcon className="h-5 w-5 text-green-500" />{" "}
                             &nbsp;
                             {selectedService?.visits}
                           </div>
                           <div
-                            className="serviceMeta__likes flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
+                            className="serviceMeta__likes flex mr-1 px-1 xs:mx-2 xs:px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
                             onClick={() => addToLikes()}>
                             <HeartIcon className="h-5 w-5 text-blue-500" />
                             &nbsp;
                             {selectedService?.likes}
                           </div>
                           <div
-                            className="serviceMeta__rating flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
+                            className="serviceMeta__rating flex mr-1 px-1 xs:mx-2 xs:px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
                             onClick={() => toggleModalOpen("reviews")}>
                             <Image
                               src="/assets/Icon/stars.svg"
@@ -236,7 +240,7 @@ const Service = () => {
                             {selectedService?.rating.toFixed(1)}
                           </div>
                           <div
-                            className="serviceMeta__review flex mx-2 px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
+                            className="serviceMeta__review flex mr-1 px-1 xs:mx-2 xs:px-2 items-center rounded-lg bg-blue-100 border border-blue-500 cursor-pointer"
                             onClick={() => toggleModalOpen("reviews")}>
                             <ChatBubbleLeftRightIcon className="h-5 w-5 text-red" />
                             &nbsp;
@@ -348,14 +352,9 @@ const Service = () => {
                 Featured Services
               </motion.h3>
             </ScrollAnimationWrapper>
-            <ScrollAnimationWrapper className="featuredServices__carousel section__carousel  w-full flex flex-col pt-5 pb-12 mb-8 sm:mb-16 relative">
-              <motion.div variants={scrollAnimation}>
-                <Carousel
-                  className="carousel"
-                  servicesData={featuredServices}
-                />
-              </motion.div>
-            </ScrollAnimationWrapper>
+            <div className="featuredServices__carousel section__carousel w-full flex flex-col pt-5 pb-12 mb-8 sm:mb-16 relative">
+              <Carousel className="carousel" servicesData={featuredServices} />
+            </div>
           </section>
         </main>
       </Layout>

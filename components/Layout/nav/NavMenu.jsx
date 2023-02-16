@@ -37,7 +37,9 @@ export const MobileNavMenu = ({ navLinks }) => {
           key={index}>
           <a
             className={`mobileNav__menuLink ${
-              href === "/cart" && cartItemQty && "animate-bounce"
+              href === "/cart" &&
+              cartItemQty &&
+              "animate-bounce !border-transparent"
             }`}>
             {icon}
             {cartItemQty ? (
