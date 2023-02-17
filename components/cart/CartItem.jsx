@@ -1,10 +1,10 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useContext } from "react";
-import { ServicesContext } from "../../context/Contexts";
+import { AuthContext } from "../../context/Contexts";
 
 const CartItem = ({ service }) => {
-  const { cart, setCart } = useContext(ServicesContext);
+  const { cart, setCart } = useContext(AuthContext);
   const quantity = (() => {
     const cartItem = JSON.parse(localStorage.getItem(service?.id));
     return cartItem?.quantity || 1;

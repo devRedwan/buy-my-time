@@ -31,15 +31,9 @@ const Service = () => {
   const scrollAnimation = getScrollAnimation();
   const router = useRouter();
   const { id: serviceSelectedId } = router?.query;
-  const {
-    services,
-    setServices,
-    sellers,
-    setCart,
-    cart,
-    reviews,
-    setServiceId,
-  } = useContext(ServicesContext);
+  const { services, setServices, sellers, reviews, setServiceId } =
+    useContext(ServicesContext);
+  const { cart, setCart } = useContext(AuthContext);
   const { toggleModalOpen, currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState();
   const featuredServices = getFeaturedServices(services, serviceSelectedId);

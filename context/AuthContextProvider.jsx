@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { auth } from "../firebase/init";
 import { AuthContext } from "./Contexts";
@@ -13,6 +13,9 @@ const AuthContextProvider = ({ children }) => {
   const [modalId, setModalId] = useState("");
   const [currentUser, setCurrentUser] = useState();
   const [userLoading, setUserLoading] = useState(true);
+  const [cart, setCart] = useState([]);
+
+  const initialRender = useRef(true);
 
   const toggleModalOpen = (Id) => {
     if (modalId === Id) {
@@ -102,6 +105,18 @@ const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("cart"))) {
+      const storedCart = JSON.parse(localStorage.getItem("cart"));
+      setCart([...cart, ...storedCart]);
+    }
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
@@ -117,6 +132,8 @@ const AuthContextProvider = ({ children }) => {
     currentUser,
     modalId,
     modalOpen,
+    cart,
+    setCart,
     setModalOpen,
     signUp,
     signIn,

@@ -7,10 +7,10 @@ import SeoHead from "../components/Layout/SeoHead";
 import ButtonOutline from "../components/misc/buttons/ButtonOutline";
 import ButtonPrimary from "../components/misc/buttons/ButtonPrimary";
 import PageHeader from "../components/misc/PageHeader";
-import { ServicesContext } from "../context/Contexts";
+import { AuthContext } from "../context/Contexts";
 
 const Cart = () => {
-  const { cart } = useContext(ServicesContext);
+  const { cart } = useContext(AuthContext);
 
   const subTotalPrice = cart.reduce(
     (sum, service) => sum + service?.totalPrice,
