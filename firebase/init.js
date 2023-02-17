@@ -7,7 +7,6 @@ import { getFirestore } from "firebase/firestore";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
-const database = getFirestore();
+const db = getFirestore(app);
 
-export { auth, googleProvider, database };
-export default app;
+export { auth, googleProvider, db };
