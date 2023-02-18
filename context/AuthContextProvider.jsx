@@ -3,16 +3,20 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { auth } from "../firebase/init";
+import { auth, db } from "../firebase/init";
 import { AuthContext } from "./Contexts";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContextProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalId, setModalId] = useState("");
   const [currentUser, setCurrentUser] = useState();
   const [userLoading, setUserLoading] = useState(true);
+  const [cart, setCart] = useState([]);
+
+  const initialRender = useRef(true);
 
   const toggleModalOpen = (Id) => {
     if (modalId === Id) {
@@ -102,9 +106,45 @@ const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const updateCartInFirestore = async () => {
+      if (currentUser) {
+        await setDoc(doc(db, "carts", currentUser.uid), { ...cart });
+      }
+    };
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    updateCartInFirestore();
+  }, [cart]);
+
+  useEffect(() => {
+    const getCartfromFirestore = async (userId) => {
+      const cartRef = doc(db, "carts", userId);
+      const cartSnap = await getDoc(cartRef);
+      if (cartSnap.exists()) {
+        const cartData = cartSnap.data();
+        const cart = [];
+        Object.keys(cartData).forEach((key) => {
+          cart.push({ ...cartData[key], id: key });
+        });
+        return cart;
+      } else {
+        return [];
+      }
+    };
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
+
+      if (user) {
+        const storedCart = await getCartfromFirestore(user.uid);
+        console.log("storedCart", storedCart);
+        setCart([...cart, ...storedCart]);
+      } else {
+        setCart([]);
+      }
     });
+
     setTimeout(() => {
       setUserLoading(false);
     }, 500);
@@ -117,6 +157,8 @@ const AuthContextProvider = ({ children }) => {
     currentUser,
     modalId,
     modalOpen,
+    cart,
+    setCart,
     setModalOpen,
     signUp,
     signIn,
