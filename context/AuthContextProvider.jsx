@@ -109,17 +109,24 @@ const AuthContextProvider = ({ children }) => {
       initialRender.current = false;
       return;
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if (currentUser) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("cart"))) {
-      const storedCart = JSON.parse(localStorage.getItem("cart"));
-      setCart([...cart, ...storedCart]);
-    }
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      if (user) {
+        if (JSON.parse(localStorage.getItem("cart"))) {
+          const storedCart = JSON.parse(localStorage.getItem("cart"));
+          setCart([...cart, ...storedCart]);
+        }
+      } else {
+        setCart([]);
+      }
     });
+
     setTimeout(() => {
       setUserLoading(false);
     }, 500);
