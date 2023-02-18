@@ -34,7 +34,7 @@ const ServicesProvider = ({ children }) => {
         dispatch({ type: GET_SELLERS, payload: sellerData });
         const reviewsData = await getReviewsData(serviceId);
         dispatch({ type: GET_REVIEWS, payload: reviewsData });
-      } catch (error) {
+      } catch (error){
         console.error(error);
       }
     }
