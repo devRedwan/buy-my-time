@@ -5,8 +5,9 @@ import {
 } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { auth } from "../firebase/init";
+import { auth, db } from "../firebase/init";
 import { AuthContext } from "./Contexts";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContextProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -105,23 +106,40 @@ const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const updateCartInFirestore = async () => {
+      if (currentUser) {
+        await setDoc(doc(db, "carts", currentUser.uid), { ...cart });
+      }
+    };
     if (initialRender.current) {
       initialRender.current = false;
       return;
     }
-    if (currentUser) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
+    updateCartInFirestore();
   }, [cart]);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const getCartfromFirestore = async (userId) => {
+      const cartRef = doc(db, "carts", userId);
+      const cartSnap = await getDoc(cartRef);
+      if (cartSnap.exists()) {
+        const cartData = cartSnap.data();
+        const cart = [];
+        Object.keys(cartData).forEach((key) => {
+          cart.push({ ...cartData[key], id: key });
+        });
+        return cart;
+      } else {
+        return [];
+      }
+    };
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
+
       if (user) {
-        if (JSON.parse(localStorage.getItem("cart"))) {
-          const storedCart = JSON.parse(localStorage.getItem("cart"));
-          setCart([...cart, ...storedCart]);
-        }
+        const storedCart = await getCartfromFirestore(user.uid);
+        console.log("storedCart", storedCart);
+        setCart([...cart, ...storedCart]);
       } else {
         setCart([]);
       }
