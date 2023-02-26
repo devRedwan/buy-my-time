@@ -1,12 +1,9 @@
-import "../styles/tailwind.css";
-import "../styles/slick.css";
-import ServicesProvider from "../context/ServicesProvider";
-import BackToTopButton from "../components/misc/buttons/BackToTopButton";
 import { Toaster } from "react-hot-toast";
+import BackToTopButton from "../components/misc/buttons/BackToTopButton";
 import AuthContextProvider from "../context/AuthContextProvider";
-import { AuthContext } from "../context/Contexts";
-import { useContext } from "react";
-import Modal from "../components/misc/Modal";
+import ServicesProvider from "../context/ServicesProvider";
+import "../styles/slick.css";
+import "../styles/tailwind.css";
 
 function MyApp({ Component, pageProps }) {
   return (
