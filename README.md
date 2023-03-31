@@ -17,6 +17,9 @@ https://buy-my-time.vercel.app/
 * Adding services to cart unique to each authenticated User
 * Mobile responsive
 
+## Major Upcoming Updates
+* Payment System (powered by Stripe)
+
 ## Stack
 * React
 * NextJs
