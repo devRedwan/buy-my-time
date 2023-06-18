@@ -1,6 +1,7 @@
 # BuyMyTime
 
-![BuyMyTime](https://www.redwanahmed.com/assets/BuyMyTime.PNG "BuyMyTime")
+![BuyMyTime](https://github.com/devRedwan/buy-my-time/assets/24552861/b5c8a81a-408a-4d40-876e-4f94642bcab9)
+
 
 ## About
 BuyMyTime is a service-marketplace CRUD application based on where sellers sell services they offer to the buyers.
